@@ -1,3 +1,5 @@
+
+
 % Präambel
 \documentclass[%
 fontsize=12pt,					% Schriftgröße
@@ -142,6 +144,9 @@ marginal
 	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
+
+
+
 % -----------------------------------------------------------------------------------------------------------------
 % Zum Aktualisieren des Abkürzungsverzeichnisses (Nomenklatur) bitte auf der Kommandozeile folgenden Befehl aufrufen :
 % makeindex <Dateiname>.nlo -s nomencl.ist -o <Dateiname>.nls
@@ -221,6 +226,8 @@ marginal
 
 \rmfamily
 
+
+
 \include{chapter/einleitung}
 \include{chapter/grundlagen}
 \include{chapter/vorgehen}
@@ -266,5 +273,8 @@ marginal
 
 \renewcommand{\indexname}{Sachwortverzeichnis}
 \printindex								% Erzeugen des Sachwortverzeichnisses
+
+%---------Notizen---------------------------
+\include{chapter/Besprechungsnotizen}
 
 \end{document}
