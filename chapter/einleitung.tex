@@ -27,29 +27,10 @@
 
 
 
-\section{Voraussetzungen}
-Voraussetzung für dieses Projekt ist ein fundiertes Verständnis der Programmierung sowie Kreativität bei der Konstruktion. Diese Fähigkeiten bringen wir durch unsere abgeschlossene Ausbildung im Bereich Mechatronik und Elektronik mit. Darüber hinaus sind Kenntnisse in der Softwareentwicklung erforderlich, insbesondere im Hinblick auf die Programmierung des LEGO Spike Prime Systems, um den Roboter erfolgreich zu steuern und die Interaktion mit der Spielumgebung zu gewährleisten.
-Die Studienarbeit erstreckt sich über zwei Praxisphasen, was einem Zeitraum von insgesamt sechs Monaten entspricht. In dieser Zeit werden die theoretischen Grundlagen, die während des Studiums erlangt haben, in die Praxis umsetzen, um eine vollständige Robotiklösung zu entwickeln, die den Anforderungen des Projekts gerecht wird.
 
 
-\section{Vorschriften:}
-\begin{itemize}
-\item max. Zeitbegrenzung eines Zuges: -> scannen des Spielfeldes und Rechenzeit müssen begrenzt sein
-\end{itemize}
 
 
-\section{Herausforderung der Programmierung}
-Die größte Herausforderung bei der Realisierung des Vier-Gewinnt-Roboters besteht in der begrenzten Rechenleistung des verwendeten Mikrocontrollers. Anders als bei leistungsstarken Computern, die in der Lage sind, vollständige Spielalgorithmen zu berechnen und dadurch eine perfekte Strategie zu verfolgen, muss der Roboter mit deutlich eingeschränkten Ressourcen auskommen.
-Ein umfassender Algorithmus, der jede mögliche Zugkombination im Vier-Gewinnt-Spiel analysiert, erfordert erheblichen Speicherplatz und Rechenleistung, da mit jedem neuen Zug die Anzahl der möglichen Spielverläufe exponentiell ansteigt. Auf einem leistungsstarken Computer wäre es theoretisch möglich, eine "perfekte" Strategie zu entwickeln, die den gesamten Spielbaum durchläuft und immer den besten Zug auswählt. Der Mikrocontroller des Roboters hingegen hat nicht die Kapazität, all diese Berechnungen in angemessener Zeit durchzuführen.
-Aus diesem Grund kann der Roboter nur eine begrenzte Anzahl von Zügen im Voraus berechnen. Er muss sich auf Algorithmen stützen, die in der Lage sind, kurzfristige Entscheidungen zu treffen, anstatt langfristige Strategien zu verfolgen. Das bedeutet, dass der Roboter durch Heuristiken (d.h. Daumenregeln oder Annäherungen) gesteuert wird, die ihm helfen, gute, aber nicht immer optimale Züge zu machen. Diese Heuristiken können einfache Prinzipien wie das Verhindern eines unmittelbaren Sieges des Gegners oder das Setzen eigener Spielsteine in strategisch günstige Positionen umfassen.
 
 
-\section{Vorgehensweise}
-Zur Realisierung lässt sich dieses Projekt in drei wesentliche Aspekte aufteilen.
-\begin{itemize}
-\item Entwicklung eines mechanischen Konzepts: Es soll eine funktionale Vorrichtung entworfen werden, der in der Lage ist, Spielsteine präzise in den Spielständer einzuführen und diese anschließend für den nächsten Spielzug freizugeben.
-\item Erfassung der Ist-Situation: Durch den Einsatz geeigneter Sensorik soll der Roboter die aktuelle Position der gelben und roten Chips im Spielstand erfassen und diese Informationen an den Mikrocontroller weiterzugeben.
-\item Erstellung eines effizienten Algorithmus: Ein in microPython programmierter Algorithmus muss entwickelt werden, der innerhalb der begrenzten Rechenkapazitäten des verwendeten Controllers effizient arbeitet und die nötigen Steuerbefehle für die Roboteraktionen bereitstellt. Für die beste Strategie soll dabei mathematische Spieltheorie analysiert werden und diese in das System eingebunden werden.
-\end{itemize}
 
->>>>>>> 28ebd7fcbab4ea283341ae41d0ce04e8e7443540

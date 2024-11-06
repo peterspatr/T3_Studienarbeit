@@ -7,5 +7,14 @@
 %
 %Verifikation anhand der zuvor erarbeiteten Anforderungen und Validierung in Bezug auf das zuvor gestellte Ziel. Diskussion der Ergebnisse. Spätestens hier auch auf die Zuverlässigkeit der gewonnenen Erkenntnisse eingehen (z.~B. anhand der Genauigkeit von Messergebnissen).
 
-\section{Baumau}
+\section{Voraussetzungen}
+Voraussetzung für dieses Projekt ist ein fundiertes Verständnis der Programmierung sowie Kreativität bei der Konstruktion. Diese Fähigkeiten bringen wir durch unsere abgeschlossene Ausbildung im Bereich Mechatronik und Elektronik mit. Darüber hinaus sind Kenntnisse in der Softwareentwicklung erforderlich, insbesondere im Hinblick auf die Programmierung des LEGO Spike Prime Systems, um den Roboter erfolgreich zu steuern und die Interaktion mit der Spielumgebung zu gewährleisten.
+Die Studienarbeit erstreckt sich über zwei Praxisphasen, was einem Zeitraum von insgesamt sechs Monaten entspricht. In dieser Zeit werden die theoretischen Grundlagen, die während des Studiums erlangt haben, in die Praxis umsetzen, um eine vollständige Robotiklösung zu entwickeln, die den Anforderungen des Projekts gerecht wird.
+
+\section{Aufbau}
 \section{Software}
+
+\subsection{Herausforderung der Programmierung}
+Die größte Herausforderung bei der Realisierung des Vier-Gewinnt-Roboters besteht in der begrenzten Rechenleistung des verwendeten Mikrocontrollers. Anders als bei leistungsstarken Computern, die in der Lage sind, vollständige Spielalgorithmen zu berechnen und dadurch eine perfekte Strategie zu verfolgen, muss der Roboter mit deutlich eingeschränkten Ressourcen auskommen.
+Ein umfassender Algorithmus, der jede mögliche Zugkombination im Vier-Gewinnt-Spiel analysiert, erfordert erheblichen Speicherplatz und Rechenleistung, da mit jedem neuen Zug die Anzahl der möglichen Spielverläufe exponentiell ansteigt. Auf einem leistungsstarken Computer wäre es theoretisch möglich, eine "perfekte" Strategie zu entwickeln, die den gesamten Spielbaum durchläuft und immer den besten Zug auswählt. Der Mikrocontroller des Roboters hingegen hat nicht die Kapazität, all diese Berechnungen in angemessener Zeit durchzuführen.
+Aus diesem Grund kann der Roboter nur eine begrenzte Anzahl von Zügen im Voraus berechnen. Er muss sich auf Algorithmen stützen, die in der Lage sind, kurzfristige Entscheidungen zu treffen, anstatt langfristige Strategien zu verfolgen. Das bedeutet, dass der Roboter durch Heuristiken (d.h. Daumenregeln oder Annäherungen) gesteuert wird, die ihm helfen, gute, aber nicht immer optimale Züge zu machen. Diese Heuristiken können einfache Prinzipien wie das Verhindern eines unmittelbaren Sieges des Gegners oder das Setzen eigener Spielsteine in strategisch günstige Positionen umfassen.
