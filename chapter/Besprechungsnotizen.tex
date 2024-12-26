@@ -15,3 +15,60 @@
 	\item KW44: 
 	
 \end{itemize}
+%*********************************************************************************************************************************************************************************************************
+%\section{Grundlagen}
+%\subsection{Geschichte}
+%\subsection{Regeln}
+%Die Regeln für dieses Strategiespiel sind kinderleicht, was auch ein Argument für die große Beliebtheit bei Jung und Alt ist. Das Spiel besteht aus einem senkrecht stehenden Spielbrett und jeweils aus 21 gelben und roten runde Steine. Diese Steine werden abwechselnd in das hohle Spielbrett mit 42 Aussparungen, sieben Spalten und sechs Reihen, eingeworfen. Der Spieler kann somit eine Spalte auswählen und den Stein fallen lassen. Der eingeworfene Stein besetzt den untersten freien Platz dieser Spalte. Das Spiel wird dann gewonnen, wenn einer der Spieler vier oder mehr Steine in einer waagerechten, senkrechten oder diagonalen Reihe platzieren kann. Der andere Spieler hat somit automatisch verloren. Kommt es zu keiner Bildung einer dieser Kombinationen, endet das Spiel bei Vergabe aller Steine in einem Remis.
+%
+%\section{spieltheoretische Analyse}
+%\subsection{kombinatorisches Spiel}
+%Das 4 gewinnt Spiel ist ein kombinatorisches Spiel. Sie bieten einen idealen Rahmen, um Strategien, Entscheidungsfindung und Spieltheorie zu untersuchen. Auch weitere Spiele wie Schach, Dame, Mühle und Tic-Tac-Toe sind ebenfalls kombinatorische Spiele. \\
+%Diese folgende fünf Eigenschaften machen ein kombinatorisches Spiel aus:
+%\begin{enumerate}
+%	\item   \textbf{Zwei-Spieler-Struktur: }Kombinatorische Spiele sind auf zwei Spieler beschränkt, die abwechselnd Züge machen. Dies ermöglicht eine klare Analyse von Strategien und Gegenstrategien.
+%	\item 	\textbf{Nullsummencharakter: }Der Gewinn eines Spielers entspricht exakt dem Verlust des anderen. Dies führt zu einer antagonistischen Spielsituation, in der die Interessen der Spieler direkt gegeneinander stehen.
+%	\item 	\textbf{Endlichkeit: }Die begrenzte Anzahl von Zugmöglichkeiten und die Unmöglichkeit unendlicher Spielverläufe garantieren, dass jedes Spiel zu einem Abschluss kommt.
+%	\item 	\textbf{Perfekte Information: }Beide Spieler haben zu jedem Zeitpunkt vollständige Kenntnis über den Spielstand. Dies eliminiert Unsicherheiten, die in Spielen mit verborgenen Informationen auftreten würden.
+%	\item 	\textbf{Determinismus:} Der Ausschluss von Zufallselementen macht das Spiel vollständig vorhersehbar, sofern die Strategien der Spieler bekannt sind.
+%\end{enumerate}
+%
+%Durch diese genannten fünf Eigenschaften werden kombinatorische Spiele auch "endliches ZweiPersonen-Nullsummenspiel mit perfekter Information" genannt.
+%
+%\subsection{Zermelos Bestimmtheitssatz}
+%Zermelos Bestimmtheitssatz am Beispiel von „Vier gewinnt“
+%Der Bestimmtheitssatz von Ernst Zermelo zeigt, dass jedes kombinatorische Spiel – wie auch „Vier gewinnt“ – in eine von drei Kategorien eingeordnet werden kann:
+%\begin{enumerate}
+%	\item \textbf{Der anziehende Spieler (Spieler 1) hat eine dominante Strategie: }Spieler 1 kann bei optimalem Spiel immer gewinnen.
+%	\item \textbf{Der nachziehende Spieler (Spieler 2) hat eine dominante Strategie:} Spieler 2 kann bei optimalem Spiel immer gewinnen.
+%	\item \textbf{Keiner der Spieler hat eine dominante Strategie:}Beide Spieler können bei optimalem Spiel ein Unentschieden erzwingen.
+%\end{enumerate}
+%
+%Auf „Vier gewinnt“ angewandt bedeutet dies, dass unabhängig von den individuellen Spielstilen der Spieler das Spiel theoretisch in einer dieser Kategorien liegt. Tatsächlich wurde durch Computersimulationen gezeigt, dass der anziehende Spieler (Spieler 1) bei optimaler Spielweise immer gewinnen kann. Damit gehört „Vier gewinnt“ zur ersten Kategorie.
+%
+%Der Beweis des Bestimmtheitssatzes basiert auf Rückwärtsinduktion. Hierbei wird zuerst die letzte mögliche Zugfolge im Spiel analysiert:
+%
+%Wenn ein Spieler im letzten Zug eine dominante Strategie hat (z. B. durch eine Reihe von vier Steinen gewinnen kann), ist der Gewinn gesichert.
+%Man geht Zug für Zug rückwärts und prüft für jede vorherige Spielsituation, ob ein Spieler seinen Gegner zwingen kann, eine Situation herbeizuführen, in der er selbst gewinnt oder zumindest nicht verliert.
+%Für „Vier gewinnt“ bedeutet das: Spieler 1 kann durch geschicktes Spiel von Beginn an sicherstellen, dass er entweder direkt gewinnt oder Spieler 2 zu Zügen zwingt, die ihm langfristig keine Gewinnoptionen lassen.
+%
+%\textbf{Konsequenzen für „Vier gewinnt“}
+%Aus dem Bestimmtheitssatz folgt, dass „Vier gewinnt“ nicht symmetrisch ist – der erste Spieler hat bei optimaler Spielweise immer einen Vorteil. Dies macht deutlich, dass die Siegchancen in solchen Spielen nicht gleich verteilt sein müssen.
+%
+%Durch die Analyse mit Rückwärtsinduktion wurde festgestellt, dass Spieler 1 mit einer optimalen Strategie den Sieg garantieren kann. Spieler 2 kann nur dann gewinnen, wenn Spieler 1 einen Fehler macht. Somit gehört „Vier gewinnt“ zur ersten Kategorie des Bestimmtheitssatzes.
+%
+%\section{Strategien und Taktiken}
+%
+%\section{Algorithmen}
+%\subsection{Minimax-Algorithmus}
+%\subsection{Alpha-Beta-Algorithums}
+%
+%\section{Heuristiken}
+%
+%\section{Lösbarkeit und perfektes Spiel}
+%
+%\section{Implementierungsaspekte für den LEGO Spike Roboter}
+%Die größte Herausforderung bei der Realisierung des Vier-Gewinnt-Roboters besteht in der begrenzten Rechenleistung des verwendeten Mikrocontrollers. Anders als bei leistungsstarken Computern, die in der Lage sind, vollständige Spielalgorithmen zu berechnen und dadurch eine perfekte Strategie zu verfolgen, muss der Roboter mit deutlich eingeschränkten Ressourcen auskommen.
+%Ein umfassender Algorithmus, der jede mögliche Zugkombination im Vier-Gewinnt-Spiel analysiert, erfordert erheblichen Speicherplatz und Rechenleistung, da mit jedem neuen Zug die Anzahl der möglichen Spielverläufe exponentiell ansteigt. Auf einem leistungsstarken Computer wäre es theoretisch möglich, eine "perfekte" Strategie zu entwickeln, die den gesamten Spielbaum durchläuft und immer den besten Zug auswählt. Der Mikrocontroller des Roboters hingegen hat nicht die Kapazität, all diese Berechnungen in angemessener Zeit durchzuführen.
+%Aus diesem Grund kann der Roboter nur eine begrenzte Anzahl von Zügen im Voraus berechnen. Er muss sich auf Algorithmen stützen, die in der Lage sind, kurzfristige Entscheidungen zu treffen, anstatt langfristige Strategien zu verfolgen. Das bedeutet, dass der Roboter durch Heuristiken (d.h. Daumenregeln oder Annäherungen) gesteuert wird, die ihm helfen, gute, aber nicht immer optimale Züge zu machen. Diese Heuristiken können einfache Prinzipien wie das Verhindern eines unmittelbaren Sieges des Gegners oder das Setzen eigener Spielsteine in strategisch günstige Positionen umfassen.
+%\section{Schlussfolgerung}
