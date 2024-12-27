@@ -1,6 +1,37 @@
 \chapter{Analyse von Vier Gewinnt aus spieltheoretischer Sicht}
 
 \section{Darstellung des Spiels in Normalform und Extensivform}
+Die spieltheoretische Analyse von Vier Gewinnt erfordert eine formale mathematische Darstellung des Spiels. Dabei sind zwei grundlegende Darstellungsformen von besonderer Bedeutung:
+
+Die Extensivform stellt das Spiel als Spielbaum dar und wird durch den Tupel  beschrieben T= (N,K,P,U,h,p), wobei:
+\begin{itemize}
+	\item N die Menge der Spieler (Spieler 1 und 2)
+	\item K die Menge aller Knoten (Spielpositionen)
+	\item P die Menge der Spielerpositionen
+	\item U die Menge der Endknoten
+	\item h die Auszahlungsfunktion
+	\item p die Vorgängerfunktion ist
+\end{itemize}
+Für Vier Gewinnt ist die Extensivform besonders geeignet, da sie die sequentielle Struktur des Spiels abbildet, die perfekte Information widerspiegelt und eine intuitive Analyse von Zugfolgen ermöglicht.
+
+Die Normalform hingegen repräsentiert das Spiel als Matrix G=(N,S,u) , mit:
+\begin{itemize}
+	\item N als Menge der Spieler
+	\item S als Menge der Strategieprofile
+	\item u als Auszahlungsfunktion
+\end{itemize}
+
+Die mathematische Beschreibung des Spielbaums erfolgt durch:
+T = (V,E,v_0) 
+wobei:
+\begin{itemize}
+	\item V die Menge aller Knoten
+	\item E die Menge der Kanten (mögliche Züge)
+	\item v_0 der Wurzelknoten (Ausgangsposition) ist
+\end{itemize}
+
+Die Darstellung in Normalform ist aufgrund der hohen Anzahl möglicher Strategien sehr umfangreich und für praktische Analysen weniger geeignet. Die Größe der Normalform-Matrix wächst exponentiell mit der Spieltiefe.
+
 \section{Strategien und Gleichgewichte}
 \section{Komplexität des Spielbaums}
 	
