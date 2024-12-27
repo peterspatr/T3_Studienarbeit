@@ -1,5 +1,112 @@
 \chapter{Spieltheoretische Grundlagen}
 
 \section{Definition und Konzepte der Spieltheorie}
+Die Spieltheorie ist ein Teilgebiet der Mathematik, das strategische Entscheidungen in Konflikt- oder Kooperationssituationen analysiert. Ein Spiel besteht dabei aus mehreren Elementen: den Spielern, den möglichen Zügen, den Regeln und dem Ergebnis. Ziel der Spieltheorie ist es, optimale Strategien zu entwickeln und die möglichen Ergebnisse eines Spiels vorherzusagen, wenn die Spieler rational handeln.
+
+Grundelemente eines Spiels
+
+\begin{enumerate}
+	\item \textbf{Spieler:} Die Teilnehmer eines Spiels, die Entscheidungen treffen. Es können zwei oder mehr Spieler beteiligt sein.
+	\item \textbf{Strategien:} Die Handlungsoptionen, die den Spielern zur Verfügung stehen, um ihre Ziele zu erreichen.
+	\item \textbf{Regeln:} Die Struktur des Spiels, die die möglichen Züge, die Abfolge der Züge und die Bedingungen für den Spielausgang definiert.
+	\item \textbf{Auszahlungen:} Die Ergebnisse des Spiels, die jedem Spieler für eine bestimmte Kombination von Strategien zugeordnet werden. Diese können in Form von Gewinnen, Verlusten oder Nutzen gemessen werden.
+	\item \textbf{Informationen:} Spiele unterscheiden sich darin, ob die Spieler über vollständige Information verfügen (d. h., alle Züge sind sichtbar) oder ob es Elemente von Unsicherheit gibt (z. B. verdeckte Karten oder Würfelergebnisse).
+\end{enumerate}
 \section{Klassifikation von Spielen}
+In der Spieltheorie werden Spiele anhand bestimmter Kriterien klassifiziert, um ihre Struktur, Dynamik und Lösbarkeit besser zu verstehen. Die wichtigsten Kategorien, die zur Einordnung dienen, sind nachfolgend dargestellt.
+
+\begin{enumerate}
+	\item \textbf{Anzahl der Spieler}
+	\begin{itemize}
+		\item \textbf{Zwei-Personen-Spiele}: Spiele mit genau zwei Spielern. Diese sind besonders häufig Gegenstand spieltheoretischer Analysen.
+		\item \textbf{Mehrspieler-Spiele}: Spiele mit drei oder mehr Teilnehmern. Die Strategien sind komplexer, da Koalitionen und wechselnde Allianzen eine Rolle spielen können.
+	\end{itemize}
+	
+	\item \textbf{Spielzüge: Gleichzeitige vs. aufeinanderfolgende Entscheidungen}
+	\begin{itemize}
+		\item \textbf{Simultane Spiele}: Beide Spieler treffen ihre Entscheidungen gleichzeitig, ohne die Wahl des Gegners zu kennen. Solche Spiele werden häufig in der Normalform (Matrix-Darstellung) analysiert.
+		\item \textbf{Sequentielle Spiele}: Die Spieler führen ihre Züge nacheinander aus und können auf die vorherigen Züge des Gegners reagieren. Solche Spiele werden in der Extensivform (Baumdiagramm) dargestellt, um die Reihenfolge der Züge und die Entscheidungsmöglichkeiten zu visualisieren.
+	\end{itemize}
+	
+	\item \textbf{Informationen der Spieler}
+	\begin{itemize}
+		\item \textbf{Spiele mit vollständiger Information}: Alle Spieler kennen die bisherigen Züge und den aktuellen Spielzustand. In solchen Spielen können optimale Strategien durch Rückwärtsinduktion berechnet werden.
+		\item \textbf{Spiele mit unvollständiger Information}: Mindestens ein Spieler hat keine vollständigen Informationen über den Spielzustand oder die Strategie des Gegners. Dies führt zu Unsicherheiten bei der Entscheidungsfindung.
+	\end{itemize}
+	
+	\item \textbf{Kooperative vs. nicht-kooperative Spiele}
+	\begin{itemize}
+		\item \textbf{Kooperative Spiele}: Spieler können Allianzen bilden und gemeinsam agieren, um einen Vorteil zu erzielen. Die Ergebnisse werden durch Verhandlungen und Absprachen beeinflusst.
+		\item \textbf{Nicht-kooperative Spiele}: Jeder Spieler agiert unabhängig und verfolgt ausschließlich seine eigenen Ziele.
+	\end{itemize}
+	
+	\item \textbf{Gewinnstruktur: Nullsummenspiele vs. Nicht-Nullsummenspiele}
+	\begin{itemize}
+		\item \textbf{Nullsummenspiele}: Der Gewinn eines Spielers entspricht exakt dem Verlust des anderen. Solche Spiele sind konfliktorientiert, da ein Vorteil für einen Spieler immer einen Nachteil für den anderen bedeutet.
+		\item \textbf{Nicht-Nullsummenspiele}: Die Gewinne und Verluste der Spieler sind nicht zwangsläufig gleich. In solchen Spielen können Kooperationen oder geteilte Gewinne auftreten.
+	\end{itemize}
+	
+	\item \textbf{Deterministische vs. stochastische Spiele}
+	\begin{itemize}
+		\item \textbf{Deterministische Spiele}: Es gibt keine Zufallselemente; der Spielverlauf wird allein durch die Entscheidungen der Spieler bestimmt.
+		\item \textbf{Stochastische Spiele}: Zufallselemente wie Würfel oder Karten beeinflussen den Spielverlauf, was zusätzliche Unsicherheiten schafft.
+	\end{itemize}
+	
+	\item \textbf{Endliche vs. unendliche Spiele}
+	\begin{itemize}
+		\item \textbf{Endliche Spiele}: Die Anzahl der möglichen Spielzustände und Züge ist begrenzt. Solche Spiele können vollständig analysiert und optimal gelöst werden.
+		\item \textbf{Unendliche Spiele}: Spiele mit potenziell unbegrenzten Spielzügen oder Zuständen, bei denen keine vollständige Analyse möglich ist.
+	\end{itemize}
+\end{enumerate}
+
+
+Das 4 gewinnt Spiel ist ein kombinatorisches Spiel. Sie bieten einen idealen Rahmen, um Strategien, Entscheidungsfindung und Spieltheorie zu untersuchen. Auch weitere Spiele wie Schach, Dame, Mühle und Tic-Tac-Toe sind ebenfalls kombinatorische Spiele. \\
+Diese folgende fünf Eigenschaften machen ein kombinatorisches Spiel aus:
+\begin{enumerate}
+	\item   \textbf{Zwei-Spieler-Struktur: }Kombinatorische Spiele sind auf zwei Spieler beschränkt, die abwechselnd Züge machen. Dies ermöglicht eine klare Analyse von Strategien und Gegenstrategien.
+	\item 	\textbf{Nullsummencharakter: }Der Gewinn eines Spielers entspricht exakt dem Verlust des anderen. Dies führt zu einer antagonistischen Spielsituation, in der die Interessen der Spieler direkt gegeneinander stehen.
+	\item 	\textbf{Endlichkeit: }Die begrenzte Anzahl von Zugmöglichkeiten und die Unmöglichkeit unendlicher Spielverläufe garantieren, dass jedes Spiel zu einem Abschluss kommt.
+	\item 	\textbf{Perfekte Information: }Beide Spieler haben zu jedem Zeitpunkt vollständige Kenntnis über den Spielstand. Dies eliminiert Unsicherheiten, die in Spielen mit verborgenen Informationen auftreten würden.
+	\item 	\textbf{Determinismus:} Der Ausschluss von Zufallselementen macht das Spiel vollständig vorhersehbar, sofern die Strategien der Spieler bekannt sind.
+\end{enumerate}
+
+Durch diese genannten fünf Eigenschaften werden kombinatorische Spiele auch "endliches ZweiPersonen-Nullsummenspiel mit perfekter Information" genannt.
+
 \section{Relevante spieltheoretische Konzepte für Vier Gewinn}
+„Vier gewinnt“ ist ein strategisches Zwei-Personen-Spiel mit vollständiger Information, das sich mithilfe der Spieltheorie analysieren lässt. Einige zentrale Konzepte der Spieltheorie sind besonders relevant, um die Dynamik und Strategien von „Vier gewinnt“ zu verstehen:
+
+
+\textbf{Dominante Strategien:}
+\begin{itemize}
+	\item Eine Strategie ist dominant, wenn sie unabhängig von den Zügen des Gegners optimal ist.
+	\item Im Spiel \textit{Vier Gewinnt} existieren situationsabhängige dominante Strategien.
+	\item Die Kontrolle der Mittelspalte gilt als teilweise dominante Strategie, da sie zentrale taktische und strategische Vorteile bietet.
+\end{itemize}
+
+\textbf{Gleichgewichtskonzepte:}
+\begin{itemize}
+	\item \textbf{Nash-Gleichgewicht}: Ein Zustand, in dem keine Partei durch einseitiges Abweichen ihre Position verbessern kann.
+	\item \textbf{Teilspielperfekte Gleichgewichte}: Strategien, die in allen Teilspielen optimal sind.
+	\item \textbf{Minimax-Prinzip}: Eine Methode, bei der der Spieler versucht, den maximal möglichen Verlust zu minimieren.
+\end{itemize}
+
+\textbf{Strategische Tiefe:}
+\begin{itemize}
+	\item Vorausschauendes Spiel über mehrere Züge ist entscheidend für den Erfolg.
+	\item Erkennung und gezielte Nutzung von Zwangszügen und Zugfolgen.
+	\item Aufbau von Drohpotentialen sowie deren effektive Abwehr.
+\end{itemize}
+
+\textbf{Positionsbewertung:}
+\begin{itemize}
+	\item Bewertung von Spielstellungen nach strategischen Kriterien zur Einschätzung der Spielstärke.
+	\item Identifikation kritischer Positionen, die über den Spielausgang entscheiden können.
+	\item Analyse von Gewinnmustern und Drohungen, um mögliche Spielstrategien zu entwickeln.
+\end{itemize}
+
+\textbf{Zugzwang-Situationen:}
+\begin{itemize}
+	\item Zugzwang beschreibt Situationen, in denen jeder mögliche Zug die eigene Position verschlechtert.
+	\item Solche Situationen haben eine hohe strategische Bedeutung für die Spielführung.
+	\item Methoden zur gezielten Herbeiführung von Zugzwang sind entscheidend, um den Gegner in eine nachteilige Lage zu bringen.
+\end{itemize}

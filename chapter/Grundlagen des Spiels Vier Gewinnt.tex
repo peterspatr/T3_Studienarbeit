@@ -31,4 +31,29 @@ Das originale Spiel 4Gewinnt besteht aus einer Rasterwand mit sechs Zeilen und s
 \end{figure}
 \newpage
 \section{Historischer Hintergrund}
+Das Spiel “Vier Gewinnt” wurde 1973 von Howard Wexler und Ned Strongin entwickelt. Die Erstveröffentlichung erfolgte 1974 durch die Firma Milton Bradley, die im deutschsprachigen Raum als MB Spiele bekannt ist.
+Die Entwicklung des Spiels erfolgte durch die Strongin und Wexler Corporation in den USA. Obwohl der Preis der Erstausgabe nicht überliefert ist, wurde das Spiel schnell zu einem beliebten Strategiespiel.\\
+Eine interessante Entwicklung erfolgte bereits vor der Entstehung des klassischen Vier Gewinnt: 1967 erschien in den USA eine dreidimensionale Variante namens “Score Four”. Diese wurde 1974 in Deutschland von Ravensburger unter dem Namen “Sogo” vertrieben und war in der DDR als “Raummühle” bekannt.\\
+Das klassische Vier Gewinnt etablierte sich rasch als beliebtes Familienspiel und wurde über die Jahre in verschiedenen Varianten neu aufgelegt. Die Einfachheit der Regeln bei gleichzeitiger strategischer Tiefe trug maßgeblich zum anhaltenden Erfolg des Spiels bei.\\
+https://www.gameorama.ch/de/museum/spielmuseum/timeline/gewinnt?t
 \section{Mathematische Eigenschaften des Spiels}
+Das Spiel 4Gewinnt weist mehrere wichtige mathematische Eigenschaften auf, die für seine Analyse fundamental sind.\\
+Hierbei liegt vorallem der Fokus auf Spielfeldgröße und Kombinatorik. Das klassische Spielfeld besteht aus 7 Spalten und 6 Reihen, was 42 mögliche Positionen ergibt. Diese Dimension wurde damals bewusst festgelegt, um ein ausgewogenes Verhältnis zwischen Komplexität und Spielbarkeit zu gewährleisten.\\
+
+Die Gesamtzahl der theoretisch möglichen Spielzustände lässt sich wie folgt berechnen:
+\begin{itemize}
+	\item Jede Position kann drei Zustände annehmen: leer, Spieler 1, Spieler 2
+	\item Dies ergibt theoretisch  mögliche Zustände\\
+	
+	Die tatsächliche Anzahl ist jedoch deutlich geringer, da:
+	\item Spielsteine nur von unten nach oben gesetzt werden können
+	\item Das Spiel endet, sobald vier Steine in einer Reihe liegen
+	\item Nicht alle Kombinationen sind durch legale Spielzüge erreichbar
+\end{itemize}
+
+Komplexitätsgrad
+•	Der durchschnittliche Verzweigungsfaktor (mögliche Züge pro Spielsituation) liegt bei etwa 4
+•	Die maximale Spieltiefe beträgt 42 Züge
+•	Die Spielbaumkomplexität ist deutlich geringer als bei Schach, aber höher als bei Tic-Tac-Toe
+Symmetrieeigenschaften Das Spielfeld weist eine vertikale Symmetrie auf, wodurch sich die Anzahl der zu analysierenden Positionen reduziert. Die mittlere Spalte nimmt dabei eine besondere strategische Position ein.
+Diese mathematischen Eigenschaften bilden die Grundlage für die spieltheoretische Analyse und die Entwicklung von Lösungsstrategien.
