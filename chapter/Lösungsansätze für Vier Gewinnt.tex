@@ -1,6 +1,74 @@
 \chapter{Lösungsansätze für Vier Gewinnt}
 
 \section{Optimale Strategien}
+Die spieltheoretische Analyse von „Vier Gewinnt“ offenbart eine Reihe von strategischen Prinzipien und optimalen Spielweisen, die das Verständnis dieses Spiels vertiefen und präzise Strategien für Spieler ermöglichen. Diese Erkenntnisse basieren sowohl auf grundlegenden strategischen Prinzipien als auch auf fortgeschrittenen taktischen Elementen, die im Verlauf des Spiels entscheidend sind.
+
+Zu den grundlegenden strategischen Prinzipien gehört vor allem die Bedeutung der Startposition. Es ist nachgewiesen, dass der erste Spieler bei perfektem Spiel immer gewinnen kann, vorausgesetzt, er wählt die optimale Eröffnung. Diese besteht darin, den ersten Stein in die mittlere Spalte zu setzen. Diese Eröffnung bietet die beste Kontrolle über das Spielfeld und erhöht die Möglichkeiten für offensive und defensive Züge in den folgenden Spielphasen. Züge in die benachbarten Spalten (d.h. die zweite oder sechste Spalte) führen bei optimaler Spielweise beider Spieler hingegen zu einem Remis. Alle anderen Eröffnungszüge gelten als suboptimal und führen bei perfektem Gegenspiel unweigerlich zur Niederlage des ersten Spielers.
+
+Ein weiteres zentrales Prinzip ist die Zentrumsbeherrschung, die eine essenzielle Rolle spielt. Die Kontrolle der mittleren drei Spalten (insbesondere der Spalten c, d und e) ist von strategischer Bedeutung, da sie die größten Möglichkeiten für horizontale, vertikale und diagonale Gewinnreihen bieten. Besonders die Spalten b und f – die zweite und vorletzte Spalte – besitzen ebenfalls strategisches Potenzial, da ohne sie keine vollständigen diagonalen oder horizontalen Viererreihen aufgebaut werden können. Diese Kontrolle ist nicht nur wichtig für den eigenen Spielaufbau, sondern auch, um den Gegner in seiner Strategie einzuschränken.
+
+Neben diesen grundlegenden Prinzipien kommen im Verlauf des Spiels auch fortgeschrittene taktische Elemente ins Spiel. Eine der wichtigsten Taktiken ist die Kontrolle über sogenannte Zugzwang-Situationen. Dabei handelt es sich um Spielsituationen, in denen der Gegner durch geschicktes Manövrieren gezwungen wird, einen Zug zu machen, der seine eigene Position verschlechtert. Diese Situationen sind besonders am Ende des Spiels entscheidend, wenn nur noch wenige Felder verfügbar sind und der Druck auf beide Spieler steigt. Ein weiteres taktisches Element sind Fallenkombinationen, bei denen der Gegner durch geschickte Kombinationen von Drohungen in eine Falle gelockt wird. Besonders effektiv sind sogenannte Doppelfallen, bei denen zwei gleichzeitige Drohungen erzeugt werden, die der Gegner nicht beide blockieren kann. Ebenfalls relevant sind Auffüllfallen, bei denen ein Spieler den Gegner durch Mangel an freien Feldern zwingt, einen entscheidenden Stein unter eine vorbereitete Blockfalle zu setzen.
+
+Die spieltheoretische Analyse von „Vier Gewinnt“ wurde durch mathematische und computerbasierte Methoden weiter vertieft. Unabhängig voneinander gelang es zwei Forschern, eine vollständige Lösung für das Spiel zu finden. Victor Allis entwickelte 1988 einen speziellen Regelsatz zur systematischen Analyse des Spiels, während James D. Allen 1990 Computerprogramme einsetzte, um das Spiel vollständig zu berechnen. Beide kamen unabhängig voneinander zum gleichen Ergebnis: Der erste Spieler kann bei optimaler Spielweise und einer Eröffnung in der Mittelspalte das Spiel immer gewinnen. Diese Erkenntnis hat nicht nur wissenschaftliche Relevanz, sondern bildet auch die Grundlage für die Entwicklung von Algorithmen, die in Computerprogrammen oder Robotersystemen eingesetzt werden, um das Spiel optimal zu spielen.
+
+
+	\begin{center}
+		\setlength{\arrayrulewidth}{1mm}
+		\setlength{\tabcolsep}{10pt}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{tabular}{|>{\columncolor[gray]{0.9}}c|c|c|c|>{\columncolor[gray]{0.8}}c|c|c|}
+			\hline
+			& & & \cellcolor[gray]{0.9} & & & \\ \hline
+			& & & \cellcolor[gray]{0.9} & & & \\ \hline
+			& & & \cellcolor[gray]{0.9} & & & \\ \hline
+			& & & \cellcolor[gray]{0.9} & & & \\ \hline
+			& & & \cellcolor[gray]{0.9} & & & \\ \hline
+			1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
+		\end{tabular}
+	\end{center}
+	
+	\subsection*{Mögliche Startpositionen und Spielausgänge}
+	
+	\textbf{1. Startposition 4 (mittlere Spalte)}
+	Wenn der erste Spieler in die mittlere Spalte setzt, hat er einen nachgewiesenen Vorteil und kann bei perfektem Spiel gewinnen. Diese Eröffnung maximiert die Kontrolle über das Spielfeld.
+	
+	\textbf{2. Startpositionen 3 oder 5 (benachbarte Spalten zur Mitte)}
+	Ein Zug in die Spalte 3 oder 5 führt bei optimalem Spiel zu einem Remis, da der zweite Spieler durch eine Kombination aus Zentrums- und Blockstrategien den Sieg verhindern kann.
+	
+	\textbf{3. Startpositionen 1, 2, 6 oder 7 (äußere Spalten)}
+	Züge in die äußeren Spalten gelten als suboptimal. Der erste Spieler verliert bei perfektem Gegenspiel des zweiten Spielers, da diese Positionen weniger Kontrolle über das Zentrum und die Gewinnlinien bieten.
+	
+	Diese Analyse zeigt, wie wichtig die Wahl der Startposition für den weiteren Spielverlauf ist. Der erste Zug in die Mitte eröffnet dem Spieler die besten Chancen, während Züge in die äußeren Spalten zu deutlichen Nachteilen führen können.
+
 \section{Heuristische Ansätze}
+
+Die Bewertung von Positionen auf dem Spielfeld ist ein zentraler heuristischer Ansatz bei der Strategieentwicklung für Vier Gewinnt. Dieser Ansatz zielt darauf ab, den strategischen Wert jeder Position systematisch zu analysieren und darauf aufbauend optimale Züge zu planen.
+
+Die dargestellte Tabelle veranschaulicht die strategische Bewertung jedes Spielfelds im Spiel „Vier Gewinnt“. Jedes Feld erhält einen numerischen Wert, der angibt, wie viele mögliche Viererreihen dieses Feld beeinflussen kann. Ein Zug auf ein Feld mit einem höheren Wert ist in der Regel strategisch besser, da er potenziell mehr Siegoptionen eröffnet. Solche Bewertungsansätze werden auch in computergesteuerten Spielen angewendet, um optimale Züge zu berechnen.
+
+	\[
+	\begin{array}{c|c|c|c|c|c|c|c|}
+		& 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
+		0 & \textcolor{red}{3} & \textcolor{red}{4} & \textcolor{red}{5} & \textcolor{red}{7} & \textcolor{red}{5} & \textcolor{red}{4} & \textcolor{red}{3} \\ \hline
+		1 & \textcolor{red}{4} & \textcolor{red}{6} & \textcolor{red}{8} & \textcolor{red}{10} & \textcolor{red}{8} & \textcolor{red}{6} & \textcolor{red}{4} \\ \hline
+		2 & \textcolor{red}{5} & \textcolor{red}{8} & \textcolor{red}{11} & \textcolor{red}{13} & \textcolor{red}{11} & \textcolor{red}{8} & \textcolor{red}{5} \\ \hline
+		3 & \textcolor{red}{5} & \textcolor{red}{8} & \textcolor{red}{11} & \textcolor{red}{13} & \textcolor{red}{11} & \textcolor{red}{8} & \textcolor{red}{5} \\ \hline
+		4 & \textcolor{red}{4} & \textcolor{red}{6} & \textcolor{red}{8} & \textcolor{red}{10} & \textcolor{red}{8} & \textcolor{red}{6} & \textcolor{red}{4} \\ \hline
+		5 & \textcolor{red}{3} & \textcolor{red}{4} & \textcolor{red}{5} & \textcolor{red}{7} & \textcolor{red}{5} & \textcolor{red}{4} & \textcolor{red}{3} \\ \hline
+	\end{array}
+	\]
+	
+	\textbf{Achsenbeschriftungen:} \(x\) steht für die Zeilen (0 bis 5 von oben nach unten) und \(y\) für die Spalten (0 bis 6 von links nach rechts).
+	
+	\subsection*{Erklärung der Werte}
+	\textbf{Zentrum des Spielfelds:} Die Felder im Zentrum (insbesondere Spalte 3 und die mittleren Zeilen) haben die höchsten Werte, da sie Teil mehrerer potenzieller Viererreihen sein können – sowohl horizontal, vertikal als auch diagonal. Das erklärt, warum das Feld in Spalte 3, Zeilen 2 und 3, den maximalen Wert von 13 besitzt.\\
+	
+	\textbf{Ränder des Spielfelds:} Die Felder am Rand (Spalten 0, 6 und die obersten bzw. untersten Zeilen) haben deutlich geringere Werte, da sie weniger Gewinnlinien ermöglichen. Ein Randfeld kann maximal Teil einer horizontalen und einer diagonalen Viererreihe sein, weshalb Werte wie 3 und 4 an diesen Positionen typisch sind.
+	
+	\subsection*{Strategische Bedeutung}
+	Die zentralen Felder werden priorisiert, da sie mehr Möglichkeiten eröffnen, eine Viererreihe zu vervollständigen. Dies macht die Kontrolle über die mittleren Spalten (z. B. Spalte 3 und benachbarte Spalten 2 und 4) zu einer entscheidenden Strategie.\\
+	Randfelder haben weniger Einfluss auf das Spielgeschehen und dienen meist nur zur Defensive oder zum Erzwingen von Zügen des Gegners.
+	
+	
 \section{Computergestützte Lösungen und Algorithmen}
 	
