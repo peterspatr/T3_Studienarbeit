@@ -53,24 +53,32 @@ Im Jahr 1967 erschien in den USA eine dreidimensionale Variante vom Spiel Vier G
 	\label{fig:Sogo}
 \end{figure}
 \newpage
+
 \section{Mathematische Eigenschaften des Spiels}
-Das Spiel 4Gewinnt weist mehrere wichtige mathematische Eigenschaften auf, die für seine Analyse fundamental sind.\\
-Hierbei liegt vorallem der Fokus auf Spielfeldgröße und Kombinatorik. Das klassische Spielfeld besteht aus 7 Spalten und 6 Reihen, was 42 mögliche Positionen ergibt. Diese Dimension wurde damals bewusst festgelegt, um ein ausgewogenes Verhältnis zwischen Komplexität und Spielbarkeit zu gewährleisten.\\
+%Das Spiel 4Gewinnt weist mehrere wichtige mathematische Eigenschaften auf, die für seine Analyse fundamental sind.\\
+%Hierbei liegt vorallem der Fokus auf Spielfeldgröße und Kombinatorik. Das klassische Spielfeld besteht aus 7 Spalten und 6 Reihen, was 42 mögliche Positionen ergibt. Diese Dimension wurde damals bewusst festgelegt, um ein ausgewogenes Verhältnis zwischen Komplexität und Spielbarkeit zu gewährleisten.\\
+%
+%Die Gesamtzahl der theoretisch möglichen Spielzustände lässt sich wie folgt berechnen:
+%\begin{itemize}
+%	\item Jede Position kann drei Zustände annehmen: leer, Spieler 1, Spieler 2
+%	\item Dies ergibt theoretisch  mögliche Zustände\\
+%	
+%	Die tatsächliche Anzahl ist jedoch deutlich geringer, da:
+%	\item Spielsteine nur von unten nach oben gesetzt werden können
+%	\item Das Spiel endet, sobald vier Steine in einer Reihe liegen
+%	\item Nicht alle Kombinationen sind durch legale Spielzüge erreichbar
+%\end{itemize}
+%
+%Komplexitätsgrad
+%•	Der durchschnittliche Verzweigungsfaktor (mögliche Züge pro Spielsituation) liegt bei etwa 4
+%•	Die maximale Spieltiefe beträgt 42 Züge
+%•	Die Spielbaumkomplexität ist deutlich geringer als bei Schach, aber höher als bei Tic-Tac-Toe
+%Symmetrieeigenschaften Das Spielfeld weist eine vertikale Symmetrie auf, wodurch sich die Anzahl der zu analysierenden Positionen reduziert. Die mittlere Spalte nimmt dabei eine besondere strategische Position ein.
+%Diese mathematischen Eigenschaften bilden die Grundlage für die spieltheoretische Analyse und die Entwicklung von Lösungsstrategien.
 
-Die Gesamtzahl der theoretisch möglichen Spielzustände lässt sich wie folgt berechnen:
-\begin{itemize}
-	\item Jede Position kann drei Zustände annehmen: leer, Spieler 1, Spieler 2
-	\item Dies ergibt theoretisch  mögliche Zustände\\
-	
-	Die tatsächliche Anzahl ist jedoch deutlich geringer, da:
-	\item Spielsteine nur von unten nach oben gesetzt werden können
-	\item Das Spiel endet, sobald vier Steine in einer Reihe liegen
-	\item Nicht alle Kombinationen sind durch legale Spielzüge erreichbar
-\end{itemize}
-
-Komplexitätsgrad
-•	Der durchschnittliche Verzweigungsfaktor (mögliche Züge pro Spielsituation) liegt bei etwa 4
-•	Die maximale Spieltiefe beträgt 42 Züge
-•	Die Spielbaumkomplexität ist deutlich geringer als bei Schach, aber höher als bei Tic-Tac-Toe
-Symmetrieeigenschaften Das Spielfeld weist eine vertikale Symmetrie auf, wodurch sich die Anzahl der zu analysierenden Positionen reduziert. Die mittlere Spalte nimmt dabei eine besondere strategische Position ein.
-Diese mathematischen Eigenschaften bilden die Grundlage für die spieltheoretische Analyse und die Entwicklung von Lösungsstrategien.
+Das Spiel 4Gewinnt weißt mehrere mathematische Eigenschaften auf. Diese sind für eine Analyse des Spiels von Bedeutung. 
+Das Strategiespiel ist ein Zwei-Personen-Nullsummenspiel. Das bedeutet es spielen zwei Teilnehmer gegeneinander. Beide Spieler haben während dem Spiel immer die volle Information über den Spielstand. Wenn einer von beiden gewinnt, bedeutet das gleichzeitig, dass der andere verloren hat \autocite{ruile2009viergewinnt}.
+%*****************************
+%mehr folgt
+%*******************************
+ 
