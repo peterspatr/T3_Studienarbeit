@@ -44,8 +44,8 @@ Im darauffolgenden Jahr 1974 wurde das Spiel Vier Gewinnt von Milton Bradley ver
 
 Im Jahr 1967 erschien in den USA eine dreidimensionale Variante vom Spiel Vier Gewinnt, unter dem Namen ,,Score Four''. In Deutschland brauchte die Firma Ravensburger 1974 eine dreidimensionale Variante mit dem Namen ,,Sogo'' auf den Markt. (siehe Abbildung:\ref{fig:Sogo}) \
 1988 wurde das Spiel von Victor Allis und James D. Allen nahezu gleichzeitig und unabhängig voneinander vollständig gelöst. Die Beiden haben mathematisch bewiesen, dass der erste Spieler bei fehlerfreiem Spiel immer gewinnen kann, wenn er den ersten Stein in der mittleren Spalte platziert.\autocite{wikipedia_vier_gewinnt}.
-
-%autocite{abebooks_image}
+ 
+% \autocite{abebooks_image}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{images/Sogo}
@@ -82,9 +82,34 @@ Trotz der simplen Spielregeln ist vier Gewinnt dennoch recht komplex. Grund daf�
 Die Komplexität des Baumdiagramms liegt bei etwa $10^{21}$, was eine vollständige Analyse des Spielbaums sehr rechenintensiv macht \autocite{ruile2009viergewinnt}.
 
 Das Lösen des Spiels Vier Gewinnt basiert auf verschiedenen mathematischen Techniken.
-Zum einen gibt es die Anwendung des Zermelo-Bestimmtheitssatzes, auf den im Kapitel \ref{sec:Analyse von Spielsituationen} näher eingegangen wird.\\
+Zum einen gibt es die Anwendung des Zermelo-Bestimmtheitssatzes. Dieser besagt, dass entweder Spieler 1, Spieler 2 oder kein Spieler die Partie gewinnt. Im Kapitel \ref{sec:Analyse von Spielsituationen} wird näher auf den Bestimmtheitssatz eingegangen wird.\\
 Eine weite Technik zur Analyse ist die Anwendung der Rückwärtsinduktion. Die Rückwärtsinduktion beginnt an der aktuellen Position und arbeitet sich zum Anfang zurück. Hierbei werden für jeden Spielzug die optimalen Entscheidungen der Spieler analysiert, unter der Berücksichtigung aller möglichen Züge.
-Am Ende dieses Prozesses steht das beste Ergebnis für den beginnenden Spieler \autocite{mueller_2011}.
+Am Ende dieses Prozesses steht das beste Ergebnis für den beginnenden Spieler \autocite{mueller_2011}.\\
+Die Rückwärtsinduktion wird durch die Payoff-Matrix-Analyse ergänzt. Das grundlegende Konzept der Payoff-Matrix-Analyse bietet eine Möglichkeit zur Darstellung strategischer Interaktionen und Entscheidungen dar \autocite{fasterCapital2024}.
 
 
+\begin{center}
+	\begin{figure}[h]
+		\centering
+		\begin{tabular}{cc|c|c|c}
+			\multicolumn{1}{c}{} & \multicolumn{4}{c}{\textcolor{blue}{Spieler 2}} \\
+			&	& Zentrum & Rand & Defensiv \\
+			\cline{2-5}
+			\multirow{3}{*}{\rotatebox{90}{\textcolor{red}{Spieler 1}}} & Zentrum & $(\textcolor{red}{0},\textcolor{blue}{0})$ & $(\textcolor{red}{1},\textcolor{blue}{-1})$ & $(\textcolor{red}{0},\textcolor{blue}{0})$ \\
+			\cline{3-5}
+			&Rand& $(\textcolor{red}{-1},\textcolor{blue}{1})$ & $(\textcolor{red}{0},\textcolor{blue}{0})$ & $(\textcolor{red}{-1},\textcolor{blue}{1})$ \\
+			\cline{3-5}
+		&Defensiv& $(\textcolor{red}{0},\textcolor{blue}{0})$ & $(\textcolor{red}{1},\textcolor{blue}{-1})$ & $(\textcolor{red}{0},\textcolor{blue}{0})$ \\
+		\end{tabular}\\
+		\caption[Payoff-Matrix für Vier gewinnt]{Payoff-Matrix für Vier gewinntt}
+		\label{fig:payoff}
+	\end{figure}
+\end{center}
+
+\begin{minipage}{\linewidth}
+	\centering
+	 \textbf{Legende der Payoff-Matrix}\\
+	\textcolor{red}{Rot} = Spieler 1, \textcolor{blue}{Blau} = Spieler 2,\\
+	1=Vorteil, 0=Neutral, -1=Verlust
+\end{minipage}
  

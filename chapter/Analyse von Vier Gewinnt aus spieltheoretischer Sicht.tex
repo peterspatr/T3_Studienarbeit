@@ -1,39 +1,56 @@
 \chapter{Analyse von Vier Gewinnt aus spieltheoretischer Sicht}
 
-Die spieltheoretische Analyse von „Vier Gewinnt“ erfordert eine präzise und formale mathematische Darstellung des Spiels, um dessen strategische Struktur vollständig zu erfassen. Diese Darstellung ermöglicht es, die komplexen Entscheidungsprozesse der Spieler zu analysieren und optimale Strategien zu bestimmen. Im Wesentlichen gibt es zwei zentrale Darstellungsformen, die für die Analyse verwendet werden. Diese Darstellungsformen werden aufgezeigt und bewertet.
+%Die spieltheoretische Analyse von „Vier Gewinnt“ erfordert eine präzise und formale mathematische Darstellung des Spiels, um dessen strategische Struktur vollständig zu erfassen. Diese Darstellung ermöglicht es, die komplexen Entscheidungsprozesse der Spieler zu analysieren und optimale Strategien zu bestimmen. Im Wesentlichen gibt es zwei zentrale Darstellungsformen, die für die Analyse verwendet werden. Diese Darstellungsformen werden aufgezeigt und bewertet.
+%
 
+Die spieltheoretische Analyse des Spiels Vier Gewinnt erfordert eine systematische Untersuchung verschiedener strategischer Komponenten und mathematischer Aspekte. Im Folgenden Kapitel ,,Analyse von Vier Gewinnt aus spieltheoretischer Sicht'' werden die wesentlichen Elemente dieser Analyse detailliert dargestellt.
 \section{Darstellung des Spiels in Normalform}
+%
+%Die Extensivform stellt das Spiel als Spielbaum dar und wird durch den Tupel  beschrieben T= (N,K,P,U,h,p), wobei:
+%\begin{itemize}
+%	\item N die Menge der Spieler (Spieler 1 und 2)
+%	\item K die Menge aller Knoten (Spielpositionen)
+%	\item P die Menge der Spielerpositionen
+%	\item U die Menge der Endknoten
+%	\item h die Auszahlungsfunktion
+%	\item p die Vorgängerfunktion ist
+%\end{itemize}
+%Für Vier Gewinnt ist die Extensivform besonders geeignet, da sie die sequentielle Struktur des Spiels abbildet, die perfekte Information widerspiegelt und eine intuitive Analyse von Zugfolgen ermöglicht.
 
-Die Extensivform stellt das Spiel als Spielbaum dar und wird durch den Tupel  beschrieben T= (N,K,P,U,h,p), wobei:
-\begin{itemize}
-	\item N die Menge der Spieler (Spieler 1 und 2)
-	\item K die Menge aller Knoten (Spielpositionen)
-	\item P die Menge der Spielerpositionen
-	\item U die Menge der Endknoten
-	\item h die Auszahlungsfunktion
-	\item p die Vorgängerfunktion ist
-\end{itemize}
-Für Vier Gewinnt ist die Extensivform besonders geeignet, da sie die sequentielle Struktur des Spiels abbildet, die perfekte Information widerspiegelt und eine intuitive Analyse von Zugfolgen ermöglicht.
-
+%*******Noch Ändern************************************************************************************
+Die Normalform-Darstellung von Vier Gewinnt basiert auf der mathematischen Modellierung sämtlicher möglicher Spielzüge. Dabei wird das Spiel als Zwei-Personen-Nullsummenspiel charakterisiert, bei dem die Gewinne eines Spielers den Verlusten des anderen entsprechen2. Die Payoff-Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat
  \section{Darstellung des Spiels in Extensivform}
-Die Normalform hingegen repräsentiert das Spiel als Matrix G=(N,S,u) , mit:
-\begin{itemize}
-	\item N als Menge der Spieler
-	\item S als Menge der Strategieprofile
-	\item u als Auszahlungsfunktion
-\end{itemize}
+%Die Normalform hingegen repräsentiert das Spiel als Matrix G=(N,S,u) , mit:
+%\begin{itemize}
+%	\item N als Menge der Spieler
+%	\item S als Menge der Strategieprofile
+%	\item u als Auszahlungsfunktion
+%\end{itemize}
+%
+%Die mathematische Beschreibung des Spielbaums erfolgt durch:
+%T = (V,E,v_0) 
+%wobei:
+%\begin{itemize}
+%	\item V die Menge aller Knoten
+%	\item E die Menge der Kanten (mögliche Züge)
+%	\item v_0 der Wurzelknoten (Ausgangsposition) ist
+%\end{itemize}
+%
+%Die Darstellung in Normalform ist aufgrund der hohen Anzahl möglicher Strategien sehr umfangreich und für praktische Analysen weniger geeignet. Die Größe der Normalform-Matrix wächst exponentiell mit der Spieltiefe.
 
-Die mathematische Beschreibung des Spielbaums erfolgt durch:
-T = (V,E,v_0) 
-wobei:
-\begin{itemize}
-	\item V die Menge aller Knoten
-	\item E die Menge der Kanten (mögliche Züge)
-	\item v_0 der Wurzelknoten (Ausgangsposition) ist
-\end{itemize}
-
-Die Darstellung in Normalform ist aufgrund der hohen Anzahl möglicher Strategien sehr umfangreich und für praktische Analysen weniger geeignet. Die Größe der Normalform-Matrix wächst exponentiell mit der Spieltiefe.
+%*******Noch Ändern************************************************************************************
+Der Spielbaum in der Extensivform zeigt die sequentielle Struktur des Spiels. Jeder Knoten repräsentiert eine Spielsituation, von der aus verschiedene Zugmöglichkeiten ausgehen. Die Teilspielanalyse ermöglicht es, einzelne Spielsituationen isoliert zu betrachten und optimale Strategien zu entwickeln5
+. Bei perfektem Spiel beider Spieler ergeben sich dabei klare Strukturen, die durch den Zermelo'schen Bestimmtheitssatz beschrieben werden können
 
 \section{Strategien und Gleichgewichte}
+%*******Noch Ändern************************************************************************************
+Die Analyse der Strategien zeigt, dass es im Vier Gewinnt dominante Strategien gibt. Nach dem Zermelo'schen Bestimmtheitssatz lässt sich das Spiel in eine von drei Kategorien einordnen, wobei sich herausgestellt hat, dass der erste Spieler eine dominante Strategie besitzt5
+. Die Nash-Gleichgewichte manifestieren sich in den optimalen Zugfolgen, wobei die Kontrolle der zentralen Spalten eine entscheidende Rolle spielt2
+.
+
 \section{Komplexität des Spielbaums}
+Die Komplexität des Spielbaums ist beträchtlich. Der Verzweigungsfaktor wird durch die sieben möglichen Züge pro Spielsituation bestimmt, wobei sich die Komplexität mit jeder Erhöhung der Baumtiefe multipliziert2
+. Die computationellen Herausforderungen ergeben sich aus der Notwendigkeit, große Mengen von Spielzuständen zu analysieren und zu bewerten. Dabei müssen bestimmte Verhaltensregeln der Spieler berücksichtigt werden, wie etwa das sofortige Nutzen von Gewinnmöglichkeiten und das Verhindern gegnerischer Gewinnzüge2
+. Die Analyse zeigt, dass trotz der scheinbaren Einfachheit der Spielregeln eine erhebliche mathematische Komplexität vorliegt. Die praktische Implementierung optimaler Strategien erfordert daher sowohl theoretisches Verständnis als auch effiziente Algorithmen zur Bewältigung des großen Zustandsraums. Besonders die Kontrolle strategisch wichtiger Positionen und die Fähigkeit, mehrere Züge vorauszudenken, sind entscheidend für den Spielerfolg2
+.
 	

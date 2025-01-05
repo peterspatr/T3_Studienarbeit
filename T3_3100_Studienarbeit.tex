@@ -34,7 +34,7 @@ ngerman
 %\linespread{1.2}\selectfont     % Zeilenabstand erhöhen - größere Werte als 1.2 nicht verwenden!!
 % Ende Einstellung große Arbeiten mit viel Text.
 %------
-\usepackage{float}
+
 \newcommand{\lowrule}{%
 	\leavevmode \kern.06em\vbox{\hrule width.5em}}
 
@@ -110,6 +110,7 @@ marginal
 
 \usepackage{xcolor} 			% einfache Verwendung von Farben in nahezu allen Farbmodellen
 
+\usepackage{multirow}
 \usepackage{listings}			% Darstellung von Quellcode mit den Umgebungen {lstlisting}, \lstinline und \lstinputlisting
 \lstset{literate=				% Damit können Umlaute innerhalb Listings geschrieben werden
 	{Ö}{{\"O}}1
@@ -152,7 +153,7 @@ marginal
 	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
-
+\usepackage{float}
 
 
 % -----------------------------------------------------------------------------------------------------------------
@@ -284,8 +285,8 @@ marginal
 %\renewcommand{\indexname}{Sachwortverzeichnis}
 %\printindex								% Erzeugen des Sachwortverzeichnisses
 
-%---------Notizen---------------------------
-\include{chapter/Besprechungsnotizen}
-\include{chapter/Anforderungsliste}
+%%---------Notizen---------------------------
+%\include{chapter/Besprechungsnotizen}
+%\include{chapter/Anforderungsliste}
 
 \end{document}
