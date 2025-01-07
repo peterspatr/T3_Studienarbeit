@@ -77,3 +77,193 @@ Die dargestellte Tabelle veranschaulicht die strategische Bewertung jedes Spielf
 	
 \section{Computergestützte Lösungen und Algorithmen}
 	
+	
+\section{MinMax-Algorithmus}
+
+Die Minimax-Strategie ist ein grundlegender Algorithmus zur Entscheidungsfindung in Nullsummenspielen wie "Vier Gewinnt". Dieser Ansatz wird verwendet, um optimale Züge für einen Spieler zu finden, indem sowohl die eigenen Möglichkeiten als auch die möglichen Gegenreaktionen des Gegners analysiert werden. In diesem Kapitel betrachten wir die Funktionsweise der Minimax-Strategie im Kontext von "Vier Gewinnt" und zeigen, wie sie das Spielverhalten verbessern kann.
+
+Grundprinzip der Minimax-Strategie
+
+Der Minimax-Algorithmus funktioniert nach dem Prinzip der Maximierung des eigenen Nutzens und der Minimierung des Nutzens des Gegners. In einem Spielbaum, der alle möglichen Züge und Gegenreaktionen darstellt, sucht der Algorithmus nach dem optimalen Zug, indem er die Ergebnisse aller möglichen Züge bis zu einer bestimmten Tiefe bewertet.
+
+Die Bewertung erfolgt durch eine sogenannte Heuristik, die den Wert eines Spielzustands quantifiziert. In "Vier Gewinnt" könnte eine einfache Heuristik beispielsweise folgende Aspekte bewerten:
+
+\begin{itemize}
+	\item Gewonnene Spiele: Ein Zustand, in dem ein Spieler vier Steine in einer Reihe hat, hat den höchsten Wert.
+	\item Blockierte Gewinnchancen: Züge, die verhindern, dass der Gegner vier in einer Reihe erreicht, sind besonders wertvoll.
+	\item Teilweise vervollständigte Reihen: Zustände, in denen drei oder zwei verbundene Steine existieren, sind wertvoller als isolierte Steine.
+\end{itemize}
+
+Der Algorithmus berechnet mögliche Züge und bewertet sie rückwärts ausgehend von den möglichen Endzuständen.
+
+Maximierer und Minimierer
+
+In "Vier Gewinnt" gibt es zwei Spieler:
+
+\begin{itemize}
+	\item Der Maximierer versucht, den eigenen Nutzen zu maximieren (z. B. Spieler 1).
+	\item Der Minimierer versucht, den Nutzen des Gegners zu minimieren (z. B. Spieler 2).
+\end{itemize}
+
+Bei jedem Zug wechselt die Rolle zwischen Maximierer und Minimierer. Der Algorithmus wechselt daher bei jedem Ebenenwechsel zwischen der Maximierung und Minimierung der Heuristikwerte.
+
+\section*{Beispiel: Minimax-Suchbaum}
+
+Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des Minimax-Algorithmus illustriert. Der Baum hat eine Tiefe von 2 (eine Max-Ebene und eine Min-Ebene).
+
+\subsection*{Suchbaum}
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[
+		level distance=1.5cm,
+		level 1/.style={sibling distance=6cm},
+		level 2/.style={sibling distance=3cm},
+		every node/.style={circle, draw, align=center}
+		]
+		\node {Max}
+		child {node {Min}
+			child {node {3}}
+			child {node {5}}
+		}
+		child {node {Min}
+			child {node {2}}
+			child {node {4}}
+		};
+	\end{tikzpicture}
+	\caption{Ein einfacher Minimax-Suchbaum mit einer Tiefe von 2.}
+	\label{fig:minimax-example}
+\end{figure}
+
+\subsection*{Erklärung des Suchbaums}
+
+Der Suchbaum in Abbildung \ref{fig:minimax-example} zeigt die Schritte des Minimax-Algorithmus:
+
+\begin{enumerate}
+	\item \textbf{Blattebene:} Die unterste Ebene enthält die Bewertungen der möglichen Endzustände aus Sicht des Max-Spielers. Diese Werte könnten durch eine Bewertungsfunktion ermittelt worden sein.
+	\begin{itemize}
+		\item Die Knoten haben die Werte 3, 5, 2 und 4.
+	\end{itemize}
+	
+	\item \textbf{Min-Ebene:} Der Min-Spieler versucht, die Bewertung zu minimieren. Für jeden Min-Knoten wird der niedrigste Wert seiner Kindknoten ausgewählt:
+	\begin{itemize}
+		\item Der linke Min-Knoten wählt $\min(3, 5) = 3$.
+		\item Der rechte Min-Knoten wählt $\min(2, 4) = 2$.
+	\end{itemize}
+	
+	\item \textbf{Max-Ebene:} Der Max-Spieler versucht, die Bewertung zu maximieren. Der Max-Knoten wählt den höchsten Wert aus den zurückgegebenen Bewertungen der Min-Knoten:
+	\begin{itemize}
+		\item Der Max-Knoten wählt $\max(3, 2) = 3$.
+	\end{itemize}
+\end{enumerate}
+
+\subsection*{Optimale Entscheidung}
+
+Der optimale Zug für den Max-Spieler ist derjenige, der zu einer Bewertung von \textbf{3} führt.
+
+\subsection*{Zusammenfassung}
+
+Der Minimax-Algorithmus analysiert den Baum von unten nach oben:
+\begin{itemize}
+	\item Min-Knoten repräsentieren die Entscheidungen des Gegners (Minimierer).
+	\item Max-Knoten repräsentieren die Entscheidungen des Spielers (Maximierer).
+\end{itemize}
+
+Durch diese systematische Analyse findet der Algorithmus den besten Zug für den Maximierer unter der Annahme, dass der Minimierer optimal spielt.
+
+
+
+\section{AlphaBeta-Algorithmus}
+
+Der Alpha-Beta-Algorithmus ist eine Optimierung des Minimax-Algorithmus, die dessen Effizienz erheblich steigert. Durch das gezielte Verwerfen von Spielzügen, die für die Entscheidung irrelevant sind, reduziert der Alpha-Beta-Algorithmus die Anzahl der bewerteten Knoten im Spielbaum. Diese Technik ist besonders wertvoll bei ressourcenbeschränkten Systemen wie einem LEGO Spike Roboter, der begrenzte Rechenleistung zur Verfügung hat.
+
+Der Alpha-Beta-Algorithmus führt die gleichen Berechnungen wie der Minimax-Algorithmus durch, ergänzt jedoch zwei zusätzliche Parameter, Alpha und Beta, um unnötige Berechnungen zu vermeiden:
+
+\begin{itemize}
+	\item \textbf{Alpha}: Der aktuelle maximale Wert, den der Maximierer sicher erreichen kann.
+	\item \textbf{Beta}: Der aktuelle minimale Wert, den der Minimierer sicher erreichen kann.
+\end{itemize}
+
+Während der Traversierung des Spielbaums werden Äste abgeschnitten, die keine Auswirkungen auf die endgültige Entscheidung haben (\textit{Pruning}). Dies geschieht, wenn:
+\begin{itemize}
+	\item Ein Knoten einen Wert liefert, der schlechter ist als der bisher bekannte Alpha-Wert für den Maximierer.
+	\item Ein Knoten einen Wert liefert, der schlechter ist als der bisher bekannte Beta-Wert für den Minimierer.
+\end{itemize}
+
+Die Anwendung des Alpha-Beta-Algorithmus auf "Vier Gewinnt" bietet mehrere Vorteile:
+\begin{itemize}
+	\item \textbf{Effizienz}: Der Algorithmus reduziert die Anzahl der Knoten, die bewertet werden müssen, erheblich. Dies ermöglicht die Analyse tieferer Spielbäume mit derselben Rechenleistung.
+	\item \textbf{Flexibilität}: Der Algorithmus kann leicht an die spezifische Bewertungsfunktion von "Vier Gewinnt" angepasst werden, z. B. zur Bewertung von Reihen, Spalten und Diagonalen.
+	\item \textbf{Optimierung für begrenzte Ressourcen}: Ein LEGO Spike Roboter hat begrenzte Rechen- und Speicherkapazitäten. Der Alpha-Beta-Algorithmus ermöglicht es, in Echtzeit Züge zu berechnen, ohne den Roboter zu überlasten.
+\end{itemize}
+
+\section*{Beispiel: Alpha-Beta-Suchbaum}
+
+Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des Alpha-Beta-Algorithmus illustriert. Der Baum zeigt, wie bestimmte Zweige (\textit{Pruning}) abgeschnitten werden, um die Effizienz zu erhöhen.
+
+\subsection*{Suchbaum mit Alpha-Beta-Pruning}
+
+\begin{figure}[h!]
+	\centering
+	\begin{tikzpicture}[
+		level distance=1.5cm,
+		level 1/.style={sibling distance=6cm},
+		level 2/.style={sibling distance=3cm},
+		every node/.style={circle, draw, align=center}
+		]
+		% Root level (Max)
+		\node (A) {Max\\$\alpha = -\infty$\\$\beta = +\infty$}
+		% Left subtree (Min)
+		child {node (B) {Min\\$\alpha = -\infty$\\$\beta = +\infty$}
+			child {node {3\\$\alpha = 3$\\$\beta = +\infty$}}
+			child {node {5\\$\alpha = 3$\\$\beta = 5$}}
+		}
+		% Right subtree (Min)
+		child {node (C) {Min\\$\alpha = 3$\\$\beta = +\infty$}
+			child {node {2\\(abgeschnitten)}}
+			child {node {4\\(abgeschnitten)}}
+		};
+		% Pruning lines
+		\draw[dashed, red] (C) -- +(0.8,-0.8);
+	\end{tikzpicture}
+	\caption{Ein Alpha-Beta-Suchbaum mit Pruning. Zweige werden abgeschnitten, wenn sie die Grenzen von Alpha und Beta verletzen.}
+	\label{fig:alphabeta-example}
+\end{figure}
+
+\subsection*{Erklärung des Suchbaums}
+
+Der Suchbaum in Abbildung \ref{fig:alphabeta-example} zeigt die Schritte des Alpha-Beta-Algorithmus:
+
+\begin{enumerate}
+	\item \textbf{Initialisierung:} Die Alpha- und Beta-Werte werden am Wurzelknoten initialisiert:
+	\begin{itemize}
+		\item $\alpha = -\infty$: Das beste Ergebnis, das der Maximierer bisher erreicht hat.
+		\item $\beta = +\infty$: Das schlechteste Ergebnis, das der Minimierer dem Maximierer erlauben würde.
+	\end{itemize}
+	
+	\item \textbf{Linker Teilbaum:} 
+	\begin{itemize}
+		\item Der Maximierer überprüft den linken Teilbaum, in dem der Minimierer aktiv ist.
+		\item Der Min-Knoten prüft seine Kindknoten:
+		\begin{itemize}
+			\item Der erste Kindknoten liefert den Wert 3. Der Alpha-Wert wird aktualisiert: $\alpha = 3$.
+			\item Der zweite Kindknoten liefert den Wert 5. Da 5 größer ist, bleibt $\alpha = 3$ bestehen.
+		\end{itemize}
+	\end{itemize}
+	
+	\item \textbf{Rechter Teilbaum (Pruning):}
+	\begin{itemize}
+		\item Der Maximierer prüft den rechten Teilbaum. Der Min-Knoten beginnt mit der Analyse.
+		\item Bereits beim ersten Kindknoten erkennt der Algorithmus, dass dessen Wert (2) kleiner ist als $\alpha = 3$.
+		\item Alle verbleibenden Kindknoten des rechten Teilbaums werden abgeschnitten (\textit{Pruning}), da sie keinen besseren Wert liefern können.
+	\end{itemize}
+\end{enumerate}
+
+\subsection*{Vorteile des Alpha-Beta-Algorithmus}
+
+Durch das Alpha-Beta-Pruning werden unnötige Berechnungen vermieden:
+\begin{itemize}
+	\item Der Algorithmus durchsucht nur jene Zweige, die potenziell zu besseren Ergebnissen führen.
+	\item In diesem Beispiel werden zwei Knoten (Wert 2 und 4 im rechten Teilbaum) nicht berechnet.
+	\item Dies erhöht die Effizienz und ermöglicht es, tiefere Suchbäume mit derselben Rechenleistung zu analysieren.
+\end{itemize}
