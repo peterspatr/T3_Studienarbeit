@@ -1,16 +1,10 @@
 \chapter{Zusammenfassung}
-\label{cha:zusammenfassung}
 
-Auf zwei bis drei Seiten soll auf folgende Punkte eingegangen werden:
 
-\begin{itemize}
-	\item Welches Ziel sollte erreicht werden
-	\item Welches Vorgehen wurde gewählt
-	\item Was wurde erreicht, zentrale Ergebnisse nennen, am besten quantitative Angaben machen
-	\item Konnten die Ergebnisse nach kritischer Bewertung zum Erreichen des Ziels oder zur Problemlösung beitragen
-	\item  Ausblick
-\end{itemize}
+Die spieltheoretische Analyse von "Vier Gewinnt" hat gezeigt, dass das Spiel trotz seiner scheinbaren Einfachheit eine hohe strategische Tiefe besitzt. Durch die Anwendung von Algorithmen wie Minimax und dessen Optimierung durch den Alpha-Beta-Algorithmus können optimale Entscheidungen getroffen werden, um entweder zu gewinnen oder ein Unentschieden zu erzwingen. 
 
-In der Zusammenfassung sind unbedingt klare Aussagen zum Ergebnis der Arbeit zu nennen. Üblicherweise können Ergebnisse nicht nur qualitativ, sondern auch quantitativ benannt werden, z.~B. \glqq \ldots konnte eine Effizienzsteigerung von \SI{12}{\percent} erreicht werden.\grqq~oder \glqq \ldots konnte die Prüfdauer um \SI{2}{\hour} verkürzt werden\grqq.
+Der Alpha-Beta-Algorithmus ist hierbei besonders hervorzuheben, da er durch die effiziente Kürzung des Suchbaums eine präzise Analyse in kürzerer Zeit ermöglicht. Diese Eigenschaft ist für die praktische Umsetzung auf ressourcenbeschränkten Systemen wie dem LEGO SPIKE Roboter entscheidend. Der Algorithmus gewährleistet, dass der Roboter in der Lage ist, komplexe Spielsituationen in Echtzeit zu bewerten und optimale Züge zu berechnen.
 
-Die Ergebnisse in der Zusammenfassung sollten selbstverständlich einen Bezug zu den in der Einleitung aufgeführten Fragestellungen und Zielen haben.
+Mit den gewonnenen Erkenntnissen aus der Spieltheorie und der mechanischen Konstruktion des Farbsensor-Systems ist nun der Grundstein für den zweiten Teil dieser Studienarbeit gelegt. In diesem Teil wird ein Programm entwickelt, das den Alpha-Beta-Algorithmus implementiert und mit der Hardware des LEGO SPIKE Roboters zusammenarbeitet. 
+
+Das Programm wird die Daten des Farbsensors nutzen, um den aktuellen Spielstand zu erkennen und auf dieser Basis optimale Spielzüge zu berechnen. Durch die präzise Steuerung der mechanischen Komponenten wird der Roboter in der Lage sein, seine Züge zuverlässig auszuführen. Diese Kombination aus theoretischen Grundlagen, Software und Hardware stellt eine vollständige Lösung dar, die sowohl den Anforderungen eines funktionierenden Vier-Gewinnt-Spielers als auch den didaktischen Zielen der Studienarbeit gerecht wird.
