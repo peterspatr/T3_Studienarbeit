@@ -5,74 +5,75 @@
 \section{Definition und Konzepte der Spieltheorie}
 Die Spieltheorie ist ein Teilgebiet der Mathematik, das strategische Entscheidungen in Konflikt- oder Kooperationssituationen analysiert. Ein Spiel besteht dabei aus mehreren Elementen: den Spielern, den möglichen Zügen, den Regeln und dem Ergebnis. Ziel der Spieltheorie ist es, optimale Strategien zu entwickeln und die möglichen Ergebnisse eines Spiels vorherzusagen, wenn die Spieler rational handeln.
 
-Grundelemente eines Spiels
+\textbf{Grundelemente eines Spiels sind folgende Aspekte:}
 
 \begin{enumerate}
-	\item \textbf{Spieler:} Die Teilnehmer eines Spiels, die Entscheidungen treffen. Es können zwei oder mehr Spieler beteiligt sein.
-	\item \textbf{Strategien:} Die Handlungsoptionen, die den Spielern zur Verfügung stehen, um ihre Ziele zu erreichen.
-	\item \textbf{Regeln:} Die Struktur des Spiels, die die möglichen Züge, die Abfolge der Züge und die Bedingungen für den Spielausgang definiert.
-	\item \textbf{Auszahlungen:} Die Ergebnisse des Spiels, die jedem Spieler für eine bestimmte Kombination von Strategien zugeordnet werden. Diese können in Form von Gewinnen, Verlusten oder Nutzen gemessen werden.
-	\item \textbf{Informationen:} Spiele unterscheiden sich darin, ob die Spieler über vollständige Information verfügen (d. h., alle Züge sind sichtbar) oder ob es Elemente von Unsicherheit gibt (z. B. verdeckte Karten oder Würfelergebnisse).
+	\item \textbf{Spieler:} Die Teilnehmer eines Spiels, die Entscheidungen treffen. Es können zwei oder mehr Mitspieler beteiligt sein.
+	\item \textbf{Strategien:} Die Handlungsoptionen, die den Spielern zur Verfügung stehen, um ihre Ziele (Sieg gegen den Mitspieler)zu erreichen.
+	\item \textbf{Regeln:} Die Struktur des Spiels legt fest, wie die Züge ablaufen, in welcher Reihenfolge sie gemacht werden und unter welchen Bedingungen das Spiel endet.
+	\item \textbf{Auszahlungen:} Die Ergebnisse des Spiels werden für jeden Spieler anhand einer bestimmten Kombination von Strategien festgelegt. Diese Ergebnisse können in Form von Gewinnen, Verlusten oder Nutzen dargestellt werden.
+	\item \textbf{Informationen:} Spiele können sich darin unterscheiden, ob die Spieler alle Informationen haben (das heißt, sie sehen alle Züge) oder ob es Unsicherheiten gibt (wie zum Beispiel verdeckte Karten oder Würfelergebnisse).\autocite{holler_einfuhrung_2019}.
 \end{enumerate}
-\section{Klassifikation von Spielen}
-In der Spieltheorie werden Spiele anhand bestimmter Kriterien klassifiziert, um ihre Struktur, Dynamik und Lösbarkeit besser zu verstehen. Die wichtigsten Kategorien, die zur Einordnung dienen, sind nachfolgend dargestellt.
 
+\section{Klassifikation von Spielen}
+Um eine Strategie von 4Gewinnt umsetzen zu können, muss das Spiel an sich ersteinmal analysiert werden. In der Spieltheorie werden Spiele nach bestimmten Kriterien eingeteilt, um ihre Struktur, Dynamik und Lösbarkeit besser zu erfassen. Die wichtigsten Kategorien für diese Einordnung sind im Folgenden aufgeführt.
 \begin{enumerate}
 	\item \textbf{Anzahl der Spieler}
 	\begin{itemize}
-		\item \textbf{Zwei-Personen-Spiele}: Spiele mit genau zwei Spielern. Diese sind besonders häufig Gegenstand spieltheoretischer Analysen.
-		\item \textbf{Mehrspieler-Spiele}: Spiele mit drei oder mehr Teilnehmern. Die Strategien sind komplexer, da Koalitionen und wechselnde Allianzen eine Rolle spielen können.
+		\item \textbf{Zwei-Personen-Spiele}: Spiele mit genau zwei Spielern. Solche Spiele werden oft spieltheoretisch analysiert.
+		\item \textbf{Mehrspieler-Spiele}: Spiele mit drei oder mehr Teilnehmern. Die Strategien sind komplexer, da Bündnisse und wechselnde Zusammenschlüsse eine Rolle spielen können.
 	\end{itemize}
 	
-	\item \textbf{Spielzüge: Gleichzeitige vs. aufeinanderfolgende Entscheidungen}
+	\item \textbf{Spielzüge: gleichzeitige vs. aufeinanderfolgende Entscheidungen}
 	\begin{itemize}
-		\item \textbf{Simultane Spiele}: Beide Spieler treffen ihre Entscheidungen gleichzeitig, ohne die Wahl des Gegners zu kennen. Solche Spiele werden häufig in der Normalform (Matrix-Darstellung) analysiert.
-		\item \textbf{Sequentielle Spiele}: Die Spieler führen ihre Züge nacheinander aus und können auf die vorherigen Züge des Gegners reagieren. Solche Spiele werden in der Extensivform (Baumdiagramm) dargestellt, um die Reihenfolge der Züge und die Entscheidungsmöglichkeiten zu visualisieren.
+		\item \textbf{Simultane Spiele}: Beide Spieler treffen ihre Entscheidungen gleichzeitig, ohne zu wissen, für welche Option der andere sich entschieden hat. Solche Spiele werden oft in einer Matrixform betrachtet, um sie besser zu analysieren.
+		\item \textbf{Sequentielle Spiele}: Die Spieler machen ihre Züge nacheinander und haben die Möglichkeit, auf die Aktionen des Gegners zu reagieren. Um die Reihenfolge der Züge und die verschiedenen Entscheidungsmöglichkeiten anschaulich darzustellen, werden solche Spiele oft in Form eines Baumdiagramms, also einer Extensivform, visualisiert.
 	\end{itemize}
 	
 	\item \textbf{Informationen der Spieler}
 	\begin{itemize}
-		\item \textbf{Spiele mit vollständiger Information}: Alle Spieler kennen die bisherigen Züge und den aktuellen Spielzustand. In solchen Spielen können optimale Strategien durch Rückwärtsinduktion berechnet werden.
+		\item \textbf{Spiele mit vollständiger Information}: Alle Spieler sind über die bisherigen Züge und den aktuellen Stand des Spiels informiert. In solchen Situationen lassen sich optimale Strategien durch Rückwärtsinduktion erarbeiten.
 		\item \textbf{Spiele mit unvollständiger Information}: Mindestens ein Spieler hat keine vollständigen Informationen über den Spielzustand oder die Strategie des Gegners. Dies führt zu Unsicherheiten bei der Entscheidungsfindung.
 	\end{itemize}
 	
 	\item \textbf{Kooperative vs. nicht-kooperative Spiele}
 	\begin{itemize}
-		\item \textbf{Kooperative Spiele}: Spieler können Allianzen bilden und gemeinsam agieren, um einen Vorteil zu erzielen. Die Ergebnisse werden durch Verhandlungen und Absprachen beeinflusst.
+		\item \textbf{Kooperative Spiele}: Spieler haben die Möglichkeit, Zusammenschlüsse zu vereinbaren und gemeinsam zu handeln, um sich einen Vorteil zu verschaffen. Dabei spielen Verhandlungen und Absprachen eine entscheidende Rolle für die Ergebnisse.
 		\item \textbf{Nicht-kooperative Spiele}: Jeder Spieler agiert unabhängig und verfolgt ausschließlich seine eigenen Ziele.
 	\end{itemize}
 	
 	\item \textbf{Gewinnstruktur: Nullsummenspiele vs. Nicht-Nullsummenspiele}
 	\begin{itemize}
-		\item \textbf{Nullsummenspiele}: Der Gewinn eines Spielers entspricht exakt dem Verlust des anderen. Solche Spiele sind konfliktorientiert, da ein Vorteil für einen Spieler immer einen Nachteil für den anderen bedeutet.
-		\item \textbf{Nicht-Nullsummenspiele}: Die Gewinne und Verluste der Spieler sind nicht zwangsläufig gleich. In solchen Spielen können Kooperationen oder geteilte Gewinne auftreten.
+		\item \textbf{Nullsummenspiele}: Der Gewinn eines Spielers ist genau der Verlust des anderen. Diese Art von Spielen ist konfliktbeladen, weil der Vorteil für einen Spieler immer mit einem Nachteil für den anderen einhergeht.
+		\item \textbf{Nicht-Nullsummenspiele}: Die Gewinne und Verluste der Spieler müssen nicht unbedingt übereinstimmen. In solchen Spielen kann es vorkommen, dass die Teilnehmer zusammenarbeiten oder ihre Gewinne teilen.
 	\end{itemize}
 	
 	\item \textbf{Deterministische vs. stochastische Spiele}
 	\begin{itemize}
-		\item \textbf{Deterministische Spiele}: Es gibt keine Zufallselemente; der Spielverlauf wird allein durch die Entscheidungen der Spieler bestimmt.
-		\item \textbf{Stochastische Spiele}: Zufallselemente wie Würfel oder Karten beeinflussen den Spielverlauf, was zusätzliche Unsicherheiten schafft.
+		\item \textbf{Deterministische Spiele}: Es gibt keine Zufälle im Spiel, alles hängt ganz von den Entscheidungen der Spieler ab.
+		\item \textbf{Stochastische Spiele}: Zufallselemente wie Würfel oder Karten bringen unvorhersehbare Wendungen ins Spiel, was für zusätzliche Spannungen und Unsicherheiten sorgt.
 	\end{itemize}
 	
 	\item \textbf{Endliche vs. unendliche Spiele}
 	\begin{itemize}
-		\item \textbf{Endliche Spiele}: Die Anzahl der möglichen Spielzustände und Züge ist begrenzt. Solche Spiele können vollständig analysiert und optimal gelöst werden.
-		\item \textbf{Unendliche Spiele}: Spiele mit potenziell unbegrenzten Spielzügen oder Zuständen, bei denen keine vollständige Analyse möglich ist.
+		\item \textbf{Endliche Spiele}: Die Anzahl der möglichen Spielzustände und Züge ist begrenzt. Das bedeutet, dass man solche Spiele komplett durchleuchten und die besten Strategien finden kann.
+		\item \textbf{Unendliche Spiele}: Spiele, bei denen es potenziell unendlich viele Züge oder Zustände gibt und die sich nicht vollständig analysieren lassen.
 	\end{itemize}
 \end{enumerate}
 
+\subsection*{Kriterien angewandt auf 4Gewinnt}
+Anhand diesen genannten Kriterien kann 4Gewinnt klassifiziert werden. 4Gewinnt ist nach den aufgelisteten fünf Kriterien ein kombinatorisches Spiel. Sie bieten einen idealen Rahmen, um Strategien, Entscheidungsfindung und Spieltheorie zu untersuchen. Auch weitere Spiele wie Schach, Dame, Mühle und Tic-Tac-Toe sind ebenfalls kombinatorische Spiele. \\
 
-Das 4 gewinnt Spiel ist ein kombinatorisches Spiel. Sie bieten einen idealen Rahmen, um Strategien, Entscheidungsfindung und Spieltheorie zu untersuchen. Auch weitere Spiele wie Schach, Dame, Mühle und Tic-Tac-Toe sind ebenfalls kombinatorische Spiele. \\
-Diese folgende fünf Eigenschaften machen ein kombinatorisches Spiel aus:
+\textbf{Diese folgende fünf Eigenschaften machen ein kombinatorisches Spiel aus:}
 \begin{enumerate}
-	\item   \textbf{Zwei-Spieler-Struktur: }Kombinatorische Spiele sind auf zwei Spieler beschränkt, die abwechselnd Züge machen. Dies ermöglicht eine klare Analyse von Strategien und Gegenstrategien.
-	\item 	\textbf{Nullsummencharakter: }Der Gewinn eines Spielers entspricht exakt dem Verlust des anderen. Dies führt zu einer antagonistischen Spielsituation, in der die Interessen der Spieler direkt gegeneinander stehen.
-	\item 	\textbf{Endlichkeit: }Die begrenzte Anzahl von Zugmöglichkeiten und die Unmöglichkeit unendlicher Spielverläufe garantieren, dass jedes Spiel zu einem Abschluss kommt.
-	\item 	\textbf{Perfekte Information: }Beide Spieler haben zu jedem Zeitpunkt vollständige Kenntnis über den Spielstand. Dies eliminiert Unsicherheiten, die in Spielen mit verborgenen Informationen auftreten würden.
-	\item 	\textbf{Determinismus:} Der Ausschluss von Zufallselementen macht das Spiel vollständig vorhersehbar, sofern die Strategien der Spieler bekannt sind.
+	\item   \textbf{Zwei-Personen-Spiel: }4Gewinnt ist ein klassisches Spiel für zwei Personen, bei dem die Spieler abwechselnd ihre Steine in ein Gitter fallen lassen. 
+	\item 	\textbf{Nullsummenspiel: }In "Vier Gewinnt" verfolgen die beiden Spieler gegensätzliche Ziele. Wenn einer von ihnen gewinnt, indem er vier Steine in einer Reihe hat, bedeutet das gleichzeitig, dass der andere verloren hat.
+	\item 	\textbf{endliches Spiel: } Das Spielfeld hat insgesamt 42 Felder, die sich auf 6 Reihen und 7 Spalten verteilen. Nach einer bestimmten Anzahl an Zügen wird das Feld immer vollständig gefüllt sein. Das bedeutet, dass jedes Spiel immer zu einem Ende kommt – entweder gewinnt ein Spieler oder es endet unentschieden, wenn keine Züge mehr möglich sind.
+	\item 	\textbf{vollständige Information: } Beide Spieler können jederzeit den aktuellen Spielstand genau im Blick behalten, da alle Spielsteine offen liegen. Es gibt keine geheimen Informationen, sodass sie ihre Strategien auf Grundlage aller bisherigen Züge entwickeln können.
+	\item 	\textbf{Determinismus:} Es gibt keine Zufälle, der Ausgang des Spiels hängt ganz von den Entscheidungen der Spieler ab. Jede Spielsituation ist klar und vorhersehbar, solange man die Züge der Spieler kennt.
 \end{enumerate}
 
-Durch diese genannten fünf Eigenschaften werden kombinatorische Spiele auch "endliches ZweiPersonen-Nullsummenspiel mit perfekter Information" genannt.
+Durch diese genannten fünf Eigenschaften werden kombinatorische Spiele auch \textbf{endliches ZweiPersonen-Nullsummenspiel mit perfekter Information} genannt\autocite{holler_einfuhrung_2019}.
 
 \section{Relevante spieltheoretische Konzepte für Vier Gewinn}
 Mit Kapitel 3.2 wurde dargestellt, dass das 4Gewinnt ein strategisches Zwei-Personen-Spiel mit vollständiger Information ist und somit mithilfe der Spieltheorie analysieren lässt. Einige zentrale Konzepte der Spieltheorie sind besonders relevant, um die Dynamik und Strategien von 4Gewinnt zu verstehen:
