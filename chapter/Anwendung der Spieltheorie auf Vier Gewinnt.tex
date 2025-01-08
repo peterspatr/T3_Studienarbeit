@@ -24,3 +24,106 @@ Aufgrund der Komplexität des Spiels stellt die Berechnung der Gewinnwahrscheinl
 Moderne Ansätze zur Berechnung der Gewinnwahrscheinlichkeit greifen auf KI-Technik zurück. Die exakte Berechnung für alle möglichen Spielsituationen bleibt aufgrund der Komplexität von Vier Gewinnt eine Herausforderung \autocite{ruile2009viergewinnt}.
 \section{Entwicklung von Spielstrategien}
 	
+Um eine spielstarke Strategie für "Vier Gewinnt" mit dem Alpha-Beta-Algorithmus zu entwickeln und später zu programmieren, müssen mehrere Schritte beachtet werden. Hier wird der gesamte Prozess erläutert, von der Spielrepräsentation über die Bewertung von Stellungen bis hin zur Integration des Alpha-Beta-Algorithmus.
+
+\subsection*{1. Spielfeld als Datenstruktur}
+Zunächst muss das Spielfeld von "Vier Gewinnt" in einer Form dargestellt werden, die von einem Algorithmus verarbeitet werden kann:
+
+Verwende ein 2D-Array (6 Zeilen × 7 Spalten), das den Zustand des Spielfeldes beschreibt.
+\begin{itemize}
+	\item 0: Leeres Feld
+	\item 1: Spielstein von Spieler 1
+	\item -1: Spielstein von Spieler 2
+\end{itemize}
+
+Das Spielfeld kann folgendermaßen dargestellt werden:
+
+\[
+\text{Spielfeld} =
+\begin{pmatrix}
+	0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{pmatrix}
+\]
+
+\subsection*{2. Zugmöglichkeiten berechnen}
+Da Spielsteine nur in den unteren freien Reihen platziert werden können, muss eine Funktion implementiert werden, die gültige Züge berechnet:
+
+\begin{lstlisting}[language=Python, caption=Funktion zur Berechnung gültiger Züge]
+	def valid_moves(board):
+	return [col for col in range(7) if board[0][col] == 0]
+\end{lstlisting}
+
+\section*{3. Bewertung der Spielstellung}
+
+Eine Bewertungsfunktion ist entscheidend für die Strategie. Sie schätzt den Wert einer Stellung ein und liefert eine Zahl:
+
+\begin{itemize}
+	\item \textbf{Gewinn für Spieler:} Sehr hoher Wert, z. B. \( +1000 \).
+	\item \textbf{Verlust für Gegner:} Sehr niedriger Wert, z. B. \( -1000 \).
+	\item \textbf{Potenzielle Verbindungen:} Punkte für 2er- und 3er-Reihen, die noch zu einem Sieg führen können.
+	\item \textbf{Blockieren von Gegnerzügen:} Zusätzliche Punkte für Züge, die den Gegner daran hindern, 4 in eine Reihe zu bilden.
+\end{itemize}
+
+\section*{4. Alpha-Beta-Algorithmus implementieren}
+	Der Alpha-Beta-Algorithmus wird verwendet, um den besten Zug zu berechnen, indem der Suchbaum effizient durchsucht wird. 
+	Dieses Beispiel zeigt den Kern des Algorithmus – die Auswahl des besten Zugs basierend auf einer vorgegebenen Spielbrett-Situation (board) und einer Suchtiefe (depth). 
+\begin{lstlisting}[language=Python, caption=Alpha-Beta Algorithmus - Kurzer Überblick]
+	# Alpha-Beta Algorithmus in Aktion
+	best_move = alpha_beta(board, depth=4, alpha=-float('inf'), beta=float('inf'), maximizingPlayer=True)
+	print(f"Bester Zug: Spalte {best_move}")
+\end{lstlisting}
+
+\section*{5. Entscheidung für den besten Zug}
+
+ fünften Schritt wird der beste Zug für den aktuellen Spieler ermittelt. Dazu werden alle möglichen Züge analysiert, indem sie simuliert und mit dem Alpha-Beta-Algorithmus bewertet werden. Der Zug mit der besten Bewertung (je nach Spieler maximierend oder minimierend) wird ausgewählt. Dieser Schritt stellt die Grundlage für die Entscheidungsfindung dar und bildet den Abschluss der Spielbaum-Analyse.
+
+\begin{lstlisting}[language=Python, caption=Entscheidung für den besten Zug - Überblick]
+	# Grober Aufbau der Funktion zur Zugentscheidung
+	def best_move(board, depth, player):
+	best_value = float('-inf') if player == 1 else float('inf')
+	best_column = None
+	
+	for col in valid_moves(board):
+	move_value = alpha_beta(apply_move(board, col, player), depth - 1, -float('inf'), float('inf'), False)
+	if (player == 1 and move_value > best_value) or (player == -1 and move_value < best_value):
+	best_value = move_value
+	best_column = col
+	
+	return best_column
+\end{lstlisting}
+\begin{itemize}
+
+	\item Die Funktion \texttt{best\_move} ist darauf ausgelegt, den besten Zug für einen Spieler (\texttt{player}) zu bestimmen. 
+	\item \texttt{valid\_moves(board)} gibt alle gültigen Spalten zurück, in die ein Stein gesetzt werden kann. 
+	\item \texttt{apply\_move(board, col, player)} simuliert das Setzen eines Steins in eine bestimmte Spalte. 
+	\item Der \emph{alpha-beta}-Algorithmus wird auf das simulierte Spielfeld angewendet, um die Bewertung des Zugs zu berechnen. 
+	\item Der Spieler wählt den Zug mit der höchsten Bewertung (für Maximierer) oder der niedrigsten Bewertung (für Minimierer).
+\end{itemize}
+
+\section*{5. Endzustände erkennen}
+
+Eine Funktion wird benötigt, um festzustellen, ob das Spiel vorbei ist:
+
+\subsection*{Kriterien für Endzustände:}
+\begin{itemize}
+	\item Einer der Spieler hat 4 in einer Reihe.
+	\item Das Spielfeld ist voll.
+\end{itemize}
+
+\begin{lstlisting}[language=Python, caption=Erkennung des Endzustands]
+def is_terminal(board):
+return has_winner(board) or all(board[0][col] != 0 for col in range(7))
+\end{lstlisting}
+
+\section*{7. Spielstrategie optimieren}
+
+\subsection*{Suchtiefe anpassen}
+Je nach Rechenleistung kann die Tiefe des Spielbaums variiert werden. 
+
+\subsection*{Zeitlimit setzen}
+Da der Algorithmus auf einem LEGO Spike Roboter läuft, ist die Rechenzeit begrenzt. Eine Tiefensuche kann eingesetzt werden, um innerhalb eines Zeitlimits die bestmögliche Tiefe zu erreichen.

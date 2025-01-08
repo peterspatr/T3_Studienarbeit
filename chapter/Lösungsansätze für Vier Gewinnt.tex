@@ -86,6 +86,10 @@ Grundprinzip der Minimax-Strategie
 
 Der Minimax-Algorithmus funktioniert nach dem Prinzip der Maximierung des eigenen Nutzens und der Minimierung des Nutzens des Gegners. In einem Spielbaum, der alle möglichen Züge und Gegenreaktionen darstellt, sucht der Algorithmus nach dem optimalen Zug, indem er die Ergebnisse aller möglichen Züge bis zu einer bestimmten Tiefe bewertet.
 
+In der Spieltheorie bezeichnet ein Spielbaum einen azyklischen, gerichteten Graphen, in dem die Knoten die verschiedenen Stellungen eines Spiels repräsentieren. Dabei kann dieselbe Stellung an mehreren Knoten des Spielbaums auftreten. Jeder Knoten kennzeichnet zudem, welcher Spieler in dieser Position am Zug ist. Der Spieler hat die Möglichkeit, eine der verfügbaren Aktionen auszuwählen, die durch die Kanten des Graphen dargestellt werden.
+
+Jede Spielstellung im Baum ist entweder eine Endstellung oder besitzt eine Menge von Nachfolgestellungen, die durch die möglichen Züge im nächsten Halbzug des Spiels erreicht werden können.
+
 Die Bewertung erfolgt durch eine sogenannte Heuristik, die den Wert eines Spielzustands quantifiziert. In "Vier Gewinnt" könnte eine einfache Heuristik beispielsweise folgende Aspekte bewerten:
 
 \begin{itemize}
