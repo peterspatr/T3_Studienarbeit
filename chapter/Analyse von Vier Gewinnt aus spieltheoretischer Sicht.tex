@@ -17,20 +17,23 @@ Die spieltheoretische Analyse des Spiels Vier Gewinnt erfordert eine systematisc
 %\end{itemize}
 %Für Vier Gewinnt ist die Extensivform besonders geeignet, da sie die sequentielle Struktur des Spiels abbildet, die perfekte Information widerspiegelt und eine intuitive Analyse von Zugfolgen ermöglicht.
 
-%*******Noch Ändern************************************************************************************
-Die Normalform-Darstellung wird das Spiel als Zwei-Personen-Nullsummenspiel charakterisiert, bei dem der Gewinn eines Spielers den Verlusten des anderen bedeutet. Das Spiel wird in der Normalform rein statisch beschrieben und besteht allgemein aus folgenden Elementen\autocite{gabler_normalform}:
+
+In der Normalform-Darstellung oder auch Normalform genannt, wird das Spiel als Zwei-Personen-Nullsummenspiel charakterisiert. Das bedeutet, wenn ein Spieler gewinnt ,verliert der andere automatisch . Das Spiel wird in der Normalform rein statisch beschrieben und besteht allgemein aus folgenden Elementen\autocite{gabler_normalform}:
 \begin{itemize}
-	\item Einer Menge  Spieler $(I = {1, ..., i, ..., n})$ 
-	\\ Diese gibt an wie viele Teilnehmer es gibt
+	\item Einer Menge Spieler $(I = {1, ..., i, ..., n})$ 
+	\\ Der Wert $I$  gibt die Anzahl der Teilnehmer an.
 	
 	\item Für jeden Spieler i eine Menge von Strategien $(S_i)$
-	\item Für jeden Spieler i eine Auszahlungsfunktion $(u_i)$
-	\\Hierbei werden jeder möglichen Strategiekombination aller Spieler einen reellen Zahlenwert zugeordnet.
+	\\$(S_i)$ entspricht der Strategiemenge des Spielers$i$, aus dieser er seine Züge wählen kann.
+	\item Für jeden Spieler i eine Auszahlungsfunktion/ Nutzenfunktion $(u_i)$
+	\\Hierbei wird jeder möglichen Strategiekombination aller Spieler einen reellen Zahlenwert zugeordnet. 
+	\\  \begin{align}
+		u_i &= \sum S_i \rightarrow \mathbb{R}^{n}  
+\end{align}}
 \end{itemize}
 
-
-Die Payoff-Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat
-
+Ist die Normalform endlich und überschaubar, kann sie auch in einer Matrix dargestellt werden.
+Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat. Durch die sehr große Anzahl an Strategien ist es nicht mehr überschaubar.
  \section{Darstellung des Spiels in Extensivform}
 %Die Normalform hingegen repräsentiert das Spiel als Matrix G=(N,S,u) , mit:
 %\begin{itemize}
