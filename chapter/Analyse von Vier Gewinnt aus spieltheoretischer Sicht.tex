@@ -18,7 +18,15 @@ Die spieltheoretische Analyse des Spiels Vier Gewinnt erfordert eine systematisc
 %Für Vier Gewinnt ist die Extensivform besonders geeignet, da sie die sequentielle Struktur des Spiels abbildet, die perfekte Information widerspiegelt und eine intuitive Analyse von Zugfolgen ermöglicht.
 
 %*******Noch Ändern************************************************************************************
-Die Normalform-Darstellung wird das Spiel als Zwei-Personen-Nullsummenspiel charakterisiert, bei dem der Gewinn eines Spielers den Verlusten des anderen bedeutet. 
+Die Normalform-Darstellung wird das Spiel als Zwei-Personen-Nullsummenspiel charakterisiert, bei dem der Gewinn eines Spielers den Verlusten des anderen bedeutet. Das Spiel wird in der Normalform rein statisch beschrieben und besteht allgemein aus folgenden Elementen\autocite{gabler_normalform}:
+\begin{itemize}
+	\item Einer Menge  Spieler $(I = {1, ..., i, ..., n})$ 
+	\\ Diese gibt an wie viele Teilnehmer es gibt
+	
+	\item Für jeden Spieler i eine Menge von Strategien $(S_i)$
+	\item Für jeden Spieler i eine Auszahlungsfunktion $(u_i)$
+	\\Hierbei werden jeder möglichen Strategiekombination aller Spieler einen reellen Zahlenwert zugeordnet.
+\end{itemize}
 
 
 Die Payoff-Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat
