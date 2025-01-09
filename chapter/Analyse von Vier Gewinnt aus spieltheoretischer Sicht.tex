@@ -33,20 +33,30 @@ In der Normalform-Darstellung oder auch Normalform genannt, wird das Spiel als Z
 \end{itemize}
 
 Ist die Normalform endlich und überschaubar, kann sie auch in einer Matrix dargestellt werden.
-Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat. Durch die sehr große Anzahl an Strategien ist es nicht mehr überschaubar.
+Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat. Durch die sehr große Anzahl an Strategien ist es nicht mehr überschaubar und daher eher weniger geeignet.
 %*************************************************************************************************************************
 \section{Komplexität des Spielbaums}
-Die Komplexität des Spielbaums ist beträchtlich. Der Verzweigungsfaktor wird durch die sieben möglichen Züge pro Spielsituation bestimmt, wobei sich die Komplexität mit jeder Erhöhung der Baumtiefe multipliziert2
-. Die computationellen Herausforderungen ergeben sich aus der Notwendigkeit, große Mengen von Spielzuständen zu analysieren und zu bewerten. Dabei müssen bestimmte Verhaltensregeln der Spieler berücksichtigt werden, wie etwa das sofortige Nutzen von Gewinnmöglichkeiten und das Verhindern gegnerischer Gewinnzüge2
-. Die Analyse zeigt, dass trotz der scheinbaren Einfachheit der Spielregeln eine erhebliche mathematische Komplexität vorliegt. Die praktische Implementierung optimaler Strategien erfordert daher sowohl theoretisches Verständnis als auch effiziente Algorithmen zur Bewältigung des großen Zustandsraums. Besonders die Kontrolle strategisch wichtiger Positionen und die Fähigkeit, mehrere Züge vorauszudenken, sind entscheidend für den Spielerfolg2
+Die Komplexität des Spielbaums ist beträchtlich und wird oft als ,,mittlere Komplexität'' beschrieben. Die liegt daran, dass es eine große Anzahl an möglichen Spielzuständen gibt, aber das Spiel sich dennoch lösbar ist.\\
+Die Anzahl der möglichen Konstellationen bei Vier Gewinnt beträgt laut einer Studie von John Tromp 4.531.985.219.092 (circa $4,5*10^{12}$) \autocite{thill2012reinforcement}. Aufgrund dieser enormen Zahl wird deutlich, warum eine vollständige Durchsuchung des Spielbaums für ein Vier-Gewinnt-Spiel eine Herausforderung darstellt.\\
+Pro Zug gib es für den Spieler sieben Möglichkeiten. Bereits in der nach ersten Runde hat der Spielbaum $7*7 = 49$ Äste, also 49 mögliche Spielzustände. Das zeigt, dass der Spielbaum trotz der scheinbaren Einfachheit des Spiels Vier Gewinnt, recht komplex ist \autocite{thill2012reinforcement}\autocite{ruile2009viergewinnt}. Aus diesem Grund wurden Ansätze entwickelt, die den Spielbaum mithilfe von verteilten Rechensystemen effizient lösen. Ein Beispiel hierfür ist ,,Shard Solver'' \autocite{yokota2022exploration}.
+
+% Der Verzweigungsfaktor wird durch die sieben möglichen Züge pro Spielsituation bestimmt, wobei sich die Komplexität mit jeder Erhöhung der Baumtiefe multipliziert2
+%. Die computationellen Herausforderungen ergeben sich aus der Notwendigkeit, große Mengen von Spielzuständen zu analysieren und zu bewerten. Dabei müssen bestimmte Verhaltensregeln der Spieler berücksichtigt werden, wie etwa das sofortige Nutzen von Gewinnmöglichkeiten und das Verhindern gegnerischer Gewinnzüge2
+%. Die Analyse zeigt, dass trotz der scheinbaren Einfachheit der Spielregeln eine erhebliche mathematische Komplexität vorliegt. Die praktische Implementierung optimaler Strategien erfordert daher sowohl theoretisches Verständnis als auch effiziente Algorithmen zur Bewältigung des großen Zustandsraums. Besonders die Kontrolle strategisch wichtiger Positionen und die Fähigkeit, mehrere Züge vorauszudenken, sind entscheidend für den Spielerfolg2
 .
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"images/Bildschirmfoto 2025-01-07 um 12.01.00"}
-	\caption{Spielbaum nach der 2. Tiefe}
-	\label{fig:bildschirmfoto-2025-01-07-um-12}
+	\includegraphics[width=0.7\linewidth]{"images/Baum1"}
+	\caption[Spielbaum nach der 2. Tiefe]{Spielbaum nach dem 1. Zug von Spieler 1}
+	\label{fig:baum1}
 \end{figure}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"images/Baum2}
+	\caption[Spielbaum nach dem 4. Zug. Quelle: \cite{vandewiele2017}]{Schematische Darstellung des Spielbaum nach dem 4. bis zum 7. Zug}
+	\label{fig:Baum2}
+\end{figure}
 
 
 
