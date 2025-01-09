@@ -1,84 +1,218 @@
 \chapter{Lösungsansätze für Vier Gewinnt}
 
 \section{Optimale Strategien}
-Die spieltheoretische Analyse von „Vier Gewinnt“ offenbart eine Reihe von strategischen Prinzipien und optimalen Spielweisen, die das Verständnis dieses Spiels vertiefen und präzise Strategien für Spieler ermöglichen. Diese Erkenntnisse basieren sowohl auf grundlegenden strategischen Prinzipien als auch auf fortgeschrittenen taktischen Elementen, die im Verlauf des Spiels entscheidend sind.
+Die Analyse von 4Gewinnt aus der Perspektive der Spieltheorie zeigt eine Reihe von strategischen Prinzipien und optimalen Spielweisen um gezielte Strategien zu entwickeln. Diese Erkenntnisse beruhen sowohl auf grundlegenden Prinzipien, welche in Kapitel 3 aufgearbeitet wurden, als auch auf fortgeschrittenen Taktiken, die im Verlauf des Spiels entscheidend sein können.
 
-Zu den grundlegenden strategischen Prinzipien gehört vor allem die Bedeutung der Startposition. Es ist nachgewiesen, dass der erste Spieler bei perfektem Spiel immer gewinnen kann, vorausgesetzt, er wählt die optimale Eröffnung. Diese besteht darin, den ersten Stein in die mittlere Spalte zu setzen. Diese Eröffnung bietet die beste Kontrolle über das Spielfeld und erhöht die Möglichkeiten für offensive und defensive Züge in den folgenden Spielphasen. Züge in die benachbarten Spalten (d.h. die zweite oder sechste Spalte) führen bei optimaler Spielweise beider Spieler hingegen zu einem Remis. Alle anderen Eröffnungszüge gelten als suboptimal und führen bei perfektem Gegenspiel unweigerlich zur Niederlage des ersten Spielers.
+Ein wichtiges Grundprinzip ist die Bedeutung des ersten Zuges. Es wurde festgestellt, dass der erste Spieler, wenn er perfekt spielt, immer gewinnen kann – vorausgesetzt, er wählt den besten Eröffnungszug. Der optimale Zug ist dabei, den ersten Stein in die Mitte zu setzen. Diese Eröffnung ermöglicht die beste Kontrolle über das Spielbrett und eröffnet viele Möglichkeiten für offensive und defensive Züge. Zieht der erste Spieler jedoch in eine der angrenzenden Spalten, führen beide Spieler bei optimalem Spiel zu einem Unentschieden. Alle anderen Eröffnungszüge gelten als weniger effektiv und führen, wenn der Gegner ebenfalls perfekt spielt, unweigerlich zur Niederlage des ersten Spielers.
 
-Ein weiteres zentrales Prinzip ist die Zentrumsbeherrschung, die eine essenzielle Rolle spielt. Die Kontrolle der mittleren drei Spalten (insbesondere der Spalten c, d und e) ist von strategischer Bedeutung, da sie die größten Möglichkeiten für horizontale, vertikale und diagonale Gewinnreihen bieten. Besonders die Spalten b und f – die zweite und vorletzte Spalte – besitzen ebenfalls strategisches Potenzial, da ohne sie keine vollständigen diagonalen oder horizontalen Viererreihen aufgebaut werden können. Diese Kontrolle ist nicht nur wichtig für den eigenen Spielaufbau, sondern auch, um den Gegner in seiner Strategie einzuschränken.
+Ein weiteres zentrales Prinzip ist die Kontrolle des Zentrums, die eine entscheidende Rolle spielt. Die Kontrolle über die mittleren drei Spalten (insbesondere c, d und e) ist strategisch besonders wichtig, da sie die besten Chancen für horizontale, vertikale und diagonale Gewinnreihen bietet. Auch die Spalten b und f – die zweite und vorletzte Spalte – sind wichtig, denn ohne sie kann der Spieler keine vollständigen diagonalen oder horizontalen Viererreihen bilden. Diese Kontrolle hilft nicht nur beim eigenen Spielaufbau, sondern schränkt auch die Möglichkeiten des Gegners ein.
 
-Neben diesen grundlegenden Prinzipien kommen im Verlauf des Spiels auch fortgeschrittene taktische Elemente ins Spiel. Eine der wichtigsten Taktiken ist die Kontrolle über sogenannte Zugzwang-Situationen. Dabei handelt es sich um Spielsituationen, in denen der Gegner durch geschicktes Manövrieren gezwungen wird, einen Zug zu machen, der seine eigene Position verschlechtert. Diese Situationen sind besonders am Ende des Spiels entscheidend, wenn nur noch wenige Felder verfügbar sind und der Druck auf beide Spieler steigt. Ein weiteres taktisches Element sind Fallenkombinationen, bei denen der Gegner durch geschickte Kombinationen von Drohungen in eine Falle gelockt wird. Besonders effektiv sind sogenannte Doppelfallen, bei denen zwei gleichzeitige Drohungen erzeugt werden, die der Gegner nicht beide blockieren kann. Ebenfalls relevant sind Auffüllfallen, bei denen ein Spieler den Gegner durch Mangel an freien Feldern zwingt, einen entscheidenden Stein unter eine vorbereitete Blockfalle zu setzen.
+Im Laufe des Spiels kommen zudem fortgeschrittene taktische Elemente ins Spiel. Eine wichtige Taktik ist die Schaffung von Zugzwang-Situationen, in denen der Gegner gezwungen wird, einen Zug zu machen, der seine eigene Position schwächt. Diese Situationen sind besonders am Ende des Spiels von Bedeutung, wenn nur noch wenige Felder zur Verfügung stehen und der Druck auf beide Spieler steigt. Eine weitere wichtige Taktik sind Fallenkombinationen, bei denen der Gegner durch clevere Kombinationen von Bedrohungen in eine Falle gelockt wird. Besonders wirkungsvoll sind Doppelfallen, bei denen zwei gleichzeitige Drohungen entstehen, die der Gegner nicht gleichzeitig abwehren kann. Auch Auffüllfallen sind relevant: Hier zwingt ein Spieler den Gegner durch einen Mangel an freien Feldern dazu, einen entscheidenden Stein in eine vorbereitete Blockade zu setzen.
 
-Die spieltheoretische Analyse von „Vier Gewinnt“ wurde durch mathematische und computerbasierte Methoden weiter vertieft. Unabhängig voneinander gelang es zwei Forschern, eine vollständige Lösung für das Spiel zu finden. Victor Allis entwickelte 1988 einen speziellen Regelsatz zur systematischen Analyse des Spiels, während James D. Allen 1990 Computerprogramme einsetzte, um das Spiel vollständig zu berechnen. Beide kamen unabhängig voneinander zum gleichen Ergebnis: Der erste Spieler kann bei optimaler Spielweise und einer Eröffnung in der Mittelspalte das Spiel immer gewinnen. Diese Erkenntnis hat nicht nur wissenschaftliche Relevanz, sondern bildet auch die Grundlage für die Entwicklung von Algorithmen, die in Computerprogrammen oder Robotersystemen eingesetzt werden, um das Spiel optimal zu spielen.
+Die spieltheoretische Analyse von „Vier Gewinnt“ wurde durch mathematische und computerbasierte Methoden weiter vertieft. Unabhängig voneinander fanden zwei Forscher eine vollständige Lösung für das Spiel. Victor Allis entwickelte 1988 einen speziellen Regelsatz zur systematischen Analyse, während James D. Allen 1990 Computerprogramme einsetzte, um das Spiel vollständig zu berechnen. Beide kamen unabhängig zum gleichen Schluss: Der erste Spieler kann bei optimalem Spiel und einer Eröffnung in der Mitte immer gewinnen. Diese Erkenntnis hat nicht nur wissenschaftliche Bedeutung, sondern bildet auch die Basis für die Entwicklung von Algorithmen, die in Computerprogrammen oder Robotersystemen verwendet werden, um das Spiel optimal zu spielen. \autocites{wikipedia_vier_gewinnt}
 
-
-	\begin{center}
-		\setlength{\arrayrulewidth}{1mm}
-		\setlength{\tabcolsep}{10pt}
-		\renewcommand{\arraystretch}{1.5}
-		\begin{tabular}{|>{\columncolor[gray]{0.9}}c|c|c|c|>{\columncolor[gray]{0.8}}c|c|c|}
-			\hline
-			& & & \cellcolor[gray]{0.9} & & & \\ \hline
-			& & & \cellcolor[gray]{0.9} & & & \\ \hline
-			& & & \cellcolor[gray]{0.9} & & & \\ \hline
-			& & & \cellcolor[gray]{0.9} & & & \\ \hline
-			& & & \cellcolor[gray]{0.9} & & & \\ \hline
-			1 & 2 & 3 & 4 & 5 & 6 & 7 \\ \hline
-		\end{tabular}
-	\end{center}
 	
 	\subsection*{Mögliche Startpositionen und Spielausgänge}
 	
 	\textbf{1. Startposition 4 (mittlere Spalte)}
 	Wenn der erste Spieler in die mittlere Spalte setzt, hat er einen nachgewiesenen Vorteil und kann bei perfektem Spiel gewinnen. Diese Eröffnung maximiert die Kontrolle über das Spielfeld.
+
+\begin{figure}[H]
+	\centering
+\begin{tikzpicture}[scale=0.6]
+	% Zeichne das Gitter mit einheitlicher Linienstärke
+	\foreach \x in {0,1,2,3,4,5,6} {
+		\foreach \y in {0,1,2,3,4,5} {
+			\draw[line width=1pt] (\x,\y) rectangle ++(1,1);
+		}
+	}
+	
+	% Beschriftung für Spalten (a-g)
+	\foreach \x [count=\i from 1] in {1,2,3,4,5,6,7} {
+		\node at (\i-0.5,-0.5) {\x};
+	}
+	
+	% Beschriftung für Zeilen (1-6)
+	\foreach \y [count=\j from 1] in {a,b,c,d,e,f} {
+		\node at (-0.5,\j-0.5) {\y};
+	}
+	
+	% Roter Stein in Feld d1 (Spalte d = 4, Zeile 1 = 0)
+	\fill[red] (3.5,0.5) circle(0.4);
+\end{tikzpicture}
+  \caption{ROT gewinnt bei optimalen Spiel}
+\label{fig:connect4_example}
+\end{figure}
+
+	
 	
 	\textbf{2. Startpositionen 3 oder 5 (benachbarte Spalten zur Mitte)}
 	Ein Zug in die Spalte 3 oder 5 führt bei optimalem Spiel zu einem Remis, da der zweite Spieler durch eine Kombination aus Zentrums- und Blockstrategien den Sieg verhindern kann.
 	
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=0.6]
+		% Zeichne das Gitter mit einheitlicher Linienstärke
+		\foreach \x in {0,1,2,3,4,5,6} {
+			\foreach \y in {0,1,2,3,4,5} {
+				\draw[line width=1pt] (\x,\y) rectangle ++(1,1);
+			}
+		}
+		
+		% Beschriftung für Spalten (a-g)
+		\foreach \x [count=\i from 1] in {1,2,3,4,5,6,7} {
+			\node at (\i-0.5,-0.5) {\x};
+		}
+		
+		% Beschriftung für Zeilen (1-6)
+		\foreach \y [count=\j from 1] in {a,b,c,d,e,f} {
+			\node at (-0.5,\j-0.5) {\y};
+		}
+		
+		% Roter Stein in Feld d1 (Spalte d = 4, Zeile 1 = 0)
+		\fill[red] (2.5,0.5) circle(0.4);
+		\fill[red] (4.5,0.5) circle(0.4);
+	\end{tikzpicture}
+	\caption{Remis bei optimalen Spiel}
+\end{figure}
+	
 	\textbf{3. Startpositionen 1, 2, 6 oder 7 (äußere Spalten)}
 	Züge in die äußeren Spalten gelten als suboptimal. Der erste Spieler verliert bei perfektem Gegenspiel des zweiten Spielers, da diese Positionen weniger Kontrolle über das Zentrum und die Gewinnlinien bieten.
+	
+	\begin{figure}[H]
+		\centering
+		\begin{tikzpicture}[scale=0.6]
+			% Zeichne das Gitter mit einheitlicher Linienstärke
+			\foreach \x in {0,1,2,3,4,5,6} {
+				\foreach \y in {0,1,2,3,4,5} {
+					\draw[line width=1pt] (\x,\y) rectangle ++(1,1);
+				}
+			}
+			
+			% Beschriftung für Spalten (a-g)
+			\foreach \x [count=\i from 1] in {1,2,3,4,5,6,7} {
+				\node at (\i-0.5,-0.5) {\x};
+			}
+			
+			% Beschriftung für Zeilen (1-6)
+			\foreach \y [count=\j from 1] in {a,b,c,d,e,f} {
+				\node at (-0.5,\j-0.5) {\y};
+			}
+			
+			% Roter Stein in Feld d1 (Spalte d = 4, Zeile 1 = 0)
+			\fill[red] (0.5,0.5) circle(0.4);
+			\fill[red] (1.5,0.5) circle(0.4);
+			\fill[red] (5.5,0.5) circle(0.4);
+			\fill[red] (6.5,0.5) circle(0.4);
+		\end{tikzpicture}
+		\caption{ROT verliert bei optimalen Spiel}
+	\end{figure}
+	
+	
 	
 	Diese Analyse zeigt, wie wichtig die Wahl der Startposition für den weiteren Spielverlauf ist. Der erste Zug in die Mitte eröffnet dem Spieler die besten Chancen, während Züge in die äußeren Spalten zu deutlichen Nachteilen führen können.
 
 \section{Heuristische Ansätze}
 
-Die Bewertung von Positionen auf dem Spielfeld ist ein zentraler heuristischer Ansatz bei der Strategieentwicklung für Vier Gewinnt. Dieser Ansatz zielt darauf ab, den strategischen Wert jeder Position systematisch zu analysieren und darauf aufbauend optimale Züge zu planen.
+Die Bewertung von Positionen auf dem Spielfeld ist ein zentraler heuristischer Ansatz bei der Strategieentwicklung für 4Gewinnt. Dieser Ansatz zielt darauf ab, den strategischen Wert jeder Position zu analysieren und darauf aufbauend optimale Züge zu planen.
 
-Die dargestellte Tabelle veranschaulicht die strategische Bewertung jedes Spielfelds im Spiel „Vier Gewinnt“. Jedes Feld erhält einen numerischen Wert, der angibt, wie viele mögliche Viererreihen dieses Feld beeinflussen kann. Ein Zug auf ein Feld mit einem höheren Wert ist in der Regel strategisch besser, da er potenziell mehr Siegoptionen eröffnet. Solche Bewertungsansätze werden auch in computergesteuerten Spielen angewendet, um optimale Züge zu berechnen.
+Die dargestellte Tabelle veranschaulicht die strategische Bewertung jedes Spielfelds. Jedes Feld erhält einen numerischen Wert, der angibt, wie viele mögliche Viererreihen dieses Feld beeinflussen kann. Ein Zug auf ein Feld mit einem höheren Wert ist in der Regel strategisch besser, da er potenziell mehr Siegoptionen eröffnet. Solche Bewertungsansätze werden auch in computergesteuerten Spielen angewendet, um optimale Züge zu berechnen.
 
+	
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[scale=1]
+		% Zeichne das Gitter mit einheitlicher Linienstärke
+		\foreach \x in {0,1,2,3,4,5,6} {
+		\foreach \y in {0,1,2,3,4,5} {
+			\draw[line width=1pt] (\x,\y) rectangle ++(1,1);
+		}
+	}
+	
+	% Beschriftung für Spalten (1-7)
+	\foreach \x [count=\i from 1] in {1,2,3,4,5,6,7} {
+		\node at (\i-0.5,-0.5) {\x};
+	}
+	
+	% Beschriftung für Zeilen (a-f)
+	\foreach \y [count=\j from 1] in {a,b,c,d,e,f} {
+		\node at (-0.5,\j-0.5) {\y};
+	}
+		
+		% Zahlen aus der Tabelle in die Felder einfügen und die Felder einfärben
+		% Zeile 0
+		\fill[gray!20] (0,5) rectangle ++(1,1); \node[red] at (0.5,5.5) {3};
+		\fill[gray!30] (1,5) rectangle ++(1,1); \node[red] at (1.5,5.5) {4};
+		\fill[gray!40] (2,5) rectangle ++(1,1); \node[red] at (2.5,5.5) {5};
+		\fill[gray!50] (3,5) rectangle ++(1,1); \node[red] at (3.5,5.5) {7};
+		\fill[gray!40] (4,5) rectangle ++(1,1); \node[red] at (4.5,5.5) {5};
+		\fill[gray!30] (5,5) rectangle ++(1,1); \node[red] at (5.5,5.5) {4};
+		\fill[gray!20] (6,5) rectangle ++(1,1); \node[red] at (6.5,5.5) {3};
+		
+		% Zeile 1
+		\fill[gray!30] (0,4) rectangle ++(1,1); \node[red] at (0.5,4.5) {4};
+		\fill[gray!40] (1,4) rectangle ++(1,1); \node[red] at (1.5,4.5) {6};
+		\fill[gray!50] (2,4) rectangle ++(1,1); \node[red] at (2.5,4.5) {8};
+		\fill[gray!60] (3,4) rectangle ++(1,1); \node[red] at (3.5,4.5) {10};
+		\fill[gray!50] (4,4) rectangle ++(1,1); \node[red] at (4.5,4.5) {8};
+		\fill[gray!40] (5,4) rectangle ++(1,1); \node[red] at (5.5,4.5) {6};
+		\fill[gray!30] (6,4) rectangle ++(1,1); \node[red] at (6.5,4.5) {4};
+		
+		% Zeile 2
+		\fill[gray!40] (0,3) rectangle ++(1,1); \node[red] at (0.5,3.5) {5};
+		\fill[gray!50] (1,3) rectangle ++(1,1); \node[red] at (1.5,3.5) {8};
+		\fill[gray!60] (2,3) rectangle ++(1,1); \node[red] at (2.5,3.5) {11};
+		\fill[gray!70] (3,3) rectangle ++(1,1); \node[red] at (3.5,3.5) {13};
+		\fill[gray!60] (4,3) rectangle ++(1,1); \node[red] at (4.5,3.5) {11};
+		\fill[gray!50] (5,3) rectangle ++(1,1); \node[red] at (5.5,3.5) {8};
+		\fill[gray!40] (6,3) rectangle ++(1,1); \node[red] at (6.5,3.5) {5};
+		
+		% Zeile 3
+		\fill[gray!40] (0,2) rectangle ++(1,1); \node[red] at (0.5,2.5) {5};
+		\fill[gray!50] (1,2) rectangle ++(1,1); \node[red] at (1.5,2.5) {8};
+		\fill[gray!60] (2,2) rectangle ++(1,1); \node[red] at (2.5,2.5) {11};
+		\fill[gray!70] (3,2) rectangle ++(1,1); \node[red] at (3.5,2.5) {13};
+		\fill[gray!60] (4,2) rectangle ++(1,1); \node[red] at (4.5,2.5) {11};
+		\fill[gray!50] (5,2) rectangle ++(1,1); \node[red] at (5.5,2.5) {8};
+		\fill[gray!40] (6,2) rectangle ++(1,1); \node[red] at (6.5,2.5) {5};
+		
+		% Zeile 4
+		\fill[gray!30] (0,1) rectangle ++(1,1); \node[red] at (0.5,1.5) {4};
+		\fill[gray!40] (1,1) rectangle ++(1,1); \node[red] at (1.5,1.5) {6};
+		\fill[gray!50] (2,1) rectangle ++(1,1); \node[red] at (2.5,1.5) {8};
+		\fill[gray!60] (3,1) rectangle ++(1,1); \node[red] at (3.5,1.5) {10};
+		\fill[gray!50] (4,1) rectangle ++(1,1); \node[red] at (4.5,1.5) {8};
+		\fill[gray!40] (5,1) rectangle ++(1,1); \node[red] at (5.5,1.5) {6};
+		\fill[gray!30] (6,1) rectangle ++(1,1); \node[red] at (6.5,1.5) {4};
+		
+		% Zeile 5
+		\fill[gray!20] (0,0) rectangle ++(1,1); \node[red] at (0.5,0.5) {3};
+		\fill[gray!30] (1,0) rectangle ++(1,1); \node[red] at (1.5,0.5) {4};
+		\fill[gray!40] (2,0) rectangle ++(1,1); \node[red] at (2.5,0.5) {5};
+		\fill[gray!50] (3,0) rectangle ++(1,1); \node[red] at (3.5,0.5) {7};
+		\fill[gray!40] (4,0) rectangle ++(1,1); \node[red] at (4.5,0.5) {5};
+		\fill[gray!30] (5,0) rectangle ++(1,1); \node[red] at (5.5,0.5) {4};
+		\fill[gray!20] (6,0) rectangle ++(1,1); \node[red] at (6.5,0.5) {3};
+		
+	\end{tikzpicture}
+	\caption{Bewertungstabelle: mögliche Anzahl an Vierer-Reihen}
 
-
-
-
-
-	\[
-	\begin{array}{c|c|c|c|c|c|c|c|}
-		& 0 & 1 & 2 & 3 & 4 & 5 & 6 \\ \hline
-		0 & \textcolor{red}{3} & \textcolor{red}{4} & \textcolor{red}{5} & \textcolor{red}{7} & \textcolor{red}{5} & \textcolor{red}{4} & \textcolor{red}{3} \\ \hline
-		1 & \textcolor{red}{4} & \textcolor{red}{6} & \textcolor{red}{8} & \textcolor{red}{10} & \textcolor{red}{8} & \textcolor{red}{6} & \textcolor{red}{4} \\ \hline
-		2 & \textcolor{red}{5} & \textcolor{red}{8} & \textcolor{red}{11} & \textcolor{red}{13} & \textcolor{red}{11} & \textcolor{red}{8} & \textcolor{red}{5} \\ \hline
-		3 & \textcolor{red}{5} & \textcolor{red}{8} & \textcolor{red}{11} & \textcolor{red}{13} & \textcolor{red}{11} & \textcolor{red}{8} & \textcolor{red}{5} \\ \hline
-		4 & \textcolor{red}{4} & \textcolor{red}{6} & \textcolor{red}{8} & \textcolor{red}{10} & \textcolor{red}{8} & \textcolor{red}{6} & \textcolor{red}{4} \\ \hline
-		5 & \textcolor{red}{3} & \textcolor{red}{4} & \textcolor{red}{5} & \textcolor{red}{7} & \textcolor{red}{5} & \textcolor{red}{4} & \textcolor{red}{3} \\ \hline
-	\end{array}
-	\]
+\end{figure}
 	
-	\textbf{Achsenbeschriftungen:} \(x\) steht für die Zeilen (0 bis 5 von oben nach unten) und \(y\) für die Spalten (0 bis 6 von links nach rechts).
+	\subsection*{Erklärung der Werte:}
+	\textbf{Zentrum des Spielfelds:} Die Felder im Zentrum (insbesondere Spalte 4 und die Zeilen neben dran 3 und 5) haben die höchsten Werte, da sie Teil mehrerer potenzieller Viererreihen sein können – sowohl horizontal, vertikal als auch diagonal. Das erklärt, warum das Feld in Spalte 4, Zeilen c und d, den maximalen Wert von 13 besitzt.\\
 	
-	\subsection*{Erklärung der Werte}
-	\textbf{Zentrum des Spielfelds:} Die Felder im Zentrum (insbesondere Spalte 3 und die mittleren Zeilen) haben die höchsten Werte, da sie Teil mehrerer potenzieller Viererreihen sein können – sowohl horizontal, vertikal als auch diagonal. Das erklärt, warum das Feld in Spalte 3, Zeilen 2 und 3, den maximalen Wert von 13 besitzt.\\
+	\textbf{Ränder des Spielfelds:} Die Felder am Rand (also die ersten und siebten Spalten sowie die Reihen a und f) zeigen deutlich niedrigere Werte. Das liegt daran, dass sie weniger Gewinnlinien bieten. Ein Randfeld kann höchstens Teil einer horizontalen und einer diagonalen Viererreihe sein, weshalb dort oft Werte von 3 oder 4 zu finden sind.
 	
-	\textbf{Ränder des Spielfelds:} Die Felder am Rand (Spalten 0, 6 und die obersten bzw. untersten Zeilen) haben deutlich geringere Werte, da sie weniger Gewinnlinien ermöglichen. Ein Randfeld kann maximal Teil einer horizontalen und einer diagonalen Viererreihe sein, weshalb Werte wie 3 und 4 an diesen Positionen typisch sind.
-	
-	\subsection*{Strategische Bedeutung}
-	Die zentralen Felder werden priorisiert, da sie mehr Möglichkeiten eröffnen, eine Viererreihe zu vervollständigen. Dies macht die Kontrolle über die mittleren Spalten (z. B. Spalte 3 und benachbarte Spalten 2 und 4) zu einer entscheidenden Strategie.\\
-	Randfelder haben weniger Einfluss auf das Spielgeschehen und dienen meist nur zur Defensive oder zum Erzwingen von Zügen des Gegners.
+	\subsection*{Strategische Bedeutung:}
+	Die zentralen Felder sind besonders wichtig, weil sie viele Optionen bieten, um eine Viererreihe zu vervollständigen. Deshalb ist es entscheidend, die mittleren Spalten – vor allem Spalte 4 sowie die angrenzenden Spalten 3 und 5 – im Auge zu behalten. Diese Kontrolle kann den Unterschied im Spiel ausmachen.
+	Im Gegensatz dazu haben die Randfelder weniger Einfluss auf den Verlauf des Spiels. Sie werden oft hauptsächlich defensiv genutzt oder um den Gegner zu bestimmten Zügen zu zwingen.
 	
 	
-\section{Computergestützte Lösungen und Algorithmen}
+\section{Entwicklung von Algorithmen}
+In diesem Abschnitt werden verschiedene Algorithmen vorgestellt, die in unserem Projekt Anwendung finden können. Jeder Algorithmus wird zunächst in seinen Grundzügen erklärt, gefolgt von einer kritischen Bewertung zur Realisierung.
 	
-	
-\section{MinMax-Algorithmus}
+\subsection{MinMax-Algorithmus}
 
 Die Minimax-Strategie ist ein grundlegender Algorithmus zur Entscheidungsfindung in Nullsummenspielen wie "Vier Gewinnt". Dieser Ansatz wird verwendet, um optimale Züge für einen Spieler zu finden, indem sowohl die eigenen Möglichkeiten als auch die möglichen Gegenreaktionen des Gegners analysiert werden. In diesem Kapitel betrachten wir die Funktionsweise der Minimax-Strategie im Kontext von "Vier Gewinnt" und zeigen, wie sie das Spielverhalten verbessern kann.
 
@@ -177,7 +311,7 @@ Durch diese systematische Analyse findet der Algorithmus den besten Zug für den
 
 
 
-\section{AlphaBeta-Algorithmus}
+\subsection{AlphaBeta-Algorithmus}
 
 Der Alpha-Beta-Algorithmus ist eine Optimierung des Minimax-Algorithmus, die dessen Effizienz erheblich steigert. Durch das gezielte Verwerfen von Spielzügen, die für die Entscheidung irrelevant sind, reduziert der Alpha-Beta-Algorithmus die Anzahl der bewerteten Knoten im Spielbaum. Diese Technik ist besonders wertvoll bei ressourcenbeschränkten Systemen wie einem LEGO Spike Roboter, der begrenzte Rechenleistung zur Verfügung hat.
 
