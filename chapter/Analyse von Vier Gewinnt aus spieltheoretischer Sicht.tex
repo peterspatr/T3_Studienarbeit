@@ -34,6 +34,22 @@ In der Normalform-Darstellung oder auch Normalform genannt, wird das Spiel als Z
 
 Ist die Normalform endlich und überschaubar, kann sie auch in einer Matrix dargestellt werden.
 Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat. Durch die sehr große Anzahl an Strategien ist es nicht mehr überschaubar.
+%*************************************************************************************************************************
+\section{Komplexität des Spielbaums}
+Die Komplexität des Spielbaums ist beträchtlich. Der Verzweigungsfaktor wird durch die sieben möglichen Züge pro Spielsituation bestimmt, wobei sich die Komplexität mit jeder Erhöhung der Baumtiefe multipliziert2
+. Die computationellen Herausforderungen ergeben sich aus der Notwendigkeit, große Mengen von Spielzuständen zu analysieren und zu bewerten. Dabei müssen bestimmte Verhaltensregeln der Spieler berücksichtigt werden, wie etwa das sofortige Nutzen von Gewinnmöglichkeiten und das Verhindern gegnerischer Gewinnzüge2
+. Die Analyse zeigt, dass trotz der scheinbaren Einfachheit der Spielregeln eine erhebliche mathematische Komplexität vorliegt. Die praktische Implementierung optimaler Strategien erfordert daher sowohl theoretisches Verständnis als auch effiziente Algorithmen zur Bewältigung des großen Zustandsraums. Besonders die Kontrolle strategisch wichtiger Positionen und die Fähigkeit, mehrere Züge vorauszudenken, sind entscheidend für den Spielerfolg2
+.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"images/Bildschirmfoto 2025-01-07 um 12.01.00"}
+	\caption{Spielbaum nach der 2. Tiefe}
+	\label{fig:bildschirmfoto-2025-01-07-um-12}
+\end{figure}
+
+
+
+
  \section{Darstellung des Spiels in Extensivform}
 %Die Normalform hingegen repräsentiert das Spiel als Matrix G=(N,S,u) , mit:
 %\begin{itemize}
@@ -66,15 +82,5 @@ Die Analyse der Strategien zeigt, dass es im Vier Gewinnt dominante Strategien g
 . Die Nash-Gleichgewichte manifestieren sich in den optimalen Zugfolgen, wobei die Kontrolle der zentralen Spalten eine entscheidende Rolle spielt2
 .
 
-\section{Komplexität des Spielbaums}
-Die Komplexität des Spielbaums ist beträchtlich. Der Verzweigungsfaktor wird durch die sieben möglichen Züge pro Spielsituation bestimmt, wobei sich die Komplexität mit jeder Erhöhung der Baumtiefe multipliziert2
-. Die computationellen Herausforderungen ergeben sich aus der Notwendigkeit, große Mengen von Spielzuständen zu analysieren und zu bewerten. Dabei müssen bestimmte Verhaltensregeln der Spieler berücksichtigt werden, wie etwa das sofortige Nutzen von Gewinnmöglichkeiten und das Verhindern gegnerischer Gewinnzüge2
-. Die Analyse zeigt, dass trotz der scheinbaren Einfachheit der Spielregeln eine erhebliche mathematische Komplexität vorliegt. Die praktische Implementierung optimaler Strategien erfordert daher sowohl theoretisches Verständnis als auch effiziente Algorithmen zur Bewältigung des großen Zustandsraums. Besonders die Kontrolle strategisch wichtiger Positionen und die Fähigkeit, mehrere Züge vorauszudenken, sind entscheidend für den Spielerfolg2
-.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{"images/Bildschirmfoto 2025-01-07 um 12.01.00"}
-	\caption{Spielbaum nach der 2. Tiefe}
-	\label{fig:bildschirmfoto-2025-01-07-um-12}
-\end{figure}
+
 	
