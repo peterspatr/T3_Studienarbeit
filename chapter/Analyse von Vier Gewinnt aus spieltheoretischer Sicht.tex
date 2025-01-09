@@ -46,14 +46,14 @@ Pro Zug gib es für den Spieler sieben Möglichkeiten. Bereits in der nach erste
 .
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"images/Baum1"}
+	\includegraphics[width=0.9\linewidth]{"images/Baum1"}
 	\caption[Spielbaum nach der 2. Tiefe]{Spielbaum nach dem 1. Zug von Spieler 1}
 	\label{fig:baum1}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{"images/Baum2}
+	\includegraphics[width=0.9\linewidth]{"images/Baum2}
 	\caption[Spielbaum nach dem 4. Zug. Quelle: \cite{vandewiele2017}]{Schematische Darstellung des Spielbaum nach dem 4. bis zum 7. Zug}
 	\label{fig:Baum2}
 \end{figure}
@@ -80,11 +80,15 @@ Pro Zug gib es für den Spieler sieben Möglichkeiten. Bereits in der nach erste
 %Die Darstellung in Normalform ist aufgrund der hohen Anzahl möglicher Strategien sehr umfangreich und für praktische Analysen weniger geeignet. Die Größe der Normalform-Matrix wächst exponentiell mit der Spieltiefe.
 
 %*******Noch Ändern************************************************************************************
-Der Spielbaum in der Extensivform zeigt die sequentielle Struktur des Spiels. Jeder Knoten repräsentiert eine Spielsituation, von der aus verschiedene Zugmöglichkeiten ausgehen. Die Teilspielanalyse ermöglicht es, einzelne Spielsituationen isoliert zu betrachten und optimale Strategien zu entwickeln5
-. Bei perfektem Spiel beider Spieler ergeben sich dabei klare Strukturen, die durch den Zermelo'schen Bestimmtheitssatz beschrieben werden können
+%Der Spielbaum in der Extensivform zeigt die sequentielle Struktur des Spiels. Jeder Knoten repräsentiert eine Spielsituation, von der aus verschiedene Zugmöglichkeiten ausgehen. Die Teilspielanalyse ermöglicht es, einzelne Spielsituationen isoliert zu betrachten und optimale Strategien zu entwickeln5
+%. Bei perfektem Spiel beider Spieler ergeben sich dabei klare Strukturen, die durch den Zermelo'schen Bestimmtheitssatz beschrieben werden können
 
 Die Extensivform Darstellung ist eine aufschlussreiche Methode.
 Sie ermöglicht eine detaillierte Abbildung des Spielverlaufs und der Entscheidungsmöglichkeiten aller Spieler.
+In dieser Form wird ein Spielbaum verwendet, der aus Knoten und Kanten besteht \autocite{einsiedler2014spieltheorie}. 
+Der Baum beginnt mit einem Wurzelknoten hier ist es ein Leeres Spielfeld mit 42 freien Feldern. Die Verbindungen zwischen den Knoten, auch Kanten genannt, stellen die möglichen Züge für den Spieler da. Die Knoten, an denen die Kanten zusammen laufen repräsentieren eine Entscheidung eines Spieler. Die Endknoten zeigen die möglichen Ausgänge für das Spiel an.
+Bei vier gewinnt stellt jeden Ebene des Spielbaums ein Spielzug da. Pro Zug gibt es immer sieben Möglichkeiten den Spielstein zu platzieren. Das Bedeutet, von jedem Knoten gehen sieben Kanten weg. Allerdings ist der Baum durch die Spielfeldgröße auf 42 mögliche Züge begrenzt.\\
+Um die Extensivform praktisch nutzen zu können, werden Vereinfachungen und Optimierungen durchgeführt.
 
 \section{Strategien und Gleichgewichte}
 %*******Noch Ändern************************************************************************************
