@@ -57,28 +57,31 @@ Um die Extensivform praktisch nutzen zu können, werden Vereinfachungen und Opti
 
 \section{Strategien und Gleichgewichte}
 Das Spiel Vier Gewinnt wird aus mathematischer und spieltheoretischer Sicht, von verschieden Strategien und Gleichgewichten geprägt.
-.
-\subsection{Strategien}
+
 \begin{itemize}
 	\item \textbf{Kontrolle des Zentrums:}
 	Die mittlere Spalte des Spielfeldrasters ist strategisch besonders wichtig. Sie bietet den Zugang zu den meisten möglichen Gewinnkombinationen (vertikal, horizontal und diagonal). Beginnt ein Spieler hier oder übernimmt frühzeitig die Kontrolle über das Zentrum, kann ich dadurch seine Chancen auf einen möglichen Sieg stark erhöhen\autocite{cornell2015connect}.
 	%
 	\item \textbf{Minimax-Strategie :} Die Minimax-Strategie ist ein weiteres zentrales Konzept, welches bei Vier Gewinnt angewandt wird. Dabei versucht ein Spieler, seinen Verlust so gering wie möglich zu halten und dabei gleichzeitig den Gewinn des Gegners zu minimieren. Diese Strategie fordert eine vorausschauende Planung über mehrere Spielzüge. Hierbei werden sowohl offensive Aspekte als auch defensive berücksichtigt\autocite{cornell2015connect}.
 	
-	\item \textbf{Bedrohungen verzweigen ("Forking") :} Bei der Bedrohungsverzweigung wird der Gegner in eine defensive Spielposition gezwungen. Dies geschieht durch das Erzeugen von Mehrfachbedrohungen. Dabei werden mehrere potenzielle Gewinnmöglichkeiten erzeugt, die der Gegner nicht alle gleichzeitig decken kann. Durch das Verzweigen der Bedrohungen wird die Wahrscheinlichkeit für einen schnellen Sieg erhöht\autocite{Cahn2024}.
+	\item \textbf{Bedrohungen verzweigen ("Forking") :} Bei der Bedrohungsverzweigung wird der Gegner in eine defensive Spielposition gezwungen. Dies geschieht durch das Erzeugen von Mehrfachbedrohungen. Dabei werden mehrere potenzielle Gewinnmöglichkeiten erzeugt, die der Gegner nicht alle gleichzeitig decken kann. Durch das Verzweigen der Bedrohungen wird die Wahrscheinlichkeit für einen schnellen Sieg erhöht\autocite{Cahn2024}\autocite{cornell2015connect}.
 	
-	\item \textbf{ Paritätsstrategie:} In der Paritätsstrategie wird darauf abgezielt, Gewinnmöglichkeiten auf bestimmten Reihen (gerade oder ungerade) zu schaffen. Spieler 1 sollte hierbei versuchen, drei Steine in einer Linie zu platzieren, sodass der vierte Stein in einer ungeraden Reihe liegt. Der zweite Spieler kann das spiegeln, indem er in diesem Beispiel auf gerade Reihen abzielt \autocite{cornell2015connect}.
+	\item \textbf{ Paritätsstrategie:} In der Paritätsstrategie wird darauf abgezielt, Gewinnmöglichkeiten auf bestimmten Reihen (gerade oder ungerade) zu schaffen. Spieler 1 sollte hierbei versuchen, drei Steine in einer Linie zu platzieren, sodass der vierte Stein in einer ungeraden Reihe liegt. Der zweite Spieler kann das spiegeln, indem er in diesem Beispiel auf gerade Reihen abzielt \autocite{Cahn2024}.
 	
 	\newpage
-	\item \textbf{ Heuristische Ansätze:} Heuristische Strategien wie das Blockieren von gegnerischen Linien oder die Priorisierung vertikaler Verbindungen werden häufig verwendet, um praktische Entscheidungen zu treffen. Die heuristischen Ansätze sind besonders nützlich für simple KI-Systeme, da sie weniger rechenintensiv sind als andere Ansätze oder sie eignen sich für menschliche Spieler.  
 	
-	
-\end{itemize}
+	\item \textbf{ Heuristische Ansätze:} Heuristische Strategien wie das Blockieren von gegnerischen Linien oder die Priorisierung vertikaler Verbindungen werden häufig verwendet, um praktische Entscheidungen zu treffen. Die heuristischen Ansätze sind besonders nützlich für simple KI-Systeme, da sie weniger rechenintensiv sind als andere Ansätze oder sie eignen sich für menschliche Spieler\autocite{Cahn2024}.  
 
-\subsection{Gleichgewichte}
-\begin{itemize}
-	\item \textbf{Nash-Gleichgewicht :}
-	\item \textbf{Dominante Strategien :}
+ 
+	 
+	\item \textbf{Dominante Strategien :} Eine dominante Strategie für den ersten Spieler besteht darin, den ersten Zug des Spiels in der Mitte zu platzieren und im weiteren Spielverlauf optimal zu spielen. Für den zweiten Spieler bedeutet das, er muss die Bedrohungen von Spieler1 konsequent blockieren und versuchen, möglichst viele eigene Gewinnmöglichkeiten aufzubauen\autocite{cornell2015connect}. 
+	
+	
 	\item \textbf{Perfektes Spiel :}
+	Das Konzept des perfekten Spiels formalisierte Victor Allis in seiner Arbeit. Er bewies, dass der erste Spieler bei einem Spiel immer gewinnen kann \autocite{cornell2015connect}. Dadurch wird die Bedeutung des ersten Spielzuges unterstrichen und gleichzeitig zeigt sich, dass zwischen den Spielern strategische Asymmetrie vorliegt.
+	
 
+
+	\item \textbf{Nash-Gleichgewicht :} Ein Nash-Gleichgewicht entsteht, wenn kein Spieler seine Strategie anpassen kann, ohne seine eigene Lage zu verschlechtern, vorausgesetzt, der andere Spieler behält seine Strategie bei\autocite{Chen2024}. 
+	Dies trifft auf, wenn beide Spieler optimal aufeinander reagieren, sodass keiner einen Vorteil durch Abweichen erzielen kann. In diesem Fall ist das Nash-Gleichgewicht stark mit der Minimax-Strategie verknüpft. Vier Gewinnt ist ein Nullsummenspiel, aus diesem Grund existiert immer mindestens ein Nash-Gleichgewicht\autocite{Cahn2024}.
 \end{itemize}
