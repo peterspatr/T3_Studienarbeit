@@ -116,7 +116,7 @@ Die Funktion Endzustand\_erreicht überprüft, ob ein Endzustand in einem Spiel 
 
 \begin{lstlisting}[language=Python, caption=Erkennung des Endzustands]
 def Endzustand_erreicht(board):
-return Spieler_gewinnt(board) or Board_voll(board[0][col] != 0 for col in range(7))
+return Spieler_gewinnt(board) or Board_voll(board[0][spalte] != 0 for spalte in range(7))
 \end{lstlisting}
 
 \section*{7. Spielstrategie optimieren}

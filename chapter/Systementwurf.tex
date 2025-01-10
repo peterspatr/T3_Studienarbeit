@@ -1,7 +1,6 @@
 \chapter{Systementwurf}
 \label{cha:Systementwurf}
-In diesem Kapitel geht es um den ersten groben Entwurf des zu entwickelten Roboter. Hierbei wird auf die benötigten Komponenten näher eingegangen. Der Vier Gewinnt spielende Roboter soll mit LEGO SPIKE realisiert werden.  
-
+In diesem Kapitel geht es um den ersten groben Entwurf des zu entwickelten Roboter. Hierbei wird auf die benötigten Komponenten näher eingegangen. Der Vier Gewinnt spielende Roboter soll mit LEGO SPIKE realisiert werden. Mit diesen Komponenten sollen erste Überlegungen gemacht werden, wie die Konstruktion realisiert werden kann unter Berücksichtigung der ausgearbeiteten Vorgaben zu der Software. Die Herausforderung besteht hierbei für die Abtastung der 42 Spielfeldpositionen und den Einwurf der Spielsteine.
 
 %Es soll eine detaillierte und funktionsfähige Vorrichtung entworfen werden, die in der Lage ist, Spielsteine präzise und zuverlässig in die vorgesehenen Spalten des Spielständers einzuführen. Dazu muss der Mechanismus so gestaltet sein, dass er unterschiedliche Positionen des Spielständers ansteuern und die Spielsteine mit der nötigen Genauigkeit platzieren kann. Nach dem Einwurf des Spielsteins muss die Vorrichtung den Spielständer wieder für den nächsten Zug freigeben, was eine genaue Steuerung und Rückkehr in die Ausgangsposition erfordert. Die mechanische Konstruktion muss robust und wiederholgenau arbeiten, um einen flüssigen und störungsfreien Spielablauf zu gewährleisten.
 
@@ -14,12 +13,7 @@ Zur Verwendung stehen folgende Sensorik und Aktorik zur Verfügung:
 	\item \textbf{großer LEGO® Technic Hub:}
 	Der Hub ist das Steuerungselement des Spike Prime Systems. Er umfasst sechs Ein-/Ausgänge, welche den Anschluss von Peripheriegeräten, wie Sensorik und Aktorik, ermöglicht. Mit einem Micro-USB-Anschluss und Bluetooth wird die Kommunikation mit kompatiblen Endgeräten hergestellt. Der Hub besitzt ein integriertes MicroPython-Betriebssystem mit einem 100-MHz-Prozessor. 
 	Weitere Ausstattungen sind:
-	Individuell anpassbaren Lichtmatrix (5x5)
-	Aufzeigen von wichtigen Informationen und Statusmeldungen
-	Tasten
-	Ermöglichen eine einfache Navigation und Steuerung durch Menüs 
-	Lautsprecher
-	6-achsigen Kreiselsensor
+	Individuell anpassbaren Lichtmatrix (5x5, Aufzeigen von wichtigen Informationen und Statusmeldungen), Tasten (Steuerung durch Menüs), Lautsprecher, 6-achsiger Kreiselsensor \autocites{lego_spike_prime_2023}.
 	
 	\begin{figure}[H]
 		\centering
@@ -30,7 +24,7 @@ Zur Verwendung stehen folgende Sensorik und Aktorik zur Verfügung:
 	
 	
 	\item \textbf{LEGO® Technic Farbsensor:}
-	Dieser Sensor kann durch die Intensität des reflektierten Lichts, welche er durch den eingebauten Lichtring erzeugt, bis zu acht Farben erkennen und unterscheiden (erkennbare Farben: schwarz, blau, rot, weiß, braun, gelb, pink und grün).  Er wird vor allem bei Anwendungen, wie Sortieren nach Farben, Linienverfolgung von farbigen Streifen und zum Ausführen von farbcodierten Befehlen eingesetzt. Um die Farberkennung optimal auf die entsprechende Umgebung anzupassen, wird das Umgebungslicht zuvor ausgewertet.
+	Dieser Sensor kann durch die Intensität des reflektierten Lichts, welche er durch den eingebauten Lichtring erzeugt, bis zu acht Farben erkennen und unterscheiden (erkennbare Farben: \textbf{ro}t,  \textbf{gelb}, schwarz, blau, weiß, braun,  pink und grün). Er wird vor allem bei Anwendungen, wie Sortieren nach Farben, Linienverfolgung von farbigen Streifen und zum Ausführen von farbcodierten Befehlen eingesetzt. Um die Farberkennung optimal auf die entsprechende Umgebung anzupassen, wird das Umgebungslicht zuvor ausgewertet \autocites{lego_spike_prime_2023}.
 	
 	\begin{figure}[H]
 		\centering
@@ -41,7 +35,7 @@ Zur Verwendung stehen folgende Sensorik und Aktorik zur Verfügung:
 	
 	
 	\item \textbf{LEGO® Technic Großer Winkelmotor}
-	Für die Bewegungssteuerung wird dieser Winkelmotor mit hoher Drehkraft und präziser Steuerung verwendet. Dieser Motor ist dafür ausgelegt, um schwere und komplexe Konstruktionen exakt in Geschwindigkeit und Position verfahren zu können. Dies wird durch den internen Winkel- und Rotationssensor ermöglicht. Der Anwendungsbereich ist vielseitig, unter anderem wird dies als Antrieb von Rädern, Gelenke, Greifarme, Hebevorrichtungen und Drehscheibe angewandt. Vor allem für Aufgaben, welche eine genau und wiederholbare Aktion ausüben müssen.
+	Für die Bewegungssteuerung wird dieser Winkelmotor mit hoher Drehkraft und präziser Steuerung verwendet. Dieser Motor ist dafür ausgelegt, um schwere und komplexe Konstruktionen exakt in Geschwindigkeit und Position verfahren zu können. Dies wird durch den internen Winkel- und Rotationssensor ermöglicht. Der Anwendungsbereich ist vielseitig, unter anderem wird dies als \textbf{Antrieb von Rädern}, Gelenke, Greifarme, Hebevorrichtungen und Drehscheibe angewandt. Vor allem für Aufgaben, welche eine genau und wiederholbare Aktion ausüben müssen \autocites{lego_spike_prime_2023}.
 	
 	\begin{figure}[H]
 		\centering
@@ -54,16 +48,23 @@ Zur Verwendung stehen folgende Sensorik und Aktorik zur Verfügung:
 
 \section{Zusammenspiel von Soft- und Hardware}
 
-Der LEGO SPIKE Farbsensor eignet sich hervorragend zur Erkennung der Spielsteine in einem Vier-Gewinnt-Spiel. 
+Für die Realisierung ist eine Konstruktion mit den LEGO Spike Komponenten erforderlich, die die Vorgaben der Software erfüllen. Sie sollte in der Lage sein, die Position der Spielsteine zu erkennen und gleichzeitig einen Mechanismus bereitstellen, der es ermöglicht, die Steine präzise ins Spielfeld zu werfen.
 
 \subsection{Mechanische Konstruktion des Farbsensor-Systems}
+Es muss eine Konstruktion realisiert werden, um alle 42 Spielfeldpositionen abtasten zu können. Der LEGO SPIKE Farbsensor eignet sich hervorragend zur Erkennung der Spielsteine. Der Farbsensor soll mit einem zweiachsigen Antriebssystem, das eine präzise Bewegung sowohl in vertikaler als auch in horizontaler Richtung ermöglicht, realisiert werden.
 
-Das Farbsensor-System basiert auf einem zweiachsigen Antriebssystem, das eine präzise Bewegung sowohl in vertikaler als auch in horizontaler Richtung ermöglicht. 
+\begin{itemize}
+	\item Die \textbf{vertikale Bewegung} wird durch eine Kettenkonstruktion realisiert, an der der Farbsensor befestigt ist. Ein LEGO SPIKE Motor treibt die Kette präzise an und sorgt dafür, dass der Sensor alle sechs Reihen des Spielfeldes abtasten kann. 
+	\item Die \textbf{horizontale Bewegung} erfolgt über einen Wagen mit vier Rädern. Dieser Wagen wird durch einen zweiten Motor angetrieben, der mit Encoderwerten für eine präzise Positionierung gesteuert wird. Durch die horizontale Bewegung können alle sieben Spalten des Spielfeldes abgedeckt werden.
+	\item Die \textbf{Steuerung der Bewegungen} erfolgt durch eine koordinierte Ansteuerung beider Achsen, wodurch der Farbsensor schrittweise von Position zu Position bewegt wird. Optimierte Verfahrwege minimieren die Scanzeit, und eine Kalibrierung der Positionen gewährleistet eine genaue Ausrichtung des Sensors.
+\end{itemize}
 
-Die \textbf{vertikale Bewegung} wird durch eine Kettenkonstruktion realisiert, an der der Farbsensor befestigt ist. Ein LEGO SPIKE Motor treibt die Kette präzise an und sorgt dafür, dass der Sensor alle sechs Reihen des Spielfeldes abtasten kann. 
+\subsection{Mechanische Konstruktion des Spielsteineinwurfs}
 
-Die \textbf{horizontale Bewegung} erfolgt über einen Wagen mit vier Rädern. Dieser Wagen wird durch einen zweiten Motor angetrieben, der mit Encoderwerten für eine präzise Positionierung gesteuert wird. Durch die horizontale Bewegung können alle sieben Spalten des Spielfeldes abgedeckt werden.
+Für den Spielsteineinwurf mit LEGO Spike wird eine mechanische Lösung entwickelt, die aus drei zentralen Komponenten besteht: einem Schacht, einem Magazin für die Spielsteine und einem Motor für die Steuerung des Einwurfs.
 
-Die \textbf{Steuerung der Bewegungen} erfolgt durch eine koordinierte Ansteuerung beider Achsen, wodurch der Farbsensor schrittweise von Position zu Position bewegt wird. Optimierte Verfahrwege minimieren die Scanzeit, und eine Kalibrierung der Positionen gewährleistet eine genaue Ausrichtung des Sensors.
-
-Diese mechanische Konstruktion ermöglicht eine zuverlässige und präzise Abtastung aller 42 Spielfeldpositionen des Vier-Gewinnt-Spiels und stellt somit eine optimale Grundlage für die Umsetzung  dar.
+\begin{itemize}
+	\item Der Schacht ist dafür verantwortlich, dass die Spielsteine präzise ins Spielfeld gelangen. Damit alles reibungslos funktioniert, muss er stabil sein, damit die Steine nicht klemmen oder seitlich herausfallen. Außerdem sollte er genau auf die Öffnung des Spielfelds ausgerichtet sein.
+	\item Das Magazin dient als Aufbewahrungsort für die Spielsteine. Hier werden die Steine ordentlich in einer Reihe gestapelt und müssen leicht zugänglich sein, damit man sie schnell nachfüllen kann. Es ist wichtig, dass die Steine einzeln und kontrolliert in den Schacht gelangen, damit nicht mehrere gleichzeitig herausrutschen.
+	\item Ein Motor übernimmt das Herausbefördern der Steine aus dem Magazin. Über einen Mechanismus (Hebel) wird jeder Stein einzeln in den Schacht geschoben. Dabei sorgt die Steuerung des Motors dafür, dass immer nur ein Stein pro Bewegung ausgegeben wird. So werden Blockaden vermieden.
+\end{itemize}
