@@ -24,7 +24,7 @@ Ist die Normalform endlich und überschaubar, kann sie auch in einer Matrix darg
 Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat. Durch die sehr große Anzahl an Strategien ist es nicht mehr überschaubar und daher eher weniger geeignet.
 %*************************************************************************************************************************
 \section{Komplexität des Spielbaums}
-Die Komplexität des Spielbaums ist beträchtlich und wird oft als ,,mittlere Komplexität'' beschrieben. Die liegt daran, dass es eine große Anzahl an möglichen Spielzuständen gibt, aber das Spiel sich dennoch lösbar ist.\\
+Die Komplexität des Spielbaums ist beträchtlich und wird oft als ,,mittlere Komplexität'' beschrieben. Die liegt daran, dass es eine große Anzahl an möglichen Spielzuständen gibt, aber das Spiel dennoch lösbar ist.\\
 Die Anzahl der möglichen Konstellationen bei Vier Gewinnt beträgt laut einer Studie von John Tromp 4.531.985.219.092 (circa $4,5*10^{12}$) \autocite{thill2012reinforcement}. Aufgrund dieser enormen Zahl wird deutlich, warum eine vollständige Durchsuchung des Spielbaums für ein Vier-Gewinnt-Spiel eine Herausforderung darstellt.\\
 Pro Zug gib es für den Spieler sieben Möglichkeiten. Bereits in der nach ersten Runde hat der Spielbaum $7*7 = 49$ Äste, also 49 mögliche Spielzustände. Das zeigt, dass der Spielbaum trotz der scheinbaren Einfachheit des Spiels Vier Gewinnt, recht komplex ist \autocite{thill2012reinforcement}\autocite{ruile2009viergewinnt}. Aus diesem Grund wurden Ansätze entwickelt, die den Spielbaum mithilfe von verteilten Rechensystemen effizient lösen. Ein Beispiel hierfür ist ,,Shard Solver'' \autocite{yokota2022exploration}.
 
@@ -36,12 +36,7 @@ Pro Zug gib es für den Spieler sieben Möglichkeiten. Bereits in der nach erste
 	\label{fig:baum1}
 \end{figure}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.9\linewidth]{"images/Baum2}
-	\caption[Spielbaum nach dem 4. Zug. Quelle: \cite{vandewiele2017}]{Schematische Darstellung des Spielbaum nach dem 4. bis zum 7. Zug}
-	\label{fig:Baum2}
-\end{figure}
+
 
 
 
@@ -53,19 +48,37 @@ In dieser Form wird ein Spielbaum verwendet, der aus Knoten und Kanten besteht \
 Der Baum beginnt mit einem Wurzelknoten, hier ist es ein leeres Spielfeld mit 42 freien Feldern. Die Verbindungen zwischen den Knoten, auch Kanten genannt, stellen die möglichen Züge für den Spieler dar. Die Knoten, an denen Kanten zusammenlaufen, repräsentieren eine Entscheidung eines Spielers. Die Knoten am Ende zeigen mögliche Ausgänge für das Spiel an.
 Bei Vier Gewinnt stellt jede Ebene des Spielbaums einen Spielzug dar. Pro Zug gibt es immer sieben Möglichkeiten, den Spielstein zu platzieren. Das bedeutet, von jedem Knoten gehen sieben Kanten weg. Allerdings ist der Baum durch die Spielfeldgröße auf 42 mögliche Züge begrenzt.\\
 Um die Extensivform praktisch nutzen zu können, werden Vereinfachungen und Optimierungen durchgeführt. Eine Möglichkeit ist es, nutzlose Züge wegzulassen. Dadurch soll der Spielbaum vereinfacht werden und sich besser für Analysen eignen \autocite{ruile2009viergewinnt}.  
-
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{"images/Baum2}
+	\caption[Spielbaum nach dem 4. Zug. Quelle: \cite{vandewiele2017}]{Schematische Darstellung des Spielbaum nach dem 4. bis zum 7. Zug}
+	\label{fig:Baum2}
+\end{figure}
 
 \section{Strategien und Gleichgewichte}
-%*******Noch Ändern************************************************************************************
-Die Analyse der Strategien zeigt, dass es im Vier Gewinnt dominante Strategien gibt. Nach dem Zermelo'schen Bestimmtheitssatz lässt sich das Spiel in eine von drei Kategorien einordnen, wobei sich herausgestellt hat, dass der erste Spieler eine dominante Strategie besitzt5
-. Die Nash-Gleichgewichte manifestieren sich in den optimalen Zugfolgen, wobei die Kontrolle der zentralen Spalten eine entscheidende Rolle spielt2
+Das Spiel Vier Gewinnt wird aus mathematischer und spieltheoretischer Sicht, von verschieden Strategien und Gleichgewichten geprägt.
 .
-
-Dominante Strategien
-
-Nash-Gleichgewicht
-
-Bedrohungsanalyse
-
-Gleichgewichte in gemischten Strategien
+\subsection{Strategien}
+\begin{itemize}
+	\item \textbf{Kontrolle des Zentrums:}
+	Die mittlere Spalte des Spielfeldrasters ist strategisch besonders wichtig. Sie bietet den Zugang zu den meisten möglichen Gewinnkombinationen (vertikal, horizontal und diagonal). Beginnt ein Spieler hier oder übernimmt frühzeitig die Kontrolle über das Zentrum, kann ich dadurch seine Chancen auf einen möglichen Sieg stark erhöhen\autocite{cornell2015connect}.
+	%
+	\item \textbf{Minimax-Strategie :} Die Minimax-Strategie ist ein weiteres zentrales Konzept, welches bei Vier Gewinnt angewandt wird. Dabei versucht ein Spieler, seinen Verlust so gering wie möglich zu halten und dabei gleichzeitig den Gewinn des Gegners zu minimieren. Diese Strategie fordert eine vorausschauende Planung über mehrere Spielzüge. Hierbei werden sowohl offensive Aspekte als auch defensive berücksichtigt\autocite{cornell2015connect}.
 	
+	\item \textbf{Bedrohungen verzweigen ("Forking") :} Bei der Bedrohungsverzweigung wird der Gegner in eine defensive Spielposition gezwungen. Dies geschieht durch das Erzeugen von Mehrfachbedrohungen. Dabei werden mehrere potenzielle Gewinnmöglichkeiten erzeugt, die der Gegner nicht alle gleichzeitig decken kann. Durch das Verzweigen der Bedrohungen wird die Wahrscheinlichkeit für einen schnellen Sieg erhöht\autocite{Cahn2024}.
+	
+	\item \textbf{ Paritätsstrategie:} In der Paritätsstrategie wird darauf abgezielt, Gewinnmöglichkeiten auf bestimmten Reihen (gerade oder ungerade) zu schaffen. Spieler 1 sollte hierbei versuchen, drei Steine in einer Linie zu platzieren, sodass der vierte Stein in einer ungeraden Reihe liegt. Der zweite Spieler kann das spiegeln, indem er in diesem Beispiel auf gerade Reihen abzielt \autocite{cornell2015connect}.
+	
+	\newpage
+	\item \textbf{ Heuristische Ansätze:} Heuristische Strategien wie das Blockieren von gegnerischen Linien oder die Priorisierung vertikaler Verbindungen werden häufig verwendet, um praktische Entscheidungen zu treffen. Die heuristischen Ansätze sind besonders nützlich für simple KI-Systeme, da sie weniger rechenintensiv sind als andere Ansätze oder sie eignen sich für menschliche Spieler.  
+	
+	
+\end{itemize}
+
+\subsection{Gleichgewichte}
+\begin{itemize}
+	\item \textbf{Nash-Gleichgewicht :}
+	\item \textbf{Dominante Strategien :}
+	\item \textbf{Perfektes Spiel :}
+
+\end{itemize}
