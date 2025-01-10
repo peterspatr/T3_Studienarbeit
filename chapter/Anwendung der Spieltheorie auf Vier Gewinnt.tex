@@ -1,6 +1,6 @@
 \chapter{Anwendung der Spieltheorie auf Vier Gewinnt}
 \label{cha:nwendung der Spieltheorie auf Vier Gewinnt}
-In diesem Kapitel werden die spieltheoretischen Aspekte von Vier Gewinnt, einschließlich der Analyse von Spielsituationen, der Berechnung von Gewinnwahrscheinlichkeiten und der Entwicklung von Spielstrategien untersucht.
+In diesem Kapitel werden die spieltheoretischen Aspekte von 4Gewinnt, einschließlich der Analyse von Spielsituationen, der Berechnung von Gewinnwahrscheinlichkeiten und der Entwicklung von Spielstrategien untersucht.
 
 
 \section{Analyse von Spielsituationen}
@@ -24,19 +24,18 @@ Aufgrund der Komplexität des Spiels stellt die Berechnung der Gewinnwahrscheinl
 Moderne Ansätze zur Berechnung der Gewinnwahrscheinlichkeit greifen auf KI-Technik zurück. Die exakte Berechnung für alle möglichen Spielsituationen bleibt aufgrund der Komplexität von Vier Gewinnt eine Herausforderung \autocite{ruile2009viergewinnt}.
 \section{Entwicklung von Spielstrategien}
 	
-Um eine spielstarke Strategie für "Vier Gewinnt" mit dem Alpha-Beta-Algorithmus zu entwickeln und später zu programmieren, müssen mehrere Schritte beachtet werden. Hier wird der gesamte Prozess erläutert, von der Spielrepräsentation über die Bewertung von Stellungen bis hin zur Integration des Alpha-Beta-Algorithmus.
+Um eine spielstarke Strategie für 4Gewinnt mit dem Alpha-Beta-Algorithmus zu entwickeln und später zu programmieren, müssen mehrere Schritte beachtet werden. Hier wird der gesamte Prozess erläutert, von der Spielrepräsentation über die Bewertung von Stellungen bis hin zur Integration des Alpha-Beta-Algorithmus.
 
 \subsection*{1. Spielfeld als Datenstruktur}
-Zunächst muss das Spielfeld von "Vier Gewinnt" in einer Form dargestellt werden, die von einem Algorithmus verarbeitet werden kann:
-
-Verwende ein 2D-Array (6 Zeilen × 7 Spalten), das den Zustand des Spielfeldes beschreibt.
+Zunächst muss das Spielfeld von 4Gewinnt in einer Form dargestellt werden, die von einem Algorithmus verarbeitet werden kann.
+Hierzu kann ein 2D-Array (6 Zeilen × 7 Spalten) verwendet werden, das den Zustand des Spielfeldes beschreibt. Für jede Situation kann eine andere Zahl verwendet werden:
 \begin{itemize}
 	\item 0: Leeres Feld
 	\item 1: Spielstein von Spieler 1
 	\item -1: Spielstein von Spieler 2
 \end{itemize}
 
-Das Spielfeld kann folgendermaßen dargestellt werden:
+Das Spielfeld kann nun als Array folgendermaßen dargestellt werden:
 
 \[
 \text{Spielfeld} =
@@ -50,12 +49,12 @@ Das Spielfeld kann folgendermaßen dargestellt werden:
 \end{pmatrix}
 \]
 
-\subsection*{2. Zugmöglichkeiten berechnen}
+\subsection*{2. Berechnung als Zugmöglichkeiten }
 Da Spielsteine nur in den unteren freien Reihen platziert werden können, muss eine Funktion implementiert werden, die gültige Züge berechnet:
 
 \begin{lstlisting}[language=Python, caption=Funktion zur Berechnung gültiger Züge]
-	def valid_moves(board):
-	return [col for col in range(7) if board[0][col] == 0]
+	def gueltige_zuege(board):
+	return [spalte for spalte in range(7) if brett[0][spalte] == 0]
 \end{lstlisting}
 
 \section*{3. Bewertung der Spielstellung}
@@ -71,62 +70,60 @@ Eine Bewertungsfunktion ist entscheidend für die Strategie. Sie schätzt den We
 
 \section*{4. Alpha-Beta-Algorithmus implementieren}
 	Der Alpha-Beta-Algorithmus wird verwendet, um den besten Zug zu berechnen, indem der Suchbaum effizient durchsucht wird. 
-	Dieses Beispiel zeigt den Kern des Algorithmus – die Auswahl des besten Zugs basierend auf einer vorgegebenen Spielbrett-Situation (board) und einer Suchtiefe (depth). 
+    Es geht darum, den besten Zug auszuwählen, basierend auf einer bestimmten Spielsituation und der Tiefe. Der Alpha-Beta-Algorithmus durchsucht den Entscheidungsbaum bis z.B. zur Tiefe 4 und nutzt alpha und beta, um unnötige Pfade auszulassen. maximizingPlayer=True gibt an, ob der Spieler seinen Vorteil maximiert.
 \begin{lstlisting}[language=Python, caption=Alpha-Beta Algorithmus - Kurzer Überblick]
 	# Alpha-Beta Algorithmus in Aktion
-	best_move = alpha_beta(board, depth=4, alpha=-float('inf'), beta=float('inf'), maximizingPlayer=True)
-	print(f"Bester Zug: Spalte {best_move}")
+	bester_Zug = alpha_beta(board, Tiefe=4, alpha=-float('inf'), beta=float('inf'), maximizingPlayer=True)
+	print(f"Bester Zug: Spalte {bester_Zug}")
 \end{lstlisting}
 
 \section*{5. Entscheidung für den besten Zug}
 
- fünften Schritt wird der beste Zug für den aktuellen Spieler ermittelt. Dazu werden alle möglichen Züge analysiert, indem sie simuliert und mit dem Alpha-Beta-Algorithmus bewertet werden. Der Zug mit der besten Bewertung (je nach Spieler maximierend oder minimierend) wird ausgewählt. Dieser Schritt stellt die Grundlage für die Entscheidungsfindung dar und bildet den Abschluss der Spielbaum-Analyse.
+Im fünften Schritt geht es darum, den optimalen Zug für den aktuellen Spieler zu finden. Dazu werden alle möglichen Züge angeschaut und mithilfe dem Alpha-Beta-Algorithmus bewertet. Der Zug, der am besten abschneidet – je nachdem, ob der Spieler versucht, seinen Punktestand zu maximieren oder zu minimieren – wird dann ausgewählt. Dieser Schritt ist entscheidend für die Entscheidungsfindung und markiert das Ende der Analyse des Spielbaums.
 
 \begin{lstlisting}[language=Python, caption=Entscheidung für den besten Zug - Überblick]
-	# Grober Aufbau der Funktion zur Zugentscheidung
-	def best_move(board, depth, player):
-	best_value = float('-inf') if player == 1 else float('inf')
-	best_column = None
-	
-	for col in valid_moves(board):
-	move_value = alpha_beta(apply_move(board, col, player), depth - 1, -float('inf'), float('inf'), False)
-	if (player == 1 and move_value > best_value) or (player == -1 and move_value < best_value):
-	best_value = move_value
-	best_column = col
-	
-	return best_column
+# Grober Aufbau der Funktion zur Zugentscheidung
+def bester_zug(board, tiefe, spieler):
+bester_wert = float('-inf') if spieler == 1 else float('inf')
+beste_spalte = None
+
+for spalte in gueltige_zuege(board):
+zug_wert = alpha_beta(anwenden_zug(brett, spalte, spieler), tiefe - 1, -float('inf'), float('inf'), False)
+if (spieler == 1 und zug_wert > bester_wert) or (spieler == -1 und zug_wert < bester_wert):
+bester_wert = zug_wert
+beste_spalte = spalte
+
+return beste_spalte
 \end{lstlisting}
 \begin{itemize}
 
-	\item Die Funktion \texttt{best\_move} ist darauf ausgelegt, den besten Zug für einen Spieler (\texttt{player}) zu bestimmen. 
-	\item \texttt{valid\_moves(board)} gibt alle gültigen Spalten zurück, in die ein Stein gesetzt werden kann. 
-	\item \texttt{apply\_move(board, col, player)} simuliert das Setzen eines Steins in eine bestimmte Spalte. 
+	\item Die Funktion \texttt{bester\_zug} ist darauf ausgelegt, den besten Zug für einen Spieler zu bestimmen. 
+	\item \texttt{gueltige\_zuege(board)} gibt alle gültigen Spalten zurück, in die ein Stein gesetzt werden kann. 
+	\item \texttt{anwenden\_zug(board, spalte, spieler)} simuliert das Setzen eines Steins in eine bestimmte Spalte. 
 	\item Der \emph{alpha-beta}-Algorithmus wird auf das simulierte Spielfeld angewendet, um die Bewertung des Zugs zu berechnen. 
 	\item Der Spieler wählt den Zug mit der höchsten Bewertung (für Maximierer) oder der niedrigsten Bewertung (für Minimierer).
 \end{itemize}
 
 \section*{5. Endzustände erkennen}
 
-Eine Funktion wird benötigt, um festzustellen, ob das Spiel vorbei ist:
-
-\subsection*{Kriterien für Endzustände:}
+Für die Auswertung der Endzustände wird eine Funktion benötigt, um festzustellen, ob das Spiel vorbei ist. Es können zwei Endzustände eintreffen:
 \begin{itemize}
-	\item Einer der Spieler hat 4 in einer Reihe.
+	\item Einer der Spieler hat 4 Steine in einer Reihe.
 	\item Das Spielfeld ist voll.
 \end{itemize}
 
+Die Funktion Endzustand\_erreicht überprüft, ob ein Endzustand in einem Spiel erreicht wurde, indem sie zwei Bedingungen prüft: ob ein Spieler gewonnen hat (über die Funktion Spieler\_gewinnt) oder ob das Spielfeld voll ist (über die Funktion Board\_voll). 
+
 \begin{lstlisting}[language=Python, caption=Erkennung des Endzustands]
-def is_terminal(board):
-return has_winner(board) or all(board[0][col] != 0 for col in range(7))
+def Endzustand_erreicht(board):
+return Spieler_gewinnt(board) or Board_voll(board[0][col] != 0 for col in range(7))
 \end{lstlisting}
 
 \section*{7. Spielstrategie optimieren}
 
-\subsection*{Suchtiefe anpassen}
-Je nach Rechenleistung kann die Tiefe des Spielbaums variiert werden. 
+Nach dem Programmieren der Spielstrategien steht die Optimierung im Vordergrund. Um die Effizienz zu steigern, sollten Suchtiefe und Zeitlimit angepasst werden.
 
-\subsection*{Zeitlimit setzen}
-Da der Algorithmus auf einem LEGO Spike Roboter läuft, ist die Rechenzeit begrenzt. Eine Tiefensuche kann eingesetzt werden, um innerhalb eines Zeitlimits die bestmögliche Tiefe zu erreichen.
+Die \textbf{Suchtiefe} kann je nach \textbf{Rechenleistung} variiert werden, um ein gutes Gleichgewicht zwischen der Tiefe des Spielbaums und der benötigten Rechenzeit zu finden. Da der Algorithmus auf einem LEGO Spike Roboter läuft, ist die Rechenzeit begrenzt. Daher ist es sinnvoll, eine Tiefensuche zu implementieren, die es ermöglicht, innerhalb eines festgelegten Zeitlimits die bestmögliche Tiefe zu erreichen. 
 
 
 
@@ -134,12 +131,12 @@ Da der Algorithmus auf einem LEGO Spike Roboter läuft, ist die Rechenzeit begre
 
 
 
-\section{Systementwurf}
+\chapter{Systementwurf}
 
 Es soll eine detaillierte und funktionsfähige Vorrichtung entworfen werden, die in der Lage ist, Spielsteine präzise und zuverlässig in die vorgesehenen Spalten des Spielständers einzuführen. Dazu muss der Mechanismus so gestaltet sein, dass er unterschiedliche Positionen des Spielständers ansteuern und die Spielsteine mit der nötigen Genauigkeit platzieren kann. Nach dem Einwurf des Spielsteins muss die Vorrichtung den Spielständer wieder für den nächsten Zug freigeben, was eine genaue Steuerung und Rückkehr in die Ausgangsposition erfordert. Die mechanische Konstruktion muss robust und wiederholgenau arbeiten, um einen flüssigen und störungsfreien Spielablauf zu gewährleisten.
 
 
-\subsection{Komponenten}
+\section{Komponenten}
 Zur Verwendung stehen folgende Sensorik und Aktorik zur Verfügung:
 
 
@@ -185,11 +182,11 @@ Für die Bewegungssteuerung wird dieser Winkelmotor mit hoher Drehkraft und prä
 
 \end{itemize}
 
-\subsection{Zusammenspiel von Soft- und Hardware}
+\section{Zusammenspiel von Soft- und Hardware}
 
 Der LEGO SPIKE Farbsensor eignet sich hervorragend zur Erkennung der Spielsteine in einem Vier-Gewinnt-Spiel. 
 
-\section{Mechanische Konstruktion des Farbsensor-Systems}
+\subsection{Mechanische Konstruktion des Farbsensor-Systems}
 
 Das Farbsensor-System basiert auf einem zweiachsigen Antriebssystem, das eine präzise Bewegung sowohl in vertikaler als auch in horizontaler Richtung ermöglicht. 
 
