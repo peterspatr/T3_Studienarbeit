@@ -116,7 +116,7 @@ Die spieltheoretische Analyse von „Vier Gewinnt“ wurde durch mathematische u
 
 Die Bewertung von Positionen auf dem Spielfeld ist ein zentraler heuristischer Ansatz bei der Strategieentwicklung für 4Gewinnt. Dieser Ansatz zielt darauf ab, den strategischen Wert jeder Position zu analysieren und darauf aufbauend optimale Züge zu planen.
 
-Die dargestellte Tabelle veranschaulicht die strategische Bewertung jedes Spielfelds. Jedes Feld erhält einen numerischen Wert, der angibt, wie viele mögliche Viererreihen dieses Feld beeinflussen kann. Ein Zug auf ein Feld mit einem höheren Wert ist in der Regel strategisch besser, da er potenziell mehr Siegoptionen eröffnet. Solche Bewertungsansätze werden auch in computergesteuerten Spielen angewendet, um optimale Züge zu berechnen.
+Die dargestellte Tabelle veranschaulicht die strategische Bewertung jedes Spielfelds. Jedes Feld erhält einen numerischen Wert, der angibt, wie viele mögliche Viererreihen dieses Feld beeinflussen kann. Ein Zug auf ein Feld mit einem höheren Wert ist in der Regel strategisch besser, da er potenziell mehr Siegoptionen eröffnet. Solche Bewertungsansätze werden auch in computergesteuerten Spielen angewendet, um optimale Züge zu berechnen\autocites{monien_alphabeta-algorithmus_2008}.
 
 	
 \begin{figure}[H]
@@ -241,7 +241,7 @@ In 4Gewinnt gibt es zwei Spieler:
 	\item Der Minimierer versucht, den Nutzen des Gegners zu minimieren (z. B. Spieler 2).
 \end{itemize}
 
-Bei jedem Zug wechselt die Rolle zwischen Maximierer und Minimierer. Der Algorithmus wechselt daher bei jedem Ebenenwechsel zwischen der Maximierung und Minimierung der Heuristikwerte.
+Bei jedem Zug wechselt die Rolle zwischen Maximierer und Minimierer. Der Algorithmus wechselt daher bei jedem Ebenenwechsel zwischen der Maximierung und Minimierung der Heuristikwerte \autocites{krusenotto_anwendungsbeispiel_2016}.
 
 \section*{Beispiel: Minimax-Suchbaum}
 
@@ -250,11 +250,8 @@ Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/Minimax.svg}
-	\caption{Minimax-Suchbaum mit einer Tiefe von 4 +++wikipedia}
-	\label{fig:minimax}
+	\caption[Minimax-Suchbaum \autocite{Wikipedia:Minimax}]{Minimax-Suchbaum mit einer Tiefe von 4}
 \end{figure}
-
-
 
 \subsection*{Erklärung des Suchbaums}
 
@@ -299,7 +296,7 @@ Die Anwendung des Alpha-Beta-Algorithmus auf 4Gewinnt bietet mehrere Vorteile:
 \begin{itemize}
 	\item \textbf{Effizienz}: Der Algorithmus reduziert die Anzahl der Knoten, die bewertet werden müssen, erheblich. Dies ermöglicht die Analyse tieferer Spielbäume mit derselben Rechenleistung.
 	\item \textbf{Flexibilität}: Der Algorithmus lässt sich ganz einfach an die speziellen Bewertungsfunktionen von 4Gewinnt anpassen. So kann er beispielsweise Reihen, Spalten und Diagonalen bewerten.
-	\item \textbf{Optimierung für begrenzte Ressourcen}: Ein LEGO Spike Roboter hat begrenzte Rechen- und Speicherkapazitäten. Der Alpha-Beta-Algorithmus ermöglicht es, in Echtzeit Züge zu berechnen, ohne den Roboter zu überlasten.
+	\item \textbf{Optimierung für begrenzte Ressourcen}: Ein LEGO Spike Roboter hat begrenzte Rechen- und Speicherkapazitäten. Der Alpha-Beta-Algorithmus ermöglicht es, in Echtzeit Züge zu berechnen, ohne den Roboter zu überlasten \autocites{monien_alphabeta-algorithmus_2008}.
 \end{itemize}
 
 \section*{Beispiel: Alpha-Beta-Suchbaum}
@@ -309,7 +306,7 @@ Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/AB_pruning.svg}
-	\caption{Alpha-Beta-Suchbaum mit einer Tiefe von 4 ++++wikipedia}
+	\caption[Alpha-Beta-Suchbaum \autocite{Wikipedia:AlphaBeta}{Alpha-Beta-Suchbaum mit einer Tiefe von 4}
 	\label{fig:abpruning}
 \end{figure}
 
@@ -331,5 +328,5 @@ Schließlich wählt der Wurzelknoten (MAX) den Wert 6 als Maximum der drei darun
 Durch das Alpha-Beta-Pruning werden unnötige Berechnungen vermieden:
 \begin{itemize}
 	\item Der Algorithmus durchsucht nur jene Zweige, die potenziell zu besseren Ergebnissen führen.
-	\item Dies erhöht die Effizienz und ermöglicht es, tiefere Suchbäume mit derselben Rechenleistung zu analysieren.
+	\item Dies erhöht die Effizienz und ermöglicht es, tiefere Suchbäume mit derselben Rechenleistung zu analysieren\autocites{monien_alphabeta-algorithmus_2008}.
 \end{itemize}
