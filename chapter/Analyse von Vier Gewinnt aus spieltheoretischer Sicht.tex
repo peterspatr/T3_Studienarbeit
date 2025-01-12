@@ -17,7 +17,7 @@ In der Normalform-Darstellung oder auch Normalform genannt, wird das Spiel als Z
 	\\Hierbei wird jeder möglichen Strategiekombination aller Spieler einen reellen Zahlenwert zugeordnet. 
 	\\  \begin{align}
 		u_i &= \sum S_i \rightarrow \mathbb{R}^{n}  
-\end{align}}
+\end{align}
 \end{itemize}
 
 Ist die Normalform endlich und überschaubar, kann sie auch in einer Matrix dargestellt werden.
@@ -27,6 +27,7 @@ Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abb
 Die Komplexität des Spielbaums ist beträchtlich und wird oft als ,,mittlere Komplexität'' beschrieben. Die liegt daran, dass es eine große Anzahl an möglichen Spielzuständen gibt, aber das Spiel dennoch lösbar ist.\\
 Die Anzahl der möglichen Konstellationen bei Vier Gewinnt beträgt laut einer Studie von John Tromp 4.531.985.219.092 (circa $4,5*10^{12}$) \autocite{thill2012reinforcement}. Aufgrund dieser enormen Zahl wird deutlich, warum eine vollständige Durchsuchung des Spielbaums für ein Vier-Gewinnt-Spiel eine Herausforderung darstellt.\\
 Pro Zug gib es für den Spieler sieben Möglichkeiten. Bereits in der nach ersten Runde hat der Spielbaum $7*7 = 49$ Äste, also 49 mögliche Spielzustände. Das zeigt, dass der Spielbaum trotz der scheinbaren Einfachheit des Spiels Vier Gewinnt, recht komplex ist \autocite{thill2012reinforcement}\autocite{ruile2009viergewinnt}. Aus diesem Grund wurden Ansätze entwickelt, die den Spielbaum mithilfe von verteilten Rechensystemen effizient lösen. Ein Beispiel hierfür ist ,,Shard Solver'' \autocite{yokota2022exploration}.
+
 
 
 \begin{figure}[H]
