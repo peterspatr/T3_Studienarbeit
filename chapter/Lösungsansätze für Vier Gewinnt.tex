@@ -271,62 +271,62 @@ Der Suchbaum in Abbildung \ref{fig:minimax} zeigt die Schritte des Minimax-Algor
 	\end{itemize}
 \end{enumerate}
 
-\subsection*{Optimale Entscheidung:}
-
-Der optimale Zug für Max ist die rechte Verzweigung, die zum Wert -7 führt. Obwohl beide Optionen zu negativen Werten führen (-10 auf der linken Seite und -7 auf der rechten Seite), wählt Max den größeren der beiden Werte, also -7. Dies ist die beste Entscheidung für Max unter der Annahme, dass der Gegenspieler (Min) optimal spielt. Der rote Pfeil im Spielbaum zeigt genau diesen optimalen Entscheidungspfad an.
-
-\subsection{AlphaBeta-Algorithmus}
-
-er Alpha-Beta-Algorithmus ist eine cleverere Variante des Minimax-Algorithmus, die dessen Leistung deutlich verbessert. Er arbeitet so, dass er bestimmte Spielzüge, die für die finale Entscheidung unwichtig sind, einfach ignoriert. Dadurch kann der Alpha-Beta-Algorithmus die Anzahl der Knoten, die im Spielbaum bewertet werden müssen, erheblich reduzieren. Das ist besonders hilfreich in ressourcenbegrenzten Umgebungen, wie zum Beispiel bei einem LEGO Spike Roboter, der nur begrenzte Rechenleistung hat.
-
-Obwohl der Alpha-Beta-Algorithmus die gleichen Berechnungen wie der Minimax-Algorithmus anstellt, nutzt er zusätzlich zwei Parameter, Alpha und Beta. Diese helfen, überflüssige Berechnungen zu vermeiden und machen den Prozess effizienter:
-
-\begin{itemize}
-	\item \textbf{Alpha}: Der aktuelle maximale Wert, den der Maximierer sicher erreichen kann.
-	\item \textbf{Beta}: Der aktuelle minimale Wert, den der Minimierer sicher erreichen kann.
-\end{itemize}
-
-Während der Spielbaum durchgegangen werden Äste abgeschnitten, welche für die endgültige Entscheidung irrelevant sind – das nennt man Pruning. Das passiert in den folgenden Fällen:
-\begin{itemize}
-	\item Ein Knoten einen Wert liefert, der schlechter ist als der bisher bekannte Alpha-Wert für den Maximierer.
-	\item Ein Knoten einen Wert liefert, der schlechter ist als der bisher bekannte Beta-Wert für den Minimierer.
-\end{itemize}
-
-Die Anwendung des Alpha-Beta-Algorithmus auf 4Gewinnt bietet mehrere Vorteile:
-\begin{itemize}
-	\item \textbf{Effizienz}: Der Algorithmus reduziert die Anzahl der Knoten, die bewertet werden müssen, erheblich. Dies ermöglicht die Analyse tieferer Spielbäume mit derselben Rechenleistung.
-	\item \textbf{Flexibilität}: Der Algorithmus lässt sich ganz einfach an die speziellen Bewertungsfunktionen von 4Gewinnt anpassen. So kann er beispielsweise Reihen, Spalten und Diagonalen bewerten.
-	\item \textbf{Optimierung für begrenzte Ressourcen}: Ein LEGO Spike Roboter hat begrenzte Rechen- und Speicherkapazitäten. Der Alpha-Beta-Algorithmus ermöglicht es, in Echtzeit Züge zu berechnen, ohne den Roboter zu überlasten \autocites{monien_alphabeta-algorithmus_2008}.
-\end{itemize}
-
-\section*{Beispiel: Alpha-Beta-Suchbaum}
-
-Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des Alpha-Beta-Algorithmus illustriert. Der Baum zeigt, wie bestimmte Zweige (\textit{Pruning}) abgeschnitten werden, um die Effizienz zu erhöhen.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\linewidth]{images/AB_pruning.svg}
-	\caption[Alpha-Beta-Suchbaum \autocite{Wikipedia:AlphaBeta}{Alpha-Beta-Suchbaum mit einer Tiefe von 4}
-	\label{fig:abpruning}
-\end{figure}
-
-\subsection*{Erklärung des Suchbaums}
-
-\begin{enumerate} \item \textbf{Blattebene:} Die unterste Ebene enthält die Bewertungen der möglichen Endzustände aus Sicht des Max-Spielers. Diese Werte repräsentieren die Spielsituationen.
-	\item \textbf{Min-Ebene:} Der Min-Spieler wählt den minimalen Wert seiner Kindknoten. Durch Alpha-Beta-Schnitte (mit $\times$ markiert) werden einige Äste nicht weiter untersucht, da sie das Endergebnis nicht mehr beeinflussen können. \begin{itemize} \item z.B. der linke Min-Knoten wählt $\min(5, 6) = 5$. Der nächste Min-Knoten bricht nach dem Wert von 4 ab, da die Zahl von 5 schon unterschritten wird und somit keinen Einfluss auf den nächsten Max-Knoten mehr hat.
-    \end{itemize}
-	\item \textbf{Max-Ebene:} Der Max-Spieler wählt den maximalen Wert. Auch hier werden durch Alpha-Beta-Schnitte (mit $\times$ markiert) einige Äste nicht weiter untersucht, da sie das Endergebnis nicht mehr beeinflussen können. 
-	\begin{itemize} \item z.B der linke Max-Knoten wählt $\max(5, 4) = 5$  
-	\end{itemize}
-	 \end{enumerate}
-
-\subsection*{Optimale Entscheidung}
-Schließlich wählt der Wurzelknoten (MAX) den Wert 6 als Maximum der drei darunterliegenden Werte. Durch Alpha-Beta-Pruning werden einige Zweige nicht weiter untersucht, da sie das Endergebnis nicht mehr beeinflussen können, was die Effizienz des Algorithmus erhöht. Der optimale Spielwert beträgt 6 und wird über den mittleren Pfad erreicht.
-
-\subsection*{Vorteile des Alpha-Beta-Algorithmus}
-
-Durch das Alpha-Beta-Pruning werden unnötige Berechnungen vermieden:
-\begin{itemize}
-	\item Der Algorithmus durchsucht nur jene Zweige, die potenziell zu besseren Ergebnissen führen.
-	\item Dies erhöht die Effizienz und ermöglicht es, tiefere Suchbäume mit derselben Rechenleistung zu analysieren\autocites{monien_alphabeta-algorithmus_2008}.
-\end{itemize}
+%\subsection*{Optimale Entscheidung:}
+%
+%Der optimale Zug für Max ist die rechte Verzweigung, die zum Wert -7 führt. Obwohl beide Optionen zu negativen Werten führen (-10 auf der linken Seite und -7 auf der rechten Seite), wählt Max den größeren der beiden Werte, also -7. Dies ist die beste Entscheidung für Max unter der Annahme, dass der Gegenspieler (Min) optimal spielt. Der rote Pfeil im Spielbaum zeigt genau diesen optimalen Entscheidungspfad an.
+%
+%\subsection{AlphaBeta-Algorithmus}
+%
+%er Alpha-Beta-Algorithmus ist eine cleverere Variante des Minimax-Algorithmus, die dessen Leistung deutlich verbessert. Er arbeitet so, dass er bestimmte Spielzüge, die für die finale Entscheidung unwichtig sind, einfach ignoriert. Dadurch kann der Alpha-Beta-Algorithmus die Anzahl der Knoten, die im Spielbaum bewertet werden müssen, erheblich reduzieren. Das ist besonders hilfreich in ressourcenbegrenzten Umgebungen, wie zum Beispiel bei einem LEGO Spike Roboter, der nur begrenzte Rechenleistung hat.
+%
+%Obwohl der Alpha-Beta-Algorithmus die gleichen Berechnungen wie der Minimax-Algorithmus anstellt, nutzt er zusätzlich zwei Parameter, Alpha und Beta. Diese helfen, überflüssige Berechnungen zu vermeiden und machen den Prozess effizienter:
+%
+%\begin{itemize}
+%	\item \textbf{Alpha}: Der aktuelle maximale Wert, den der Maximierer sicher erreichen kann.
+%	\item \textbf{Beta}: Der aktuelle minimale Wert, den der Minimierer sicher erreichen kann.
+%\end{itemize}
+%
+%Während der Spielbaum durchgegangen werden Äste abgeschnitten, welche für die endgültige Entscheidung irrelevant sind – das nennt man Pruning. Das passiert in den folgenden Fällen:
+%\begin{itemize}
+%	\item Ein Knoten einen Wert liefert, der schlechter ist als der bisher bekannte Alpha-Wert für den Maximierer.
+%	\item Ein Knoten einen Wert liefert, der schlechter ist als der bisher bekannte Beta-Wert für den Minimierer.
+%\end{itemize}
+%
+%Die Anwendung des Alpha-Beta-Algorithmus auf 4Gewinnt bietet mehrere Vorteile:
+%\begin{itemize}
+%	\item \textbf{Effizienz}: Der Algorithmus reduziert die Anzahl der Knoten, die bewertet werden müssen, erheblich. Dies ermöglicht die Analyse tieferer Spielbäume mit derselben Rechenleistung.
+%	\item \textbf{Flexibilität}: Der Algorithmus lässt sich ganz einfach an die speziellen Bewertungsfunktionen von 4Gewinnt anpassen. So kann er beispielsweise Reihen, Spalten und Diagonalen bewerten.
+%	\item \textbf{Optimierung für begrenzte Ressourcen}: Ein LEGO Spike Roboter hat begrenzte Rechen- und Speicherkapazitäten. Der Alpha-Beta-Algorithmus ermöglicht es, in Echtzeit Züge zu berechnen, ohne den Roboter zu überlasten \autocites{monien_alphabeta-algorithmus_2008}.
+%\end{itemize}
+%
+%\section*{Beispiel: Alpha-Beta-Suchbaum}
+%
+%Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des Alpha-Beta-Algorithmus illustriert. Der Baum zeigt, wie bestimmte Zweige (\textit{Pruning}) abgeschnitten werden, um die Effizienz zu erhöhen.
+%
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.7\linewidth]{images/AB_pruning.svg}
+%	\caption[Alpha-Beta-Suchbaum \autocite{Wikipedia:AlphaBeta}{Alpha-Beta-Suchbaum mit einer Tiefe von 4}
+%	\label{fig:abpruning}
+%\end{figure}
+%
+%\subsection*{Erklärung des Suchbaums}
+%
+%\begin{enumerate} \item \textbf{Blattebene:} Die unterste Ebene enthält die Bewertungen der möglichen Endzustände aus Sicht des Max-Spielers. Diese Werte repräsentieren die Spielsituationen.
+%	\item \textbf{Min-Ebene:} Der Min-Spieler wählt den minimalen Wert seiner Kindknoten. Durch Alpha-Beta-Schnitte (mit $\times$ markiert) werden einige Äste nicht weiter untersucht, da sie das Endergebnis nicht mehr beeinflussen können. \begin{itemize} \item z.B. der linke Min-Knoten wählt $\min(5, 6) = 5$. Der nächste Min-Knoten bricht nach dem Wert von 4 ab, da die Zahl von 5 schon unterschritten wird und somit keinen Einfluss auf den nächsten Max-Knoten mehr hat.
+%    \end{itemize}
+%	\item \textbf{Max-Ebene:} Der Max-Spieler wählt den maximalen Wert. Auch hier werden durch Alpha-Beta-Schnitte (mit $\times$ markiert) einige Äste nicht weiter untersucht, da sie das Endergebnis nicht mehr beeinflussen können. 
+%	\begin{itemize} \item z.B der linke Max-Knoten wählt $\max(5, 4) = 5$  
+%	\end{itemize}
+%	 \end{enumerate}
+%
+%\subsection*{Optimale Entscheidung}
+%Schließlich wählt der Wurzelknoten (MAX) den Wert 6 als Maximum der drei darunterliegenden Werte. Durch Alpha-Beta-Pruning werden einige Zweige nicht weiter untersucht, da sie das Endergebnis nicht mehr beeinflussen können, was die Effizienz des Algorithmus erhöht. Der optimale Spielwert beträgt 6 und wird über den mittleren Pfad erreicht.
+%
+%\subsection*{Vorteile des Alpha-Beta-Algorithmus}
+%
+%Durch das Alpha-Beta-Pruning werden unnötige Berechnungen vermieden:
+%\begin{itemize}
+%	\item Der Algorithmus durchsucht nur jene Zweige, die potenziell zu besseren Ergebnissen führen.
+%	\item Dies erhöht die Effizienz und ermöglicht es, tiefere Suchbäume mit derselben Rechenleistung zu analysieren\autocites{monien_alphabeta-algorithmus_2008}.
+%\end{itemize}
