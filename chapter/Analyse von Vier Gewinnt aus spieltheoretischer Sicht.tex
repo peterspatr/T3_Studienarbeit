@@ -49,10 +49,11 @@ In dieser Form wird ein Spielbaum verwendet, der aus Knoten und Kanten besteht \
 Der Baum beginnt mit einem Wurzelknoten, hier ist es ein leeres Spielfeld mit 42 freien Feldern. Die Verbindungen zwischen den Knoten, auch Kanten genannt, stellen die möglichen Züge für den Spieler dar. Die Knoten, an denen Kanten zusammenlaufen, repräsentieren eine Entscheidung eines Spielers. Die Knoten am Ende zeigen mögliche Ausgänge für das Spiel an.
 Bei Vier Gewinnt stellt jede Ebene des Spielbaums einen Spielzug dar. Pro Zug gibt es immer sieben Möglichkeiten, den Spielstein zu platzieren. Das bedeutet, von jedem Knoten gehen sieben Kanten weg. Allerdings ist der Baum durch die Spielfeldgröße auf 42 mögliche Züge begrenzt.\\
 Um die Extensivform praktisch nutzen zu können, werden Vereinfachungen und Optimierungen durchgeführt. Eine Möglichkeit ist es, nutzlose Züge wegzulassen. Dadurch soll der Spielbaum vereinfacht werden und sich besser für Analysen eignen \autocite{ruile2009viergewinnt}.  
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.9\linewidth]{"images/Baum2}
-	\caption[Spielbaum nach dem 4. Zug. Quelle: \cite{vandewiele2017}]{Schematische Darstellung des Spielbaum nach dem 4. bis zum 7. Zug}
+	\caption[Spielbaum nach dem 4. Zug. Quelle: ]{Schematische Darstellung des Spielbaum nach dem 4. bis zum 7. Zug  \autocite{vandewiele2017}}
 	\label{fig:Baum2}
 \end{figure}
 
