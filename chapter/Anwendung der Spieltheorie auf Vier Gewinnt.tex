@@ -72,7 +72,7 @@ Eine Bewertungsfunktion ist entscheidend für die Strategie. Sie schätzt den We
 \section*{4. Alpha-Beta-Algorithmus implementieren}
 	Der Alpha-Beta-Algorithmus wird verwendet, um den besten Zug zu berechnen, indem der Suchbaum effizient durchsucht wird. 
     Es geht darum, den besten Zug auszuwählen, basierend auf einer bestimmten Spielsituation und der Tiefe. Der Alpha-Beta-Algorithmus durchsucht den Entscheidungsbaum bis z.B. zur Tiefe 4 und nutzt alpha und beta, um unnötige Pfade auszulassen. maximizingPlayer=True gibt an, ob der Spieler seinen Vorteil maximiert.
-\begin{lstlisting}[language=Python, caption=Alpha-Beta Algorithmus - Kurzer Überblick]
+\begin{lstlisting}[language=Python, caption=Alpha-Beta Algorithmus - Überblick]
 	# Alpha-Beta Algorithmus in Aktion
 	bester_Zug = alpha_beta(board, Tiefe=4, alpha=-float('inf'), beta=float('inf'), maximizingPlayer=True)
 	print(f"Bester Zug: Spalte {bester_Zug}")
@@ -117,7 +117,7 @@ Die Funktion Endzustand\_erreicht überprüft, ob ein Endzustand in einem Spiel 
 
 \begin{lstlisting}[language=Python, caption=Erkennung des Endzustands]
 def Endzustand_erreicht(board):
-return Spieler_gewinnt(board) or Board_voll(board[0][col] != 0 for col in range(7))
+return Spieler_gewinnt(board) or Board_voll(board[0][spalte] != 0 for spalte in range(7))
 \end{lstlisting}
 
 \section*{7. Spielstrategie optimieren}
