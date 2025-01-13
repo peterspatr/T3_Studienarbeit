@@ -5,9 +5,9 @@ Die Analyse von 4Gewinnt aus der Perspektive der Spieltheorie zeigt eine Reihe v
 
 Ein wichtiges Grundprinzip ist die Bedeutung des ersten Zuges. Es wurde festgestellt, dass der erste Spieler, wenn er perfekt spielt, immer gewinnen kann – vorausgesetzt, er wählt den besten Eröffnungszug. Der optimale Zug ist dabei, den ersten Stein in die Mitte zu setzen. Diese Eröffnung ermöglicht die beste Kontrolle über das Spielbrett und eröffnet viele Möglichkeiten für offensive und defensive Züge. Zieht der erste Spieler jedoch in eine der angrenzenden Spalten, führen beide Spieler bei optimalem Spiel zu einem Unentschieden. Alle anderen Eröffnungszüge gelten als weniger effektiv und führen, wenn der Gegner ebenfalls perfekt spielt, unweigerlich zur Niederlage des ersten Spielers.
 
-Ein weiteres zentrales Prinzip ist die Kontrolle des Zentrums, die eine entscheidende Rolle spielt. Die Kontrolle über die mittleren drei Spalten (insbesondere c, d und e) ist strategisch besonders wichtig, da sie die besten Chancen für horizontale, vertikale und diagonale Gewinnreihen bietet. Auch die Spalten b und f – die zweite und vorletzte Spalte – sind wichtig, denn ohne sie kann der Spieler keine vollständigen diagonalen oder horizontalen Viererreihen bilden. Diese Kontrolle hilft nicht nur beim eigenen Spielaufbau, sondern schränkt auch die Möglichkeiten des Gegners ein.
+Ein weiteres zentrales Prinzip ist die Kontrolle des Zentrums, die eine entscheidende Rolle spielt. Die Kontrolle über die mittleren drei Spalten (insbesondere 3, 4 und 5) ist strategisch besonders wichtig, da sie die besten Chancen für horizontale, vertikale und diagonale Gewinnreihen bietet. Auch die Spalten 2 und 5 – die zweite und vorletzte Spalte – sind wichtig, denn ohne sie kann der Spieler keine vollständigen diagonalen oder horizontalen Viererreihen bilden. Diese Kontrolle hilft nicht nur beim eigenen Spielaufbau, sondern schränkt auch die Möglichkeiten des Gegners ein.
 
-Im Laufe des Spiels kommen zudem fortgeschrittene taktische Elemente ins Spiel. Eine wichtige Taktik ist die Schaffung von Zugzwang-Situationen, in denen der Gegner gezwungen wird, einen Zug zu machen, der seine eigene Position schwächt. Diese Situationen sind besonders am Ende des Spiels von Bedeutung, wenn nur noch wenige Felder zur Verfügung stehen und der Druck auf beide Spieler steigt. Eine weitere wichtige Taktik sind Fallenkombinationen, bei denen der Gegner durch clevere Kombinationen von Bedrohungen in eine Falle gelockt wird. Besonders wirkungsvoll sind Doppelfallen, bei denen zwei gleichzeitige Drohungen entstehen, die der Gegner nicht gleichzeitig abwehren kann. Auch Auffüllfallen sind relevant: Hier zwingt ein Spieler den Gegner durch einen Mangel an freien Feldern dazu, einen entscheidenden Stein in eine vorbereitete Blockade zu setzen.
+Im Laufe des Spiels kommen zudem fortgeschrittene taktische Elemente ins Spiel. Eine wichtige Taktik ist die Schaffung von Zugzwang-Situationen, in denen der Gegner gezwungen wird, einen Zug zu machen, der seine eigene Position schwächt. Diese Situationen sind besonders am Ende des Spiels von Bedeutung, wenn nur noch wenige Felder zur Verfügung stehen und der Druck auf beide Spieler steigt. Eine weitere wichtige Taktik sind Fallenkombinationen, bei denen der Gegner durch clevere Kombinationen von Bedrohungen in eine Falle gelockt wird. Besonders wirkungsvoll sind Doppelfallen, bei denen zwei gleichzeitige Drohungen entstehen, die der Gegner nicht gleichzeitig abwehren kann. Auch Auffüllfallen sind relevant: Hier zwingt ein Spieler den Gegner durch einen Mangel an freien Feldern dazu, einen entscheidenden Stein in eine vorbereitete Blockade zu setzen\autocites{Winter2019}.
 
 Die spieltheoretische Analyse von „Vier Gewinnt“ wurde durch mathematische und computerbasierte Methoden weiter vertieft. Unabhängig voneinander fanden zwei Forscher eine vollständige Lösung für das Spiel. Victor Allis entwickelte 1988 einen speziellen Regelsatz zur systematischen Analyse, während James D. Allen 1990 Computerprogramme einsetzte, um das Spiel vollständig zu berechnen. Beide kamen unabhängig zum gleichen Schluss: Der erste Spieler kann bei optimalem Spiel und einer Eröffnung in der Mitte immer gewinnen. Diese Erkenntnis hat nicht nur wissenschaftliche Bedeutung, sondern bildet auch die Basis für die Entwicklung von Algorithmen, die in Computerprogrammen oder Robotersystemen verwendet werden, um das Spiel optimal zu spielen. \autocites{wikipedia_vier_gewinnt}.
 	
@@ -249,7 +249,7 @@ Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.7\linewidth]{images/Minimax.svg}
-	\caption[Minimax-Suchbaum: ]{Minimax-Suchbaum mit einer Tiefe von 4 \autocite{Wikipedia:Minimax}}
+	\caption[Minimax-Suchbaum: \cite{Wikipedia:Minimax}]{Minimax-Suchbaum mit einer Tiefe von 4}
 	\label{fig:minimax}
 \end{figure}
 
@@ -285,7 +285,7 @@ Der optimale Zug für Max ist die rechte Verzweigung, die zum Wert -7 führt. Ob
 
 \subsection{AlphaBeta-Algorithmus}
 
-er Alpha-Beta-Algorithmus ist eine cleverere Variante des Minimax-Algorithmus, die dessen Leistung deutlich verbessert. Er arbeitet so, dass er bestimmte Spielzüge, die für die finale Entscheidung unwichtig sind, einfach ignoriert. Dadurch kann der Alpha-Beta-Algorithmus die Anzahl der Knoten, die im Spielbaum bewertet werden müssen, erheblich reduzieren. Das ist besonders hilfreich in ressourcenbegrenzten Umgebungen, wie zum Beispiel bei einem LEGO Spike Roboter, der nur begrenzte Rechenleistung hat.
+Der Alpha-Beta-Algorithmus ist eine cleverere Variante des Minimax-Algorithmus, die dessen Leistung deutlich verbessert. Er arbeitet so, dass er bestimmte Spielzüge, die für die finale Entscheidung unwichtig sind, einfach ignoriert. Dadurch kann der Alpha-Beta-Algorithmus die Anzahl der Knoten, die im Spielbaum bewertet werden müssen, erheblich reduzieren. Das ist besonders hilfreich in ressourcenbegrenzten Umgebungen, wie zum Beispiel bei einem LEGO Spike Roboter, der nur begrenzte Rechenleistung hat.
 
 Obwohl der Alpha-Beta-Algorithmus die gleichen Berechnungen wie der Minimax-Algorithmus anstellt, nutzt er zusätzlich zwei Parameter, Alpha und Beta. Diese helfen, überflüssige Berechnungen zu vermeiden und machen den Prozess effizienter:
 
@@ -304,7 +304,7 @@ Die Anwendung des Alpha-Beta-Algorithmus auf 4Gewinnt bietet mehrere Vorteile:
 \begin{itemize}
 	\item \textbf{Effizienz}: Der Algorithmus reduziert die Anzahl der Knoten, die bewertet werden müssen, erheblich. Dies ermöglicht die Analyse tieferer Spielbäume mit derselben Rechenleistung.
 	\item \textbf{Flexibilität}: Der Algorithmus lässt sich ganz einfach an die speziellen Bewertungsfunktionen von 4Gewinnt anpassen. So kann er beispielsweise Reihen, Spalten und Diagonalen bewerten.
-	\item \textbf{Optimierung für begrenzte Ressourcen}: Ein LEGO Spike Roboter hat begrenzte Rechen- und Speicherkapazitäten. Der Alpha-Beta-Algorithmus ermöglicht es, in Echtzeit Züge zu berechnen, ohne den Roboter zu überlasten.
+	\item \textbf{Optimierung für begrenzte Ressourcen}: Ein LEGO Spike Roboter hat begrenzte Rechen- und Speicherkapazitäten. Der Alpha-Beta-Algorithmus ermöglicht es, in Echtzeit Züge zu berechnen, ohne den Roboter zu überlasten \autocites{monien_alphabeta-algorithmus_2008}.
 \end{itemize}
 
 \section*{Beispiel: Alpha-Beta-Suchbaum}
@@ -313,8 +313,8 @@ Im Folgenden wird ein einfacher Suchbaum dargestellt, der die Funktionsweise des
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\linewidth]{images/AB_pruning.svg}
-	\caption[Alpha-Beta-Suchbaum: ]{Alpha-Beta-Suchbaum mit einer Tiefe von 4 \autocite{Wikipedia:AlphaBeta}}
+	\includegraphics[width=0.6\linewidth]{images/AB_pruning.svg}
+	\caption[Alpha-Beta-Suchbaum: \cite{Wikipedia:AlphaBeta}]{Alpha-Beta-Suchbaum mit einer Tiefe von 4}
 	\label{fig:abpruning}
 \end{figure}
 
@@ -336,7 +336,7 @@ Schließlich wählt der Wurzelknoten (MAX) den Wert 6 als Maximum der drei darun
 Durch das Alpha-Beta-Pruning werden unnötige Berechnungen vermieden:
 \begin{itemize}
 	\item Der Algorithmus durchsucht nur jene Zweige, die potenziell zu besseren Ergebnissen führen.
-	\item Dies erhöht die Effizienz und ermöglicht es, tiefere Suchbäume mit derselben Rechenleistung zu analysieren.
+	\item Dies erhöht die Effizienz und ermöglicht es, tiefere Suchbäume mit derselben Rechenleistung zu analysieren \autocites{monien_alphabeta-algorithmus_2008}.
 \end{itemize}
 
 %<<<<<<< HEAD
