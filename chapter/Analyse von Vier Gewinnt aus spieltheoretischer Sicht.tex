@@ -6,14 +6,14 @@ Die spieltheoretische Analyse des Spiels Vier Gewinnt erfordert eine systematisc
 
 
 
-In der Normalform-Darstellung oder auch Normalform genannt, wird das Spiel als Zwei-Personen-Nullsummenspiel charakterisiert. Das bedeutet, wenn ein Spieler gewinnt ,verliert der andere automatisch . Das Spiel wird in der Normalform rein statisch beschrieben und besteht allgemein aus folgenden Elementen\autocite{gabler_normalform}:
+In der Normalform-Darstellung oder auch Normalform genannt, wird das Spiel als Zwei-Personen-Nullsummenspiel charakterisiert. Das bedeutet, wenn ein Spieler gewinnt, verliert der andere automatisch . Das Spiel wird in der Normalform rein statisch beschrieben und besteht allgemein aus folgenden Elementen\autocite{gabler_normalform}:
 \begin{itemize}
 	\item Einer Menge Spieler $(I = {1, ..., i, ..., n})$ 
 	\\ Der Wert $I$  gibt die Anzahl der Teilnehmer an.
 	
-	\item Für jeden Spieler i eine Menge von Strategien $(S_i)$
-	\\$(S_i)$ entspricht der Strategiemenge des Spielers$i$, aus dieser er seine Züge wählen kann.
-	\item Für jeden Spieler i eine Auszahlungsfunktion/ Nutzenfunktion $(u_i)$
+	\item Für jeden Spieler $i$ eine Menge von Strategien $(S_i)$
+	\\$(S_i)$ entspricht der Strategiemenge des Spielers $i$, aus dieser er seine Züge wählen kann.
+	\item Für jeden Spieler $i$ eine Auszahlungsfunktion/ Nutzenfunktion $(u_i)$
 	\\Hierbei wird jeder möglichen Strategiekombination aller Spieler einen reellen Zahlenwert zugeordnet. 
 	\\  \begin{align}
 		u_i &= \sum S_i \rightarrow \mathbb{R}^{n}  
@@ -21,7 +21,7 @@ In der Normalform-Darstellung oder auch Normalform genannt, wird das Spiel als Z
 \end{itemize}
 
 Ist die Normalform endlich und überschaubar, kann sie auch in einer Matrix dargestellt werden.
-Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat. Durch die sehr große Anzahl an Strategien ist es nicht mehr überschaubar und daher eher weniger geeignet.
+Die Matrix muss dabei die verschiedenen Spielsituationen und deren Ausgänge abbilden, wobei jeder Spieler in seiner Zugfolge bis zu sieben verschiedene Strategien pro Zug zur Verfügung hat. Durch die sehr große Anzahl an Strategien, bei 4Gewinnt, ist es nicht mehr überschaubar und daher eher weniger geeignet.
 %*************************************************************************************************************************
 \section{Komplexität des Spielbaums}
 Die Komplexität des Spielbaums ist beträchtlich und wird oft als ,,mittlere Komplexität'' beschrieben. Die liegt daran, dass es eine große Anzahl an möglichen Spielzuständen gibt, aber das Spiel dennoch lösbar ist.\\
