@@ -1,0 +1,18 @@
+[0] Config.pm:307> INFO - This is Biber 2.19
+[0] Config.pm:310> INFO - Logfile is 'T3_3100_Studienarbeit.blg'
+[135] biber-darwin:340> INFO - === Fri Dec 27, 2024, 13:42:20
+[169] Biber.pm:419> INFO - Reading 'T3_3100_Studienarbeit.bcf'
+[353] Biber.pm:979> INFO - Found 1 citekeys in bib section 0
+[378] Biber.pm:4419> INFO - Processing section 0
+[394] Biber.pm:4610> INFO - Looking for bibtex file 'literature/literatur1.bib' for section 0
+[395] bibtex.pm:1713> INFO - LaTeX decoding ...
+[404] bibtex.pm:1519> INFO - Found BibTeX data source 'literature/literatur1.bib'
+[405] Biber.pm:4610> INFO - Looking for bibtex file 'literature/Manuelle.bib' for section 0
+[406] bibtex.pm:1713> INFO - LaTeX decoding ...
+[409] bibtex.pm:1519> INFO - Found BibTeX data source 'literature/Manuelle.bib'
+[455] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[455] UCollate.pm:68> INFO - Overriding locale 'de-DE' defaults 'variable = shifted' with 'variable = non-ignorable'
+[455] Biber.pm:4239> INFO - Sorting list 'anyt/global//global/global' of type 'entry' with template 'anyt' and locale 'de-DE'
+[455] Biber.pm:4245> INFO - No sort tailoring available for locale 'de-DE'
+[457] bbl.pm:660> INFO - Writing 'T3_3100_Studienarbeit.bbl' with encoding 'UTF-8'
+[458] bbl.pm:763> INFO - Output to T3_3100_Studienarbeit.bbl

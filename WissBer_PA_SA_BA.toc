@@ -1,0 +1,32 @@
+\babel@toc {ngerman}{}\relax 
+\contentsline {chapter}{\numberline {1}Einleitung}{1}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Spieltheorie}{2}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Vorgehen}{3}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Vorgehensweise}{3}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Anforderung}{4}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Konzept}{4}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Nutzwertanalyse}{4}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Zeitplan}{4}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Umsetzung und Ergebnisse}{5}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Voraussetzungen}{5}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Aufbau}{6}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Software}{6}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Herausforderung der Programmierung}{6}{subsection.4.3.1}%
+\contentsline {chapter}{\numberline {5}Zusammenfassung}{7}{chapter.5}%
+\contentsline {chapter}{\nonumberline Abbildungsverzeichnis}{8}{chapter*.6}%
+\contentsline {chapter}{\nonumberline Tabellenverzeichnis}{9}{chapter*.7}%
+\contentsline {chapter}{\nonumberline A Ergänzungen}{10}{chapter*.8}%
+\contentsline {section}{\numberline {A.1}Details zu bestimmten theoretischen Grundlagen}{10}{section.A.1}%
+\contentsline {section}{\numberline {A.2}Weitere Details, welche im Hauptteil den Lesefluss behindern}{10}{section.A.2}%
+\contentsline {chapter}{\nonumberline B Details zu Laboraufbauten und Messergebnissen}{11}{chapter*.9}%
+\contentsline {section}{\numberline {B.1}Versuchsanordnung}{11}{section.B.1}%
+\contentsline {section}{\numberline {B.2}Liste der verwendeten Messgeräte}{11}{section.B.2}%
+\contentsline {section}{\numberline {B.3}Übersicht der Messergebnisse}{11}{section.B.3}%
+\contentsline {section}{\numberline {B.4}Schaltplan und Bild der Prototypenplatine}{11}{section.B.4}%
+\contentsline {chapter}{\nonumberline C Zusatzinformationen zu verwendeter Software}{12}{chapter*.10}%
+\contentsline {section}{\numberline {C.1}Struktogramm des Programmentwurfs}{12}{section.C.1}%
+\contentsline {section}{\numberline {C.2}Wichtige Teile des Quellcodes}{12}{section.C.2}%
+\contentsline {chapter}{\nonumberline D Datenblätter}{13}{chapter*.11}%
+\contentsline {section}{\numberline {D.1}9.Oktober.2024}{18}{section.D.1}%
+\protect \contentsline {chapter}{Sachwortverzeichnis}{20}{table.caption.15}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
