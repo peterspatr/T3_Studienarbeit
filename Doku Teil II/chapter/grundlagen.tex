@@ -1,15 +1,53 @@
 \chapter{Grundlagen}
-\label{cha:Grundlagen}
-%Zielgerichtete theoretische Grundlagen, sowohl fachliche, wie auch methodische.
-%
-%Zu den Grundlagen gehören z.~B. auch Details zur Problemstellung, der Stand der Technik und weitere Grundlagen, welche zur Konzeptausarbeitung, Umsetzung und Verifikation erforderlich sind.
-%
-%Grundlagen haben immer einen Bezug zu den nachfolgenden Kapiteln. Diesen Bezug sollte man gelegentlich explizit herstellen, damit bereits in diesem Kapitel klar ist, wo und für was die Grundlagen gebraucht und angewandt werden.
-
-\section{Vier-Gewinnt}
-%grober Spielablauf
-
-\section{Python}
-\section{Lego Spike}
+\section{Mikropython}
 
 
+MicroPython ist eine für Mikrocontroller optimierte Version der Programmiersprache Python. Im Gegensatz zur klassischen Desktop-Variante ist MicroPython ressourcenschonend und kann direkt auf eingebetteten Systemen wie dem Großen LEGO® Technic Hub ausgeführt werden. LEGO® Education SPIKE™ Prime nutzt MicroPython als Grundlage für die textbasierte Programmierung außerhalb der Standard-GUI, was besonders fortgeschrittenen Nutzern und Entwicklern zusätzliche Freiheiten eröffnet.
+
+Der Große LEGO® Technic Hub ist mit einem leistungsfähigen 32-Bit ARM Cortex-M4 Mikrocontroller ausgestattet, der mit einer Taktfrequenz von 100 MHz arbeitet. Darüber hinaus verfügt der Hub über 1 MB Flash-Speicher und 128 KB RAM, was für viele schulische und experimentelle Anwendungen mehr als ausreichend ist. Sechs Anschlüsse für Motoren und Sensoren sowie Bluetooth Low Energy (BLE) zur drahtlosen Kommunikation machen den Hub vielseitig einsetzbar.
+
+Durch den Einsatz von MicroPython lassen sich komplexere Algorithmen – wie etwa Spiel-KI (z.\,B. Minimax bei 4-Gewinnt), Sensorfusion oder datenbasierte Steuerungen – effizient umsetzen. Der Zugriff auf Motoren, Sensoren und interne Funktionen ist über eine dedizierte MicroPython-API möglich, was die Programmierung stark flexibilisiert. Insgesamt verbindet MicroPython die Einfachheit von Python mit der unmittelbaren Steuerung von Hardwarekomponenten und macht den Großen Technic Hub zu einer leistungsfähigen Plattform für robotische und algorithmische Experimente.
+
+\section{der Mikrocontoller}
+\subsection*{LEGO® spike Hub:}
+Der Hub ist das Steuerungselement des Spike Prime Systems. Er umfasst sechs Ein-/Ausgänge, welche den Anschluss von Peripheriegeräten, wie Sensorik und Aktorik, ermöglicht. Mit einem Micro-USB-Anschluss und Bluetooth wird die Kommunikation mit kompatiblen Endgeräten hergestellt. Der Hub besitzt ein integriertes MicroPython-Betriebssystem mit einem 100-MHz-Prozessor. 
+Weitere Ausstattungen sind:
+\begin{itemize}
+	\item Individuell anpassbaren Lichtmatrix (5x5)
+	\item Aufzeigen von wichtigen Informationen und Statusmeldungen
+	\item Tasten ermöglichen eine einfache Navigation und Steuerung durch Menüs 
+	\item Lautsprecher
+	\item 6-achsigen Kreiselsensor
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{images/Hub}
+	\caption{großer LEGO® Technic Hub}
+	\label{fig:hub}
+\end{figure}
+
+
+
+\section{Sensorik}
+\subsection*{LEGO® Technic Farbsensor:}
+Dieser Sensor kann durch die Intensität des reflektierten Lichts, welche er durch den eingebauten Lichtring erzeugt, bis zu acht Farben erkennen und unterscheiden (erkennbare Farben: schwarz, blau, rot, weiß, braun, gelb, pink und grün).  Er wird vor allem bei Anwendungen, wie Sortieren nach Farben, Linienverfolgung von farbigen Streifen und zum Ausführen von farbcodierten Befehlen eingesetzt. Um die Farberkennung optimal auf die entsprechende Umgebung anzupassen, wird das Umgebungslicht zuvor ausgewertet.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{images/Farbsensor}
+	\caption{LEGO® Technic Farbsensor}
+	\label{fig:farbsensor}
+\end{figure}
+
+
+\section{Aktorik}
+\subsection{LEGO® Technic Großer Winkelmotor}
+Für die Bewegungssteuerung wird dieser Winkelmotor mit hoher Drehkraft und präziser Steuerung verwendet. Dieser Motor ist dafür ausgelegt, um schwere und komplexe Konstruktionen exakt in Geschwindigkeit und Position verfahren zu können. Dies wird durch den internen Winkel- und Rotationssensor ermöglicht. Der Anwendungsbereich ist vielseitig, unter anderem wird dies als Antrieb von Rädern, Gelenke, Greifarme, Hebevorrichtungen und Drehscheibe angewandt. Vor allem für Aufgaben, welche eine genau und wiederholbare Aktion ausüben müssen.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{images/Motor}
+	\caption{LEGO® Technic Großer Winkelmotor}
+	\label{fig:motor}
+\end{figure}
