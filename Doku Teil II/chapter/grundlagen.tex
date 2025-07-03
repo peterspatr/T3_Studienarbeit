@@ -1,16 +1,18 @@
 \chapter{Grundlagen}
 In diesem Kapitel werden die zentralen Begriffe und Methoden ausführlich vorgestellt. So wird das notwendige Grundlagenwissen vermittelt, auf dem die weitere Ausarbeitung aufbaut.
 
+\section{Vier-Gewinnt}
+Das Spiel Vier-Gewinnt wird auf einem Spielfeldraster mit sechs Zeilen und sieben Spalten gespielt. Zum Spielbeginn erhält jeder Spieler 21 Spielchips, entweder Rote oder Gelbe. Ziel des Spiels ist es, möglichst schnell vier Chips der eigenen Farbe in eine Reihe zu bringen – waagrecht, senkrecht oder diagonal. Die Spieler werfen abwechselnd ihre Chips in das Spielfeld, bis entweder ein Spieler das Ziel erreicht oder alle 42 Felder belegt sind \autocite{Hasbro.2020}.
+
 \section{Mikropython}
-MicroPython ist eine speziell für Mikrocontroller angepasste Version der Programmiersprache Python. Im Gegensatz zur Desktop-Variante lässt sich MicroPython-Code direkt auf Hardware mit begrenzten Ressourcen ausführen.\autocite{energy_responsiveness2023}\autocite{Plauska2023}\
+MicroPython ist eine speziell für Mikrocontroller angepasste Version der Programmiersprache Python. Im Gegensatz zur Desktop-Variante lässt sich MicroPython-Code direkt auf Hardware mit begrenzten Ressourcen ausführen\autocite{energy_responsiveness2023}\autocite{Plauska2023}.\
 Im Unterschied zu Standard-Python 3 bringt MicroPython allerdings nur einen Teil der gewohnten Python-Standardbibliotheken mit. Wodurch es weniger Speicherplatz benötigt.
-Zudem besitzt MircoPython einen eigenen Interpreter, der direkt auf einem Mirkocontroller ausgeführt werden kann.
-Dadurch eignet sich MicroPython besonders gut für die Programmierung des LEGO Spike Hubs.\autocite{bell2024micropython}
+Zudem besitzt MicroPython einen eigenen Interpreter, der direkt auf einem Mikrokontroller ausgeführt werden kann.
+Dadurch eignet sich MicroPython besonders gut für die Programmierung des LEGO Spike Hubs\autocite{bell2024micropython}.
 
 
 
-\section{der Mikrocontoller}
-\subsection*{LEGO® spike Hub:}
+\section{LEGO® spike Hub:}
 Der Große LEGO® Technic Hub ist mit einem leistungsfähigen 32-Bit ARM Cortex-M4 Mikrocontroller ausgestattet, der mit einer Taktfrequenz von 100 MHz arbeitet. Darüber hinaus verfügt der Hub über 1 MB Flash-Speicher und 128 KB RAM, was für viele schulische und experimentelle Anwendungen mehr als ausreichend ist. Sechs Anschlüsse für Motoren und Sensoren sowie Bluetooth Low Energy (BLE) zur drahtlosen Kommunikation machen den Hub vielseitig einsetzbar.
 
 Der Hub ist das Steuerungselement des Spike Prime Systems. Er umfasst sechs Ein-/Ausgänge, welche den Anschluss von Peripheriegeräten, wie Sensorik und Aktorik, ermöglicht. Mit einem Micro-USB-Anschluss und Bluetooth wird die Kommunikation mit kompatiblen Endgeräten hergestellt. Der Hub besitzt ein integriertes MicroPython-Betriebssystem mit einem 100-MHz-Prozessor. 
