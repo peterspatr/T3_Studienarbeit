@@ -12,18 +12,18 @@ Dadurch eignet sich MicroPython besonders gut für die Programmierung des LEGO S
 
 
 
-\section{LEGO® spike Hub:}
-Der Große LEGO® Technic Hub ist mit einem leistungsfähigen 32-Bit ARM Cortex-M4 Mikrocontroller ausgestattet, der mit einer Taktfrequenz von 100 MHz arbeitet. Darüber hinaus verfügt der Hub über 1 MB Flash-Speicher und 128 KB RAM, was für viele schulische und experimentelle Anwendungen mehr als ausreichend ist. Sechs Anschlüsse für Motoren und Sensoren sowie Bluetooth Low Energy (BLE) zur drahtlosen Kommunikation machen den Hub vielseitig einsetzbar.
+\section{LEGO® Spike Hub:}
+Der LEGO Spike Hub ist das Herzstück des LEGO Spike Prime Sets. Er dient als programmierbare Steuereinheit mit sechs LPF2 input/output ports, an die alle LEGO-Sensoren und -Motoren angeschlossen werden können. Im Inneren arbeitet ein eigener Prozessor (100 MHz ARM Cortex-M4), unterstützt von 320 KB RAM und 1 MB Flash-Speicher. Die Programmierung des LEGO Spike Hubs erfolgt in der Sprache MicroPython. LEGO stellt dafür eine eigene Entwicklungsumgebung (IDE) bereit, mit dieser der Hub einfach programmiert werden kann. Hierfür kann der Hub über USB oder via Bluetooth mit dem Computer verbunden werden. Die Steuereinheit wird über einen  wiederaufladbarer Lithium-Ionen-Akku mit Strom und Spannung versorgt \autocite{lego2020techniclargehub}.
 
-Der Hub ist das Steuerungselement des Spike Prime Systems. Er umfasst sechs Ein-/Ausgänge, welche den Anschluss von Peripheriegeräten, wie Sensorik und Aktorik, ermöglicht. Mit einem Micro-USB-Anschluss und Bluetooth wird die Kommunikation mit kompatiblen Endgeräten hergestellt. Der Hub besitzt ein integriertes MicroPython-Betriebssystem mit einem 100-MHz-Prozessor. 
-Weitere Ausstattungen sind:
+Weitere technische Merkmale des LEGO Spike Hubs sind:
 \begin{itemize}
 	\item Individuell anpassbaren Lichtmatrix (5x5)
-	\item Aufzeigen von wichtigen Informationen und Statusmeldungen
-	\item Tasten ermöglichen eine einfache Navigation und Steuerung durch Menüs 
 	\item Lautsprecher
-	\item 6-achsigen Kreiselsensor
-\end{itemize}
+	\item Taster mit integrierter Statusleuchte 
+	\item Tasten für die Navigation und Steuerung durch Menüs am Hub 
+	\item Lautsprecher
+	\item sechsachsiger Gyrosensor 
+\end{itemize} 
 
 \begin{figure}[H]
 	\centering
@@ -34,7 +34,7 @@ Weitere Ausstattungen sind:
 
 
 
-\section{Sensorik}
+\section{Sensorik} %Ändern
 \subsection*{LEGO® Technic Farbsensor:}
 Dieser Sensor kann durch die Intensität des reflektierten Lichts, welche er durch den eingebauten Lichtring erzeugt, bis zu acht Farben erkennen und unterscheiden (erkennbare Farben: schwarz, blau, rot, weiß, braun, gelb, pink und grün).  Er wird vor allem bei Anwendungen, wie Sortieren nach Farben, Linienverfolgung von farbigen Streifen und zum Ausführen von farbcodierten Befehlen eingesetzt. Um die Farberkennung optimal auf die entsprechende Umgebung anzupassen, wird das Umgebungslicht zuvor ausgewertet.
 
@@ -46,7 +46,7 @@ Dieser Sensor kann durch die Intensität des reflektierten Lichts, welche er dur
 \end{figure}
 
 
-\section{Aktorik}
+\section{Aktorik} %Ändern
 \subsection{LEGO® Technic Großer Winkelmotor}
 Für die Bewegungssteuerung wird dieser Winkelmotor mit hoher Drehkraft und präziser Steuerung verwendet. Dieser Motor ist dafür ausgelegt, um schwere und komplexe Konstruktionen exakt in Geschwindigkeit und Position verfahren zu können. Dies wird durch den internen Winkel- und Rotationssensor ermöglicht. Der Anwendungsbereich ist vielseitig, unter anderem wird dies als Antrieb von Rädern, Gelenke, Greifarme, Hebevorrichtungen und Drehscheibe angewandt. Vor allem für Aufgaben, welche eine genau und wiederholbare Aktion ausüben müssen.
 
