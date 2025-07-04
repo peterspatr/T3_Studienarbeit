@@ -6,13 +6,13 @@ Das Spiel Vier-Gewinnt wird auf einem Spielfeldraster mit sechs Zeilen und siebe
 
 \section{Mikropython}
 MicroPython ist eine speziell für Mikrocontroller angepasste Version der Programmiersprache Python. Im Gegensatz zur Desktop-Variante lässt sich MicroPython-Code direkt auf Hardware mit begrenzten Ressourcen ausführen\autocite{energy_responsiveness2023}\autocite{Plauska2023}.\
-Im Unterschied zu Standard-Python 3 bringt MicroPython allerdings nur einen Teil der gewohnten Python-Standardbibliotheken mit. Wodurch es weniger Speicherplatz benötigt.
+Im Unterschied zu Standard-Python 3 bringt MicroPython allerdings nur einen Teil der gewohnten Python-Standardbibliotheken mit.\\ Wodurch es weniger Speicherplatz benötigt.
 Zudem besitzt MicroPython einen eigenen Interpreter, der direkt auf einem Mikrokontroller ausgeführt werden kann.
 Dadurch eignet sich MicroPython besonders gut für die Programmierung des LEGO Spike Hubs\autocite{bell2024micropython}.
 
 
 
-\section{LEGO® Spike Hub:}
+\section{LEGO Spike Hub:}
 Der LEGO Spike Hub ist das Herzstück des LEGO Spike Prime Sets. Er dient als programmierbare Steuereinheit mit sechs LPF2 input/output ports, an die alle LEGO-Sensoren und -Motoren angeschlossen werden können. Im Inneren arbeitet ein eigener Prozessor (100 MHz ARM Cortex-M4), unterstützt von 320 KB RAM und 1 MB Flash-Speicher. Die Programmierung des LEGO Spike Hubs erfolgt in der Sprache MicroPython. LEGO stellt dafür eine eigene Entwicklungsumgebung (IDE) bereit, mit dieser der Hub einfach programmiert werden kann. Hierfür kann der Hub über USB oder via Bluetooth mit dem Computer verbunden werden. Die Steuereinheit wird über einen  wiederaufladbarer Lithium-Ionen-Akku mit Strom und Spannung versorgt \autocite{lego2020techniclargehub}.
 
 Weitere technische Merkmale des LEGO Spike Hubs sind:
@@ -27,16 +27,18 @@ Weitere technische Merkmale des LEGO Spike Hubs sind:
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.4\linewidth]{images/Hub}
+	\includegraphics[width=0.75\linewidth]{images/Hub}
 	\caption{großer LEGO® Technic Hub}
 	\label{fig:hub}
 \end{figure}
 
+\section{Sensorik}
+\subsection{LEGO Spike Farbsensor}
+Dieser elektronische Farbsensor wurde speziell für LEGO Spike entwickelt. Seine Abtastrate beträgt 1 kHz und er kann direkt am Hub angeschlossen werden. Der Sensor kann bis zu acht verschiedene Farben erkennen, darunter Schwarz, Blau, Rot, Weiß, Braun, Gelb, Pink und Grün. Außerdem misst er sowohl die Intensität des reflektierten Lichts als auch die des Umgebungslichts \autocite{lego2020colorsensor}\autocite{legoeducation2020spikesensors}.
 
+Für die Farberkennung erfasst der Sensor die Farbwerte sowohl im RGB- (Rot, Grün, Blau) als auch im HSV-Farbraum (hue = Farbton, saturation = Sättigung, value = Helligkeit). Die Messergebnisse werden als Ganzzahlen ausgegeben \autocite{lego2020colorsensor}.
 
-\section{Sensorik} %Ändern
-\subsection*{LEGO® Technic Farbsensor:}
-Dieser Sensor kann durch die Intensität des reflektierten Lichts, welche er durch den eingebauten Lichtring erzeugt, bis zu acht Farben erkennen und unterscheiden (erkennbare Farben: schwarz, blau, rot, weiß, braun, gelb, pink und grün).  Er wird vor allem bei Anwendungen, wie Sortieren nach Farben, Linienverfolgung von farbigen Streifen und zum Ausführen von farbcodierten Befehlen eingesetzt. Um die Farberkennung optimal auf die entsprechende Umgebung anzupassen, wird das Umgebungslicht zuvor ausgewertet.
+Zur Reflexionsmessung sendet der Sensor weißes Licht auf eine Oberfläche und misst das zurückgeworfene Licht. Diese Funktion wird häufig für Linienführung eingesetzt \autocite{betzold2025colorsensor}\autocite{lego2020colorsensor}.
 
 \begin{figure}[H]
 	\centering
