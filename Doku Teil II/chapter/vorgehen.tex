@@ -1,4 +1,88 @@
-\chapter{der Algorithmus}
+\chapter{Vorgehen}
+Im folgendem Kapitel wird auf die Planung des Vier-Gewinnt-Roboters eingegangen. Zunächst werden die Anforderungen definiert. Anschließend werden verschiedene Konzepte genauer betrachtet und miteinander verglichen.
+
+\section{Aufgabenpräzisierung}
+
+
+\section{Anforderungen an den Roboter}
+In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinnt-Roboter in einer Anforderungsliste zusammengetragen. Dabei wird zwischen Forderungen und Wünschen unterschieden. Anforderungen, die mit \textsl{\textbf{F}} gekennzeichnet sind, müssen unbedingt umgesetzt werden. Während hingegen Anforderungen, die mit \textsl{\textbf{W}} markiert sind, als Wünsche zu verstehen sind und nicht zwingend im System realisiert werden müssen.
+
+\begin{table}[h]
+	\centering
+	\caption{Anforderungstabelle für einen Vier-Gewinnt-Roboter}
+	\label{tab:Anforderungen}
+	\begin{tabular}{|p{1cm}|p{12cm}| p{1cm}|}
+		\hline
+		\textbf{Nr} & \textbf{Anforderung an das System} & \textbf{F/W} \\
+		\hline
+		\hline
+		- & Komplettes Spielfeld scannen & F\\
+		\hline
+		- & Das Ende des Spiels erkennen & F\\
+		\hline
+		- & Autonom fahren	& F\\
+		\hline
+		- &  Begrezungen des Spielfeld erkennen& F\\
+		\hline
+		- &Steine selber platzieren & F\\
+		\hline
+		- & Immer nur ein Stein pro Spielzug & F\\
+		\hline
+		-&  Abwarten bis der Gegner sein Zug beendet hat& F\\
+		\hline
+	
+		- & Nach jeden Zug rechts vom Spielfeld wegfahren  & F\\
+		\hline
+		- & maximal 90 Sekunden pro Spielzug  & F\\
+		\hline
+		- & optimalen Spielzug berechnen & F\\
+		\hline
+		- & Scannen bis ein neuer gegnerischer Stein erkannt wurde  &W\\
+		\hline
+		- & Volle Spalten überspringen & W\\
+		\hline
+		- & Wenn eine leere Zeile erkannt wurde zur nächsten Spalte wechseln & W\\
+		\hline
+		- &  & F\\
+		\hline
+		
+		
+		
+%		Physisches Spiel & Der Roboter muss in der Lage sein, auf einem echten Vier-Gewinnt-Brett Spielsteine zu platzieren. \\
+%		\hline
+%		Mechanik & Einfache, zuverlässige Mechanik zum Greifen, Transportieren und Einwerfen der Spielsteine in die gewünschte Spalte. \\
+%		\hline
+%		Brett-Erkennung & Das aktuelle Spielfeld muss erkannt werden, z.B. mit einer Kamera oder Sensoren, um die Position aller Steine zu erfassen. \\
+%		\hline
+%		Gegnerzug-Erkennung & Der Roboter muss erkennen, in welche Spalte der menschliche Spieler seinen Stein geworfen hat. \\
+%		\hline
+%		Künstliche Intelligenz & Implementierung eines Algorithmus (z.B. Minimax mit Alpha-Beta-Pruning), um den optimalen Zug zu berechnen. \\
+%		\hline
+%		Reaktionszeit & Der Roboter soll innerhalb weniger Sekunden nach dem gegnerischen Zug reagieren können. \\
+%		\hline
+%		Benutzerinteraktion & Möglichkeit, den Schwierigkeitsgrad einzustellen und das Spiel zu starten/abzubrechen. \\
+%		\hline
+%		Sicherheit & Der Roboter darf keine Gefahr für den Benutzer darstellen (z.B. Not-Aus, sichere Mechanik). \\
+%		\hline
+%		Kommunikation & Schnittstellen zur Steuerung und ggf. zur Anzeige von Statusinformationen (Display, LEDs, Sound). \\
+%		\hline
+%		Wartung & Der Roboter soll einfach zu warten und zu reinigen sein. \\
+%		\hline
+%		Mobilität (optional) & Der Roboter kann transportabel oder stationär ausgelegt sein. \\
+%		\hline
+
+% Legende direkt unter der Tabelle
+
+	\end{tabular}
+	  %\vspace{3mm}
+	\begin{minipage}{0.5\linewidth}
+		\small
+		\textbf{Legende:} \textbf{F} = Forderung, \textbf{W} = Wunsch,
+	\end{minipage}
+	
+\end{table}
+
+\section{der Algorithmus}
 \section*{Struktur und Funktionalität des Python-Codes für ein 4-Gewinnt-Spiel}
 
 \subsection*{1. Initialisierung und Konfiguration}

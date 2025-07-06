@@ -13,8 +13,8 @@ opponent_piece = -my_piece
 speed_DF = 230
 speed_A = 500
 speed_E = 600
-bewegung_weite_e = 97 # Schrittweite Motor E pro Zeile, ggf. kalibrieren!
-bewegung_weite_d = 73
+move_distance_e = 97 # Schrittweite Motor E pro Zeile, ggf. kalibrieren!
+move_distance_d = 73
 pause_motor_e = 1
 pause_motor_e_back = 2
 pause_motor_d = 1
@@ -214,8 +214,8 @@ while True:
         matrix_spalte = spielfeld_breite - 1 - spalte
         if letztes_spielfeld[spielfeld_hoehe-1][matrix_spalte] != 0:
             if spalte > 0:
-                motor.run_for_degrees(port.D, bewegung_weite_d, 170)
-                #motor.run_for_degrees(port.F, -bewegung_weite_d, 170)
+                motor.run_for_degrees(port.D, move_distance_d, 170)
+                #motor.run_for_degrees(port.F, -move_distance_d, 170)
                 time.sleep(pause_motor_d)
             continue
 
@@ -227,7 +227,7 @@ while True:
         if freie_zeile is None:
             continue
 
-        motor.run_for_degrees(port.E, bewegung_weite_e * (freie_zeile), speed_E)
+        motor.run_for_degrees(port.E, move_distance_e * (freie_zeile), speed_E)
         time.sleep(pause_motor_e)
         time.sleep(wartezeit_zeile)
 
@@ -246,21 +246,21 @@ while True:
             gegner_spalte = spalte
             time.sleep(1)
 
-        motor.run_for_degrees(port.E, -bewegung_weite_e * freie_zeile, speed_E)
+        motor.run_for_degrees(port.E, -move_distance_e * freie_zeile, speed_E)
         time.sleep(pause_motor_e_back)
 
         if gegner_stein_entdeckt:
             break
 
         if spalte > 0:
-            motor.run_for_degrees(port.D, bewegung_weite_d, speed_DF)
-       #     motor.run_for_degrees(port.F, -bewegung_weite_d, speed_DF)
+            motor.run_for_degrees(port.D, move_distance_d, speed_DF)
+       #     motor.run_for_degrees(port.F, -move_distance_d, speed_DF)
             time.sleep(pause_motor_d)
 
     if gegner_stein_entdeckt and gegner_spalte is not None and gegner_spalte != 0:
         schritte_rechts = gegner_spalte
-        motor.run_for_degrees(port.D, bewegung_weite_d * schritte_rechts, speed_DF)
-        #motor.run_for_degrees(port.F, -bewegung_weite_d * schritte_rechts, speed_DF)
+        motor.run_for_degrees(port.D, move_distance_d * schritte_rechts, speed_DF)
+        #motor.run_for_degrees(port.F, -move_distance_d * schritte_rechts, speed_DF)
         time.sleep(4)
 
     spielfeld_numeric = [[0 if x is None else x for x in row] for row in spielfeld]
@@ -283,8 +283,8 @@ while True:
 
     if best_col is not None and best_row is not None:
         physische_ziel_spalte = spielfeld_breite - 1 - best_col
-        motor.run_for_degrees(port.D, -bewegung_weite_d * physische_ziel_spalte, speed_DF)
-        #motor.run_for_degrees(port.F, bewegung_weite_d * physische_ziel_spalte, speed_DF)
+        motor.run_for_degrees(port.D, -move_distance_d * physische_ziel_spalte, speed_DF)
+        #motor.run_for_degrees(port.F, move_distancee_d * physische_ziel_spalte, speed_DF)
         time.sleep(pause_motor_d * 4)
         motor.run_for_degrees(port.A, -360, speed_A)
         time.sleep(3)
@@ -295,17 +295,17 @@ while True:
             print("🎉 Glückwunsch! Der Roboter hat das Spiel GEWONNEN!")
             print_spielfeld(spielfeld)
             sound.beep(440, 1000000, 100)
-            motor.run_for_degrees(port.D, -bewegung_weite_d * best_col, speed_DF)
-         #   motor.run_for_degrees(port.F, bewegung_weite_d * best_col, speed_DF)
+            motor.run_for_degrees(port.D, -move_distance_d * best_col, speed_DF)
+         #   motor.run_for_degrees(port.F, move_distance_d * best_col, speed_DF)
             time.sleep_ms(2500)
-            motor.run_for_degrees(port.D, -bewegung_weite_d * 3, speed_DF)
-          #  motor.run_for_degrees(port.F, bewegung_weite_d * 3, speed_DF)
+            motor.run_for_degrees(port.D, -move_distance_d * 3, speed_DF)
+          #  motor.run_for_degrees(port.F, move_distance_d * 3, speed_DF)
             sound.beep(0, 1000000, 100)
             break
     
        
-        motor.run_for_degrees(port.D, -bewegung_weite_d * best_col, speed_DF)
-        #motor.run_for_degrees(port.F, bewegung_weite_d * best_col, speed_DF)
+        motor.run_for_degrees(port.D, -move_distance_d * best_col, speed_DF)
+        #motor.run_for_degrees(port.F, move_distance_d * best_col, speed_DF)
     print_spielfeld(spielfeld)
     time.sleep_ms(2500)
     motor.run_for_degrees(port.D, -199 , speed_DF)
