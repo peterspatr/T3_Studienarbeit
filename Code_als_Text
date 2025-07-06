@@ -1,23 +1,33 @@
+
 import motor
 import color_sensor
 import color
 import time
-from hub import port
+import force_sensor
+from hub import port, sound
 
 # --- KONFIGURATION ---
-my_piece = -1# -1 = Rot, 1 = Gelb (KI-Spieler)
-opponent_piece = -my_piece# Automatisch gesetzt
+my_piece = 1# -1 = Rot, 1 = Gelb (KI-Spieler)
+opponent_piece = -my_piece
 
-bewegung_weite_e = 95    # Grad pro Zeilenschritt (Motor E)
-bewegung_weite_d = 72    # Grad pro Spaltenwechsel (Motor D)
-bewegung_weite_f = -72    # Grad pro Spaltenwechsel (Motor F, gegenläufig zu D)
-pause_motor_e = 1        # Wartezeit nach Zeilenbewegung
-pause_motor_e_back = 3    # Wartezeit nach Rückführung Motor E
-pause_motor_d = 1        # Wartezeit nach Spaltenwechsel
-spielfeld_breite = 7        # 7 Spalten
-spielfeld_hoehe = 6        # 6 Zeilen
+speed_DF = 230
+speed_A = 500
+speed_E = 600
+bewegung_weite_e = 97 # Schrittweite Motor E pro Zeile, ggf. kalibrieren!
+bewegung_weite_d = 73
+pause_motor_e = 1
+pause_motor_e_back = 2
+pause_motor_d = 1
+spielfeld_breite = 7
+spielfeld_hoehe = 6
+wartezeit_zeile = 1 # Wartezeit nach Erreichen der Zeile (in Sekunden)
 
-spielfeld = [[None for _ in range(spielfeld_breite)] for _ in range(spielfeld_hoehe)]
+# --- HILFSFUNKTIONEN ---
+def sensor_aktiviert():
+    try:
+        return force_sensor.force(port.C) > 30
+    except:
+        return False
 
 def update_spielfeld(zeile, spalte, erkannte_farbe):
     if erkannte_farbe in (color.RED, color.PURPLE, color.MAGENTA):
@@ -34,45 +44,6 @@ def print_spielfeld(spielfeld):
         zeile = spielfeld[zeile_idx]
         print(" ".join(symbol_map.get(feld, "?") for feld in zeile))
 
-# --- SCAN-LOGIK ---
-for spalte in range(spielfeld_breite - 1, -1, -1):
-    leere_erkannt = False
-    for zeile in range(spielfeld_hoehe):
-        if zeile > 0:
-            motor.run_for_degrees(port.E, bewegung_weite_e, 120)
-            time.sleep(pause_motor_e)
-        erkannte_farbe = color_sensor.color(port.B)
-        matrix_zeile = zeile
-        matrix_spalte = spielfeld_breite - 1 - spalte# Umrechnung auf Matrix-Spalte
-
-        if erkannte_farbe is None or erkannte_farbe == color.UNKNOWN:
-            for z in range(zeile, spielfeld_hoehe):
-                update_spielfeld(z, matrix_spalte, 0)
-            if zeile > 0:
-                motor.run_for_degrees(port.E, -bewegung_weite_e * zeile, 500)
-                time.sleep(pause_motor_e_back)
-            leere_erkannt = True
-            break
-
-        update_spielfeld(matrix_zeile, matrix_spalte, erkannte_farbe)
-        print("Matrix-Eintrag: Zeile {}, Spalte {}: {}".format(
-            matrix_zeile, matrix_spalte,
-            "Rot" if spielfeld[matrix_zeile][matrix_spalte] == -1
-            else "Gelb" if spielfeld[matrix_zeile][matrix_spalte] == 1
-            else "Leer"))
-
-    if not leere_erkannt:
-        motor.run_for_degrees(port.E, -bewegung_weite_e * (spielfeld_hoehe - 1), 500)
-        time.sleep(pause_motor_e_back)
-
-    if spalte > 0:
-        motor.run_for_degrees(port.D, bewegung_weite_d, 100)
-        motor.run_for_degrees(port.F, -bewegung_weite_d, 100)# Korrigierte Richtung für F
-        time.sleep(pause_motor_d)
-
-# Nach dem Scan steht der Roboter auf PHYSISCHER Spalte 0 (ganz links)
-
-# --- ALGORITHMUS-FUNKTIONEN ---
 def is_valid_location(board, col):
     return board[spielfeld_hoehe-1][col] == 0
 
@@ -83,17 +54,14 @@ def get_next_open_row(board, col):
     return None
 
 def winning_move(board, piece):
-    # Horizontal
     for c in range(spielfeld_breite-3):
         for r in range(spielfeld_hoehe):
             if board[r][c] == piece and board[r][c+1] == piece and board[r][c+2] == piece and board[r][c+3] == piece:
                 return True
-    # Vertikal
     for c in range(spielfeld_breite):
         for r in range(spielfeld_hoehe-3):
             if board[r][c] == piece and board[r+1][c] == piece and board[r+2][c] == piece and board[r+3][c] == piece:
                 return True
-    # Diagonalen
     for c in range(spielfeld_breite-3):
         for r in range(spielfeld_hoehe-3):
             if board[r][c] == piece and board[r+1][c+1] == piece and board[r+2][c+2] == piece and board[r+3][c+3] == piece:
@@ -118,47 +86,56 @@ def evaluate_window(window, player):
 
 def evaluate(board):
     score = 0
-    # Zentrum bevorzugen
     center_array = [board[r][spielfeld_breite//2] for r in range(spielfeld_hoehe)]
     center_count = center_array.count(my_piece)
     score += center_count * 3
-
-    # Horizontal
     for r in range(spielfeld_hoehe):
         row_array = [board[r][c] for c in range(spielfeld_breite)]
         for c in range(spielfeld_breite - 3):
             window = row_array[c:c+4]
             score += evaluate_window(window, my_piece)
             score -= evaluate_window(window, opponent_piece)
-
-    # Vertikal
     for c in range(spielfeld_breite):
         col_array = [board[r][c] for r in range(spielfeld_hoehe)]
         for r in range(spielfeld_hoehe - 3):
             window = col_array[r:r+4]
             score += evaluate_window(window, my_piece)
             score -= evaluate_window(window, opponent_piece)
-
-    # Diagonal /
     for r in range(spielfeld_hoehe - 3):
         for c in range(spielfeld_breite - 3):
             window = [board[r+i][c+i] for i in range(4)]
             score += evaluate_window(window, my_piece)
             score -= evaluate_window(window, opponent_piece)
-
-    # Diagonal \
     for r in range(3, spielfeld_hoehe):
         for c in range(spielfeld_breite - 3):
             window = [board[r-i][c+i] for i in range(4)]
             score += evaluate_window(window, my_piece)
             score -= evaluate_window(window, opponent_piece)
-
     return score
 
-def alpha_beta(board, depth, alpha, beta, maximizing_player):
-    valid_locations = [col for col in range(spielfeld_breite) if is_valid_location(board, col)]
-    terminal = winning_move(board, my_piece) or winning_move(board, opponent_piece) or len(valid_locations) == 0
+transposition_table = {}
 
+def board_hash(board, maximizing_player):
+    return (tuple([item for row in board for item in row]), maximizing_player)
+
+def get_dynamic_depth(board):
+    # Zähle leere Felder
+    empty = sum(row.count(0) for row in board)
+    if empty > 30:
+        return 3# Anfang: schnell, geringe Tiefe
+    else:
+        return 4# Ende: hohe Tiefe für beste Züge
+
+
+    
+
+def alpha_beta(board, depth, alpha, beta, maximizing_player):
+    key = (board_hash(board, maximizing_player), depth)
+    if key in transposition_table:
+        return transposition_table[key]
+    valid_locations = [col for col in range(spielfeld_breite) if is_valid_location(board, col)]
+    valid_locations.sort(key=lambda c: abs(c - spielfeld_breite // 2))
+    terminal = winning_move(board, my_piece) or winning_move(board, opponent_piece) or len(valid_locations) == 0
     if depth == 0 or terminal:
         if terminal:
             if winning_move(board, my_piece): return (None, 1000000)
@@ -166,12 +143,13 @@ def alpha_beta(board, depth, alpha, beta, maximizing_player):
             else: return (None, 0)
         else:
             return (None, evaluate(board))
-
     if maximizing_player:
         value = -float('inf')
         best_col = valid_locations[0]
         for col in valid_locations:
             row = get_next_open_row(board, col)
+            if row is None:
+                continue
             board_copy = [r[:] for r in board]
             board_copy[row][col] = my_piece
             new_score = alpha_beta(board_copy, depth-1, alpha, beta, False)[1]
@@ -181,12 +159,14 @@ def alpha_beta(board, depth, alpha, beta, maximizing_player):
             alpha = max(alpha, value)
             if alpha >= beta:
                 break
-        return best_col, value
+        result = (best_col, value)
     else:
         value = float('inf')
         best_col = valid_locations[0]
         for col in valid_locations:
             row = get_next_open_row(board, col)
+            if row is None:
+                continue
             board_copy = [r[:] for r in board]
             board_copy[row][col] = opponent_piece
             new_score = alpha_beta(board_copy, depth-1, alpha, beta, True)[1]
@@ -196,41 +176,142 @@ def alpha_beta(board, depth, alpha, beta, maximizing_player):
             beta = min(beta, value)
             if beta <= alpha:
                 break
-        return best_col, value
+        result = (best_col, value)
+    transposition_table[key] = result
+    return result
 
 # --- HAUPTPROGRAMM ---
-# Konvertiere None zu 0 für den Algorithmus
-spielfeld_numeric = [[0 if x is None else x for x in row] for row in spielfeld]
+spielfeld = [[0 for _ in range(spielfeld_breite)] for _ in range(spielfeld_hoehe)]
+letztes_spielfeld = [row[:] for row in spielfeld]
 
-# Berechne optimalen Zug
-best_col, _ = alpha_beta(
+def move_motor_e_to_zero():
+    # Optional: Vor jedem Scan auf Nullposition (Zeile 0) fahren, falls keine Anschlagserkennung:
+    pass
+
+while True:
+
+
+    print("Warte auf Sensor an Port C...")
+    while not sensor_aktiviert():
+        time.sleep(0.1)
+    print("Sensor erkannt! Starte Spielzug...")
+    time.sleep(1)
+
+    # zum Feld fahren
+    motor.run_for_degrees(port.D, 198, 170)
+    #motor.run_for_degrees(port.F, -195, 170)
+    print("Spielfeld erreicht...")
+    time.sleep(1.5)
+
+    transposition_table.clear()
+
+    gegner_stein_entdeckt = False
+    gegner_spalte = None
+
+    move_motor_e_to_zero()
+
+    for spalte in range(spielfeld_breite - 1, -1, -1):
+        matrix_spalte = spielfeld_breite - 1 - spalte
+        if letztes_spielfeld[spielfeld_hoehe-1][matrix_spalte] != 0:
+            if spalte > 0:
+                motor.run_for_degrees(port.D, bewegung_weite_d, 170)
+                #motor.run_for_degrees(port.F, -bewegung_weite_d, 170)
+                time.sleep(pause_motor_d)
+            continue
+
+        freie_zeile = None
+        for zeile in range(spielfeld_hoehe):
+            if letztes_spielfeld[zeile][matrix_spalte] == 0:
+                freie_zeile = zeile
+                break
+        if freie_zeile is None:
+            continue
+
+        motor.run_for_degrees(port.E, bewegung_weite_e * (freie_zeile), speed_E)
+        time.sleep(pause_motor_e)
+        time.sleep(wartezeit_zeile)
+
+        farbe = color_sensor.color(port.B)
+        update_spielfeld(freie_zeile, matrix_spalte, farbe)
+        print("Matrix-Eintrag: Zeile {}, Spalte {}: {}".format(
+            freie_zeile, matrix_spalte,
+            "Rot" if spielfeld[freie_zeile][matrix_spalte] == -1
+            else "Gelb" if spielfeld[freie_zeile][matrix_spalte] == 1
+            else "Leer"))
+
+        if (letztes_spielfeld[freie_zeile][matrix_spalte] == 0 and
+            spielfeld[freie_zeile][matrix_spalte] == opponent_piece):
+            print("Neuer gegnerischer Stein in Spalte {}, Zeile {}".format(matrix_spalte, freie_zeile))
+            gegner_stein_entdeckt = True
+            gegner_spalte = spalte
+            time.sleep(1)
+
+        motor.run_for_degrees(port.E, -bewegung_weite_e * freie_zeile, speed_E)
+        time.sleep(pause_motor_e_back)
+
+        if gegner_stein_entdeckt:
+            break
+
+        if spalte > 0:
+            motor.run_for_degrees(port.D, bewegung_weite_d, speed_DF)
+       #     motor.run_for_degrees(port.F, -bewegung_weite_d, speed_DF)
+            time.sleep(pause_motor_d)
+
+    if gegner_stein_entdeckt and gegner_spalte is not None and gegner_spalte != 0:
+        schritte_rechts = gegner_spalte
+        motor.run_for_degrees(port.D, bewegung_weite_d * schritte_rechts, speed_DF)
+        #motor.run_for_degrees(port.F, -bewegung_weite_d * schritte_rechts, speed_DF)
+        time.sleep(4)
+
+    spielfeld_numeric = [[0 if x is None else x for x in row] for row in spielfeld]
+    #dynamic_depth = get_dynamic_depth(spielfeld_numeric)
+
+    dynamic_depth = get_dynamic_depth(spielfeld_numeric)
+    best_col, _ = alpha_beta(
     spielfeld_numeric,
-    depth=5,
+    depth=dynamic_depth,
     alpha=-float('inf'),
     beta=float('inf'),
     maximizing_player=(my_piece == 1)
-)
+    )
 
-best_row = get_next_open_row(spielfeld_numeric, best_col)
-farbe = "Rot" if my_piece == -1 else "Gelb"
+    best_row = get_next_open_row(spielfeld_numeric, best_col)
+    farbe = "Rot" if my_piece == -1 else "Gelb"
+    print("\nOptimale Position für {}:".format(farbe))
+    print("Spalte: {}, Zeile: {}".format(best_col, best_row))
+    #print_spielfeld(spielfeld)
 
-print("\nOptimale Position für {}:".format(farbe))
-print("Spalte: {}, Zeile: {}".format(best_col, best_row))
-print_spielfeld(spielfeld)
+    if best_col is not None and best_row is not None:
+        physische_ziel_spalte = spielfeld_breite - 1 - best_col
+        motor.run_for_degrees(port.D, -bewegung_weite_d * physische_ziel_spalte, speed_DF)
+        #motor.run_for_degrees(port.F, bewegung_weite_d * physische_ziel_spalte, speed_DF)
+        time.sleep(pause_motor_d * 4)
+        motor.run_for_degrees(port.A, -360, speed_A)
+        time.sleep(3)
+        spielfeld[best_row][best_col] = my_piece
+        letztes_spielfeld = [row[:] for row in spielfeld]
 
-# --- ROBOTERSTEUERUNG ZUR ZIELSPALTE ---
-physische_ziel_spalte = spielfeld_breite - 1 - best_col# Umrechnung
+        if winning_move(spielfeld, my_piece):
+            print("🎉 Glückwunsch! Der Roboter hat das Spiel GEWONNEN!")
+            print_spielfeld(spielfeld)
+            sound.beep(440, 1000000, 100)
+            motor.run_for_degrees(port.D, -bewegung_weite_d * best_col, speed_DF)
+         #   motor.run_for_degrees(port.F, bewegung_weite_d * best_col, speed_DF)
+            time.sleep_ms(2500)
+            motor.run_for_degrees(port.D, -bewegung_weite_d * 3, speed_DF)
+          #  motor.run_for_degrees(port.F, bewegung_weite_d * 3, speed_DF)
+            sound.beep(0, 1000000, 100)
+            break
+    
+       
+        motor.run_for_degrees(port.D, -bewegung_weite_d * best_col, speed_DF)
+        #motor.run_for_degrees(port.F, bewegung_weite_d * best_col, speed_DF)
+    print_spielfeld(spielfeld)
+    time.sleep_ms(2500)
+    motor.run_for_degrees(port.D, -199 , speed_DF)
+    #motor.run_for_degrees(port.F, 199, speed_DF)
+    time.sleep(pause_motor_d)
 
-# Fahre zur Zielspalte (RECHTS)
-motor.run_for_degrees(port.D, -bewegung_weite_d * physische_ziel_spalte, 100)
-motor.run_for_degrees(port.F, bewegung_weite_d * physische_ziel_spalte, 100)
-time.sleep(pause_motor_d * 4)
-
-# Stein einwerfen
-motor.run_for_degrees(port.A, -360, 300)
-time.sleep(3)
-
-# Zurück zur Startposition (RECHTS, Spalte 0)
-motor.run_for_degrees(port.D, -bewegung_weite_d * best_col, 100)# D: RECHTS
-motor.run_for_degrees(port.F, bewegung_weite_d * best_col, 100)# F: LINKS
-time.sleep(pause_motor_d)
+    while sensor_aktiviert():
+        time.sleep(0.1)
+    print("Zug abgeschlossen. Warte auf nächste Aktivierung...")
