@@ -82,41 +82,41 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 	
 \end{table}
 
-\section{der Algorithmus}
-\section*{Struktur und Funktionalität des Python-Codes für ein 4-Gewinnt-Spiel}
-
-\subsection*{1. Initialisierung und Konfiguration}
-
-Zu Beginn werden grundlegende Variablen und Datenstrukturen definiert, die den Zustand des Spiels abbilden. Das Spielfeld wird als zweidimensionale Liste mit 6 Zeilen und 7 Spalten realisiert, wobei freie Felder mit dem Symbol \texttt{"-"} gekennzeichnet sind. Zusätzlich wird ein Dictionary zur Zuordnung der numerischen Spielwerte (0 für den Computer und 2 für den Menschen) zu deren Symbolen („O“ bzw. „X“) erstellt. Die Bewertungsmatrix \texttt{werte} dient zur heuristischen Gewichtung der Spielfeldpositionen, wobei zentrale Felder höher bewertet werden als Randpositionen, da sie strategisch vorteilhafter sind. Diese Initialisierung schafft die Grundlage für die spätere Spiellogik und die Bewertung von Spielsituationen.
-
-\subsection*{2. Ausgabefunktion}
-
-Die Funktion \texttt{ausgabe()} visualisiert das aktuelle Spielfeld in der Konsole. Dabei werden numerische Spielzustände in die zugehörigen Zeichen („O“ oder „X“) umgewandelt und zeilenweise ausgegeben. Nicht belegte Felder erscheinen als \texttt{"-"} und am unteren Rand wird eine Spaltenbeschriftung (0 bis 6) zur Orientierung angezeigt. Die Funktion dient sowohl der Information als auch der Interaktion mit dem menschlichen Spieler. Sie ermöglicht die Nachvollziehbarkeit der Spielzüge und den aktuellen Spielverlauf.
-
-\subsection*{3. Bewertungsfunktion}
-
-Die Funktion \texttt{bewertung()} liefert einen numerischen Wert, der die aktuelle Spielsituation heuristisch einschätzt. Für jedes belegte Feld wird basierend auf der Bewertungsmatrix ein Wert addiert oder subtrahiert: positive Werte für den Computer, negative für den Menschen. Dadurch entsteht ein Maß für die Positionierungsvorteile des Computers gegenüber dem Gegner. Die Funktion kommt im Minimax-Algorithmus zum Einsatz, wenn die maximale Suchtiefe erreicht ist oder keine Gewinnsituation erkannt wurde. Sie ermöglicht eine differenzierte Einschätzung von Zwischenständen jenseits reiner Gewinnbedingungen.
-
-\subsection*{4. Auswertungsfunktion}
-
-Die Funktion \texttt{auswertung()} überprüft, ob eine Spielsituation vorliegt, in der ein Spieler vier Spielsteine in einer Reihe platzieren konnte. Dabei werden horizontale, vertikale und diagonale Kombinationen systematisch untersucht. Ergibt sich eine solche Konstellation, so wird der entsprechende Spieler (0 für Computer, 2 für Mensch) als Gewinner zurückgegeben. Liegt keine Gewinnsituation vor, wird zudem überprüft, ob das Spielfeld voll ist, was auf ein Unentschieden hinweist (Rückgabewert 1). In allen anderen Fällen wird -1 zurückgegeben, was den Fortbestand des Spiels signalisiert.
-
-\subsection*{5. Zugfunktionen}
-
-Die Funktion \texttt{zug(y, s)} simuliert das Einwerfen eines Spielsteins in die Spalte \texttt{y} für den Spieler \texttt{s}. Dabei wird die unterste freie Position in der Spalte gesucht und entsprechend belegt. Die komplementäre Funktion \texttt{zugRueckgaengig(y)} entfernt den obersten Spielstein aus der Spalte und stellt somit den vorherigen Spielzustand wieder her. Diese Rücknahmefunktion ist essenziell für die Implementierung des Minimax-Algorithmus, da im Rahmen der rekursiven Bewertung zahlreiche hypothetische Züge getestet und wieder verworfen werden müssen. Beide Funktionen gewährleisten eine realitätsnahe Simulation von Spielzügen.
-
-\subsection*{6. Minimax-Algorithmus}
-
-Die beiden Funktionen \texttt{maxFunktion(tiefe)} und \texttt{minFunktion(tiefe)} implementieren gemeinsam den klassischen Minimax-Algorithmus mit begrenzter Suchtiefe. \texttt{maxFunktion} wird vom Computer aufgerufen und versucht, den bestmöglichen (höchsten) Bewertungswert zu erzielen, während \texttt{minFunktion} die besten Gegenreaktionen des menschlichen Spielers simuliert. Beide Funktionen überprüfen vor jedem Zug, ob bereits ein Gewinn oder Unentschieden vorliegt, um die Rekursion ggf. zu beenden. Wenn die maximale Suchtiefe erreicht ist, erfolgt die Bewertung über die Heuristik. Diese Logik bildet das Kernstück der künstlichen Intelligenz im Spiel.
-
-\subsection*{7. Zugauswahl des Computers}
-
-Die Funktion \texttt{besterZug()} bestimmt den optimalen Zug des Computers unter Anwendung des Minimax-Verfahrens mit einer festen Suchtiefe von vier. Für jede gültige Spalte wird simuliert, wie sich der Zug auf die Spielsituation auswirken würde, wobei anschließend der resultierende Spielzustand durch den Minimax-Algorithmus bewertet wird. Der Zug mit dem geringsten Wert aus Sicht des Gegners (also dem besten aus Computersicht) wird als nächster Spielzug ausgewählt. Diese Funktion stellt sicher, dass der Computer stets eine taktisch sinnvolle Entscheidung trifft. Sie verbindet die Simulation potenzieller Spielverläufe mit einer strategischen Bewertung.
-
-\subsection*{8. Spielsteuerung}
-
-Die Funktion \texttt{spiele()} koordiniert den gesamten Spielablauf zwischen Mensch und Computer. Nach der Initialisierung des Spielfelds folgt eine Spielschleife, in der der Mensch und der Computer abwechselnd ihre Züge tätigen. Der Spieler gibt seine Eingabe über die Konsole ein, während der Computer seinen Zug automatisch über die \texttt{besterZug()}-Funktion berechnet. Nach jedem Zug wird der Spielzustand neu ausgegeben und auf ein mögliches Spielende überprüft. Die Spielsteuerung bildet somit die zentrale Benutzerschnittstelle und kontrolliert die Spiellogik.
-
-\subsection*{9. Programmausführung}
-
-Der abschließende Block \texttt{if \_\_name\_\_ == "\_\_main\_\_"} sorgt dafür, dass das Spiel nur dann automatisch gestartet wird, wenn das Skript direkt ausgeführt wird. Dies ist in Python eine gängige Praxis, um eine Datei sowohl als importierbares Modul als auch als eigenständig ausführbares Programm nutzen zu können. Dadurch wird verhindert, dass das Spiel beim Import des Skripts in andere Module unbeabsichtigt gestartet wird. Dieser Mechanismus fördert die Wiederverwendbarkeit und Modularität des Codes. In wissenschaftlichen Anwendungen ist dies ein Merkmal guter Programmierpraxis.
+%\section{der Algorithmus}
+%\section*{Struktur und Funktionalität des Python-Codes für ein 4-Gewinnt-Spiel}
+%
+%\subsection*{1. Initialisierung und Konfiguration}
+%
+%Zu Beginn werden grundlegende Variablen und Datenstrukturen definiert, die den Zustand des Spiels abbilden. Das Spielfeld wird als zweidimensionale Liste mit 6 Zeilen und 7 Spalten realisiert, wobei freie Felder mit dem Symbol \texttt{"-"} gekennzeichnet sind. Zusätzlich wird ein Dictionary zur Zuordnung der numerischen Spielwerte (0 für den Computer und 2 für den Menschen) zu deren Symbolen („O“ bzw. „X“) erstellt. Die Bewertungsmatrix \texttt{werte} dient zur heuristischen Gewichtung der Spielfeldpositionen, wobei zentrale Felder höher bewertet werden als Randpositionen, da sie strategisch vorteilhafter sind. Diese Initialisierung schafft die Grundlage für die spätere Spiellogik und die Bewertung von Spielsituationen.
+%
+%\subsection*{2. Ausgabefunktion}
+%
+%Die Funktion \texttt{ausgabe()} visualisiert das aktuelle Spielfeld in der Konsole. Dabei werden numerische Spielzustände in die zugehörigen Zeichen („O“ oder „X“) umgewandelt und zeilenweise ausgegeben. Nicht belegte Felder erscheinen als \texttt{"-"} und am unteren Rand wird eine Spaltenbeschriftung (0 bis 6) zur Orientierung angezeigt. Die Funktion dient sowohl der Information als auch der Interaktion mit dem menschlichen Spieler. Sie ermöglicht die Nachvollziehbarkeit der Spielzüge und den aktuellen Spielverlauf.
+%
+%\subsection*{3. Bewertungsfunktion}
+%
+%Die Funktion \texttt{bewertung()} liefert einen numerischen Wert, der die aktuelle Spielsituation heuristisch einschätzt. Für jedes belegte Feld wird basierend auf der Bewertungsmatrix ein Wert addiert oder subtrahiert: positive Werte für den Computer, negative für den Menschen. Dadurch entsteht ein Maß für die Positionierungsvorteile des Computers gegenüber dem Gegner. Die Funktion kommt im Minimax-Algorithmus zum Einsatz, wenn die maximale Suchtiefe erreicht ist oder keine Gewinnsituation erkannt wurde. Sie ermöglicht eine differenzierte Einschätzung von Zwischenständen jenseits reiner Gewinnbedingungen.
+%
+%\subsection*{4. Auswertungsfunktion}
+%
+%Die Funktion \texttt{auswertung()} überprüft, ob eine Spielsituation vorliegt, in der ein Spieler vier Spielsteine in einer Reihe platzieren konnte. Dabei werden horizontale, vertikale und diagonale Kombinationen systematisch untersucht. Ergibt sich eine solche Konstellation, so wird der entsprechende Spieler (0 für Computer, 2 für Mensch) als Gewinner zurückgegeben. Liegt keine Gewinnsituation vor, wird zudem überprüft, ob das Spielfeld voll ist, was auf ein Unentschieden hinweist (Rückgabewert 1). In allen anderen Fällen wird -1 zurückgegeben, was den Fortbestand des Spiels signalisiert.
+%
+%\subsection*{5. Zugfunktionen}
+%
+%Die Funktion \texttt{zug(y, s)} simuliert das Einwerfen eines Spielsteins in die Spalte \texttt{y} für den Spieler \texttt{s}. Dabei wird die unterste freie Position in der Spalte gesucht und entsprechend belegt. Die komplementäre Funktion \texttt{zugRueckgaengig(y)} entfernt den obersten Spielstein aus der Spalte und stellt somit den vorherigen Spielzustand wieder her. Diese Rücknahmefunktion ist essenziell für die Implementierung des Minimax-Algorithmus, da im Rahmen der rekursiven Bewertung zahlreiche hypothetische Züge getestet und wieder verworfen werden müssen. Beide Funktionen gewährleisten eine realitätsnahe Simulation von Spielzügen.
+%
+%\subsection*{6. Minimax-Algorithmus}
+%
+%Die beiden Funktionen \texttt{maxFunktion(tiefe)} und \texttt{minFunktion(tiefe)} implementieren gemeinsam den klassischen Minimax-Algorithmus mit begrenzter Suchtiefe. \texttt{maxFunktion} wird vom Computer aufgerufen und versucht, den bestmöglichen (höchsten) Bewertungswert zu erzielen, während \texttt{minFunktion} die besten Gegenreaktionen des menschlichen Spielers simuliert. Beide Funktionen überprüfen vor jedem Zug, ob bereits ein Gewinn oder Unentschieden vorliegt, um die Rekursion ggf. zu beenden. Wenn die maximale Suchtiefe erreicht ist, erfolgt die Bewertung über die Heuristik. Diese Logik bildet das Kernstück der künstlichen Intelligenz im Spiel.
+%
+%\subsection*{7. Zugauswahl des Computers}
+%
+%Die Funktion \texttt{besterZug()} bestimmt den optimalen Zug des Computers unter Anwendung des Minimax-Verfahrens mit einer festen Suchtiefe von vier. Für jede gültige Spalte wird simuliert, wie sich der Zug auf die Spielsituation auswirken würde, wobei anschließend der resultierende Spielzustand durch den Minimax-Algorithmus bewertet wird. Der Zug mit dem geringsten Wert aus Sicht des Gegners (also dem besten aus Computersicht) wird als nächster Spielzug ausgewählt. Diese Funktion stellt sicher, dass der Computer stets eine taktisch sinnvolle Entscheidung trifft. Sie verbindet die Simulation potenzieller Spielverläufe mit einer strategischen Bewertung.
+%
+%\subsection*{8. Spielsteuerung}
+%
+%Die Funktion \texttt{spiele()} koordiniert den gesamten Spielablauf zwischen Mensch und Computer. Nach der Initialisierung des Spielfelds folgt eine Spielschleife, in der der Mensch und der Computer abwechselnd ihre Züge tätigen. Der Spieler gibt seine Eingabe über die Konsole ein, während der Computer seinen Zug automatisch über die \texttt{besterZug()}-Funktion berechnet. Nach jedem Zug wird der Spielzustand neu ausgegeben und auf ein mögliches Spielende überprüft. Die Spielsteuerung bildet somit die zentrale Benutzerschnittstelle und kontrolliert die Spiellogik.
+%
+%\subsection*{9. Programmausführung}
+%
+%Der abschließende Block \texttt{if \_\_name\_\_ == "\_\_main\_\_"} sorgt dafür, dass das Spiel nur dann automatisch gestartet wird, wenn das Skript direkt ausgeführt wird. Dies ist in Python eine gängige Praxis, um eine Datei sowohl als importierbares Modul als auch als eigenständig ausführbares Programm nutzen zu können. Dadurch wird verhindert, dass das Spiel beim Import des Skripts in andere Module unbeabsichtigt gestartet wird. Dieser Mechanismus fördert die Wiederverwendbarkeit und Modularität des Codes. In wissenschaftlichen Anwendungen ist dies ein Merkmal guter Programmierpraxis.

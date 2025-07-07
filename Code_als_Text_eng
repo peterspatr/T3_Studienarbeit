@@ -1,4 +1,3 @@
-
 import motor
 import color_sensor
 import color
@@ -6,8 +5,8 @@ import time
 import force_sensor
 from hub import port, sound
 
-# --- KONFIGURATION ---
-my_piece = 1# -1 = RED, 1 = YELLOW (KI-Spieler)
+# --- CONFIGURATION ---
+my_piece = 1 # -1 = RED, 1 = YELLOW (AI player)
 opponent_piece = -my_piece
 
 speed_D = 230
@@ -20,29 +19,29 @@ break_motor_e_back = 2
 break_motor_d = 1
 field_width = 7
 field_height = 6
-waitung_line = 1 # Waiting time after reaching the line (in seconds)
+waiting_line = 1 # Waiting time after reaching the line (in seconds)
 
-# --- HELPFUNCTIONS ---
+# --- HELPER FUNCTIONS ---
 def sensor_activated():
     try:   
         return force_sensor.force(port.C) > 30
     except:
         return False
 
-def update_spielfeld(zeile, spalte, erkannte_farbe):
-    if erkannte_farbe in (color.RED, color.PURPLE, color.MAGENTA):
-        spielfeld[zeile][spalte] = -1
-    elif erkannte_farbe in (color.YELLOW, color.WHITE, color.GREEN):
-        spielfeld[zeile][spalte] = 1
+def update_board(row, col, detected_color):
+    if detected_color in (color.RED, color.PURPLE, color.MAGENTA):
+        board[row][col] = -1
+    elif detected_color in (color.YELLOW, color.WHITE, color.GREEN):
+        board[row][col] = 1
     else:
-        spielfeld[zeile][spalte] = 0
+        board[row][col] = 0
 
-def print_spielfeld(spielfeld):
+def print_board(board):
     symbol_map = {-1: "🔴", 1: "🟡", 0: "⚪", None: "⚪"}
-    print("\nAktuelles Spielfeld (unten rechts = [0][0]):")
-    for zeile_idx in reversed(range(field_height)):
-        zeile = spielfeld[zeile_idx]
-        print(" ".join(symbol_map.get(feld, "?") for feld in zeile))
+    print("\nCurrent board (bottom right = [0][0]):")
+    for row_idx in reversed(range(field_height)):
+        row = board[row_idx]
+        print(" ".join(symbol_map.get(cell, "?") for cell in row))
 
 def is_valid_location(board, col):
     return board[field_height-1][col] == 0
@@ -106,7 +105,7 @@ def evaluate(board):
             window = [board[r+i][c+i] for i in range(4)]
             score += evaluate_window(window, my_piece)
             score -= evaluate_window(window, opponent_piece)
-    for r in range(3, spielfeld_hoehe):
+    for r in range(3, field_height):
         for c in range(field_width - 3):
             window = [board[r-i][c+i] for i in range(4)]
             score += evaluate_window(window, my_piece)
@@ -119,15 +118,12 @@ def board_hash(board, maximizing_player):
     return (tuple([item for row in board for item in row]), maximizing_player)
 
 def get_dynamic_depth(board):
-    # Zähle leere Felder
+    # Count empty fields
     empty = sum(row.count(0) for row in board)
     if empty > 30:
-        return 3# Anfang: schnell, geringe Tiefe
+        return 3 # Beginning: fast, low depth
     else:
-        return 4# Ende: hohe Tiefe für beste Züge
-
-
-    
+        return 4 # End: high depth for best moves
 
 def alpha_beta(board, depth, alpha, beta, maximizing_player):
     key = (board_hash(board, maximizing_player), depth)
@@ -180,126 +176,121 @@ def alpha_beta(board, depth, alpha, beta, maximizing_player):
     transposition_table[key] = result
     return result
 
-# --- HAUPTPROGRAMM ---
-spielfeld = [[0 for _ in range(field_width)] for _ in range(field_height)]
-letztes_spielfeld = [row[:] for row in spielfeld]
+# --- MAIN PROGRAM ---
+board = [[0 for _ in range(field_width)] for _ in range(field_height)]
+last_board = [row[:] for row in board]
 
 while True:
-
-
-    print("Warte auf Sensor an Port C...")
+    print("Waiting for sensor at port C...")
     while not sensor_activated():
         time.sleep(0.1)
-    print("Sensor erkannt! Starte Spielzug...")
+    print("Sensor detected! Starting move...")
     time.sleep(1)
 
-    # zum Feld fahren
+    # Move to field
     motor.run_for_degrees(port.D, 198, 170)
-    print("Spielfeld erreicht...")
+    print("Field reached...")
     time.sleep(1.5)
 
     transposition_table.clear()
 
-    gegner_stein_entdeckt = False
-    gegner_spalte = None
+    opponent_piece_found = False
+    opponent_col = None
 
     move_motor_e_to_zero()
 
-    for spalte in range(field_width - 1, -1, -1):
-        matrix_spalte = field_width - 1 - spalte
-        if letztes_spielfeld[field_height-1][matrix_spalte] != 0:
-            if spalte > 0:
+    for col in range(field_width - 1, -1, -1):
+        matrix_col = field_width - 1 - col
+        if last_board[field_height-1][matrix_col] != 0:
+            if col > 0:
                 motor.run_for_degrees(port.D, move_distance_d, 170)
-                time.sleep(break_motor r_d)
+                time.sleep(break_motor_d)
             continue
 
-        freie_zeile = None
-        for zeile in range(field_height):
-            if letztes_spielfeld[zeile][matrix_spalte] == 0:
-                freie_zeile = zeile
+        free_row = None
+        for row in range(field_height):
+            if last_board[row][matrix_col] == 0:
+                free_row = row
                 break
-        if freie_zeile is None:
+        if free_row is None:
             continue
 
-        motor.run_for_degrees(port.E, move_distance_e * (freie_zeile), speed_E)
+        motor.run_for_degrees(port.E, move_distance_e * (free_row), speed_E)
         time.sleep(break_motor_e)
-        time.sleep(waitung_line)
+        time.sleep(waiting_line)
 
-        farbe = color_sensor.color(port.B)
-        update_spielfeld(freie_zeile, matrix_spalte, farbe)
-        print("Matrix-Eintrag: Zeile {}, Spalte {}: {}".format(
-            freie_zeile, matrix_spalte,
-            "RED" if spielfeld[freie_zeile][matrix_spalte] == -1
-            else "YELLOW" if spielfeld[freie_zeile][matrix_spalte] == 1
+        detected_color = color_sensor.color(port.B)
+        update_board(free_row, matrix_col, detected_color)
+        print("Matrix entry: Row {}, Col {}: {}".format(
+            free_row, matrix_col,
+            "RED" if board[free_row][matrix_col] == -1
+            else "YELLOW" if board[free_row][matrix_col] == 1
             else "NONE"))
 
-        if (letztes_spielfeld[freie_zeile][matrix_spalte] == 0 and
-            spielfeld[freie_zeile][matrix_spalte] == opponent_piece):
-            print("Neuer gegnerischer Stein in Spalte {}, Zeile {}".format(matrix_spalte, freie_zeile))
-            gegner_stein_entdeckt = True
-            gegner_spalte = spalte
+        if (last_board[free_row][matrix_col] == 0 and
+            board[free_row][matrix_col] == opponent_piece):
+            print("New opponent piece in column {}, row {}".format(matrix_col, free_row))
+            opponent_piece_found = True
+            opponent_col = col
             time.sleep(1)
 
-        motor.run_for_degrees(port.E, -move_distance_e * freie_zeile, speed_E)
-        time.sleep(pause_motor_e_back)
+        motor.run_for_degrees(port.E, -move_distance_e * free_row, speed_E)
+        time.sleep(break_motor_e_back)
 
-        if gegner_stein_entdeckt:
+        if opponent_piece_found:
             break
 
-        if spalte > 0:
+        if col > 0:
             motor.run_for_degrees(port.D, move_distance_d, speed_D)
             time.sleep(break_motor_d)
 
-    if gegner_stein_entdeckt and gegner_spalte is not None and gegner_spalte != 0:
-        schritte_rechts = gegner_spalte
-        motor.run_for_degrees(port.D, move_distance_d * schritte_rechts, speed_D)
+    if opponent_piece_found and opponent_col is not None and opponent_col != 0:
+        steps_right = opponent_col
+        motor.run_for_degrees(port.D, move_distance_d * steps_right, speed_D)
         time.sleep(4)
 
-    spielfeld_numeric = [[0 if x is None else x for x in row] for row in spielfeld]
-    #dynamic_depth = get_dynamic_depth(spielfeld_numeric)
-
-    dynamic_depth = get_dynamic_depth(spielfeld_numeric)
+    board_numeric = [[0 if x is None else x for x in row] for row in board]
+    dynamic_depth = get_dynamic_depth(board_numeric)
     best_col, _ = alpha_beta(
-    spielfeld_numeric,
-    depth=dynamic_depth,
-    alpha=-float('inf'),
-    beta=float('inf'),
-    maximizing_player=(my_piece == 1)
+        board_numeric,
+        depth=dynamic_depth,
+        alpha=-float('inf'),
+        beta=float('inf'),
+        maximizing_player=(my_piece == 1)
     )
 
-    best_row = get_next_open_row(spielfeld_numeric, best_col)
-    farbe = "RED" if my_piece == -1 else "YELLOW"
-    print("\nOptimale Position für {}:".format(farbe))
-    print("Spalte: {}, Zeile: {}".format(best_col, best_row))
+    best_row = get_next_open_row(board_numeric, best_col)
+    color_str = "RED" if my_piece == -1 else "YELLOW"
+    print("\nOptimal position for {}:".format(color_str))
+    print("Column: {}, Row: {}".format(best_col, best_row))
 
     if best_col is not None and best_row is not None:
-        physische_ziel_spalte = spielfeld_breite - 1 - best_col
-        motor.run_for_degrees(port.D, -move_distance_d * physische_ziel_spalte, speed_D)
+        physical_target_col = field_width - 1 - best_col
+        motor.run_for_degrees(port.D, -move_distance_d * physical_target_col, speed_D)
         time.sleep(break_motor_d * 4)
         motor.run_for_degrees(port.A, -360, speed_A)
         time.sleep(3)
-        spielfeld[best_row][best_col] = my_piece
-        letztes_spielfeld = [row[:] for row in spielfeld]
+        board[best_row][best_col] = my_piece
+        last_board = [row[:] for row in board]
 
-        if winning_move(spielfeld, my_piece):
-            print("🎉 Glückwunsch! Der Roboter hat das Spiel GEWONNEN!")
-            print_spielfeld(spielfeld)
+        if winning_move(board, my_piece):
+            print("🎉 Congratulations! The robot has WON the game!")
+            print_board(board)
             sound.beep(440, 1000000, 100)
             motor.run_for_degrees(port.D, -move_distance_d * best_col, speed_D)
             time.sleep_ms(2500)
             motor.run_for_degrees(port.D, -move_distance_d * 3, speed_D)
             sound.beep(0, 1000000, 100)
             break
-    
-       
+
         motor.run_for_degrees(port.D, -move_distance_d * best_col, speed_D)
-       
-    print_spielfeld(spielfeld)
+
+    print_board(board)
     time.sleep_ms(2500)
-    motor.run_for_degrees(port.D, -199 , speed_D)
-   
+    motor.run_for_degrees(port.D, -199, speed_D)
+
     time.sleep(break_motor_d)
 
     while sensor_activated():
         time.sleep(0.1)
-    print("Zug abgeschlossen. Warte auf nächste Aktivierung...")
+    print("Move completed. Waiting for next activation...")
