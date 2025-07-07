@@ -134,7 +134,6 @@
 	Falls ja, gibt die Funktion eine Bewertung zurück. Andernfalls wird der Spielbaum weiter durchlaufen.
 	
 	\paragraph*{Maximierender Spieler (KI):}
-	\\
 	
 	\begin{lstlisting}[style=pythonstyle]
 		if maximizing_player:
@@ -196,6 +195,13 @@
 	
 	Der eingesetzte Minimax-Algorithmus mit Alpha-Beta-Pruning stellt das strategische Herzstück des 4-Gewinnt-Roboters dar. Durch gezielte Bewertung von Spielpositionen, Berücksichtigung gegnerischer Drohungen und dynamische Tiefenanpassung kann der Roboter selbstständig Züge planen, Gefahren abwehren und letztlich siegreich agieren. Die Verwendung eines Transpositionstables beschleunigt dabei die Entscheidungsfindung, indem bereits analysierte Spielsituationen nicht erneut bewertet werden müssen. Das Ergebnis ist ein hochgradig effektives Entscheidungsverfahren für ein strategisches Spiel wie 4-Gewinnt.
 	
+	
+	\subsection{Begrenzung}
+	Der LEGO Spike Hub besitzt mit seinem 100 MHz ARM Cortex-M4 Prozessor, 320 KB RAM und 1 MB Flash-Speicher eine stark begrenzte Hardwareausstattung. Diese Ressourcen reichen für einfache Steuerungsaufgaben, setzen aber dem Einsatz komplexer Algorithmen wie Minimax enge Grenzen.
+	
+	Insbesondere der geringe Arbeitsspeicher ist entscheidend: Bereits bei einer Suchtiefe von 4 erreicht der Algorithmus die Speichergrenze, da jeder Spielzug rekursiv bewertet und gespeichert wird. Eine tiefere Suche führt zu Speicherüberläufen oder langen Berechnungszeiten.
+	
+	Durch Alpha-Beta-Pruning und eine dynamisch begrenzte Suchtiefe lässt sich der Algorithmus dennoch effizient auf dem Hub einsetzen – mit akzeptabler Reaktionszeit und stabiler Ausführung.
 
 
 	
