@@ -1,16 +1,203 @@
 \chapter{Zusammenfassung}
 \label{cha:zusammenfassung}
 
-Auf zwei bis drei Seiten soll auf folgende Punkte eingegangen werden:
+%Auf zwei bis drei Seiten soll auf folgende Punkte eingegangen werden:
 
-\begin{itemize}
-	\item Welches Ziel sollte erreicht werden
-	\item Welches Vorgehen wurde gewählt
-	\item Was wurde erreicht, zentrale Ergebnisse nennen, am besten quantitative Angaben machen
-	\item Konnten die Ergebnisse nach kritischer Bewertung zum Erreichen des Ziels oder zur Problemlösung beitragen
-	\item  Ausblick
-\end{itemize}
+%\begin{itemize}
+%	\item Welches Ziel sollte erreicht werden
+	%\item Welches Vorgehen wurde gewählt
+%	\item Was wurde erreicht, zentrale Ergebnisse nennen, am besten quantitative Angaben machen
+%	\item Konnten die Ergebnisse nach kritischer Bewertung zum Erreichen des Ziels oder zur Problemlösung beitragen
+	%\item  Ausblick
+%\end{itemize}
 
-In der Zusammenfassung sind unbedingt klare Aussagen zum Ergebnis der Arbeit zu nennen. Üblicherweise können Ergebnisse nicht nur qualitativ, sondern auch quantitativ benannt werden, z.~B. \glqq \ldots konnte eine Effizienzsteigerung von \SI{12}{\percent} erreicht werden.\grqq~oder \glqq \ldots konnte die Prüfdauer um \SI{2}{\hour} verkürzt werden\grqq.
+%In der Zusammenfassung sind unbedingt klare Aussagen zum Ergebnis der Arbeit zu nennen. Üblicherweise können Ergebnisse nicht nur qualitativ, sondern auch quantitativ benannt werden, z.~B. \glqq \ldots konnte eine Effizienzsteigerung von \SI{12}{\percent} erreicht werden.\grqq~oder \glqq \ldots konnte die Prüfdauer um \SI{2}{\hour} verkürzt werden\grqq.
 
-Die Ergebnisse in der Zusammenfassung sollten selbstverständlich einen Bezug zu den in der Einleitung aufgeführten Fragestellungen und Zielen haben.
+%Die Ergebnisse in der Zusammenfassung sollten selbstverständlich einen Bezug zu den in der Einleitung aufgeführten Fragestellungen und Zielen haben.
+
+% ------------------------------------------------------------------
+% Kapitel „Algorithmus“ – LaTeX‑Quelltext
+% ------------------------------------------------------------------
+
+
+
+\lstdefinestyle{pythonstyle}{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{gray}\itshape,
+	stringstyle=\color{orange},
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	numbersep=8pt,
+	frame=single,                 % Einzelrahmen um Codeblöcke
+	rulecolor=\color{black},      % Rahmenfarbe schwarz
+	framerule=0.8pt,              % Rahmendicke
+	breaklines=true,
+	backgroundcolor=\color{white},
+	tabsize=4,
+	showstringspaces=false,
+}
+
+	
+	\section*{Algorithmus zur Entscheidungsfindung}
+	
+	Ein zentraler Bestandteil des 4-Gewinnt-Roboters ist die Entscheidungsfindung durch einen algorithmischen Spielbaum. Dieser wird mit dem bekannten Minimax-Algorithmus unter Verwendung von Alpha-Beta-Pruning realisiert. Ziel ist es, basierend auf dem aktuellen Spielfeldzustand den optimalen Zug für die KI zu berechnen. Der Algorithmus bewertet mögliche Züge bis zu einer bestimmten Tiefe im Spielbaum und trifft Entscheidungen, die langfristig zum Sieg führen können oder gegnerische Gewinnzüge verhindern.
+	
+	\subsection*{Spielfeld und Spielerdefinition}
+	
+	Im Vorfeld des Algorithmus ist festgelegt, welches Symbol der Algorithmus (die KI) spielt:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		my_piece = 1  # 1 = YELLOW (AI player), -1 = RED
+		opponent_piece = -my_piece
+	\end{lstlisting}
+	
+	Dabei entspricht 1 dem gelben Spielstein (der KI), -1 dem roten Spielstein (dem Gegner). Diese numerische Darstellung vereinfacht die Bewertung und das Vergleichen der Felder im Spielfeld.
+	
+	\subsection*{Bewertungsfunktion (evaluate)}
+	
+	Der Algorithmus benötigt eine Bewertungsfunktion, die die Qualität eines Spielzustands abschätzt. Dies geschieht durch eine Heuristik, die mögliche Gewinnlinien zählt und bewertet.
+	
+	Die Bewertungsfunktion basiert auf der Idee, sogenannte „Fenster“ (Ausschnitte aus 4 Feldern) im Spiel zu analysieren und zu beurteilen, wie viele Steine der KI bzw. des Gegners in diesen Fenstern enthalten sind:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		def evaluate_window(window, player):
+		opp_player = opponent_piece if player == my_piece else my_piece
+		score = 0
+		if window.count(player) == 4:
+		score += 100
+		elif window.count(player) == 3 and window.count(0) == 1:
+		score += 5
+		elif window.count(player) == 2 and window.count(0) == 2:
+		score += 2
+		if window.count(opp_player) == 3 and window.count(0) == 1:
+		score -= 4
+		return score
+	\end{lstlisting}
+	
+	Diese Funktion bewertet sowohl offensive als auch defensive Situationen. Ein Fenster mit drei eigenen Steinen und einem leeren Feld wird positiv bewertet, ein Fenster mit drei gegnerischen Steinen und einem leeren Feld hingegen negativ, um Bedrohungen abzuwehren.
+	
+	Die Hauptfunktion zur Bewertung des gesamten Spielfeldes aggregiert alle horizontalen, vertikalen und diagonalen Fenster:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		def evaluate(board):
+		score = 0
+		center_array = [board[r][field_width//2] for r in range(field_height)]
+		center_count = center_array.count(my_piece)
+		score += center_count * 3
+	\end{lstlisting}
+	
+	Zunächst werden die mittleren Spalten stärker gewichtet, da sie strategisch wichtiger sind (von dort aus können mehr Gewinnlinien entstehen).
+	
+	Anschließend werden alle Zeilen, Spalten und Diagonalen analysiert:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		for r in range(field_height):
+		row_array = [board[r][c] for c in range(field_width)]
+		for c in range(field_width - 3):
+		window = row_array[c:c+4]
+		score += evaluate_window(window, my_piece)
+		score -= evaluate_window(window, opponent_piece)
+	\end{lstlisting}
+	
+	Diese Schleifen bilden das heuristische Fundament für die spätere Entscheidungsfindung.
+	
+	\subsection*{Minimax mit Alpha-Beta-Pruning}
+	
+	Die Hauptentscheidung trifft der Minimax-Algorithmus. Dabei wird rekursiv der Spielbaum aufgebaut, wobei sich der Algorithmus abwechselnd in die Rolle der KI („maximizing player“) und des Gegners („minimizing player“) versetzt. Um die Effizienz zu steigern, wird Alpha-Beta-Pruning genutzt. Dabei werden Äste im Spielbaum verworfen, wenn sie nachweislich zu schlechteren Ergebnissen führen.
+	
+	Der Einstiegspunkt ist:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		def alpha_beta(board, depth, alpha, beta, maximizing_player):
+	\end{lstlisting}
+	
+	Zuerst wird geprüft, ob der aktuelle Zustand bereits im Transposition Table gespeichert ist – einem Cache zur Vermeidung redundanter Berechnungen:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		key = (board_hash(board, maximizing_player), depth)
+		if key in transposition_table:
+		return transposition_table[key]
+	\end{lstlisting}
+	
+	Anschließend erfolgt eine Terminalprüfung: Ist der Zug eine Gewinnsituation, oder wurde die maximale Tiefe erreicht?
+	
+	\begin{lstlisting}[style=pythonstyle]
+		valid_locations = [col for col in range(field_width) if is_valid_location(board, col)]
+		terminal = winning_move(board, my_piece) or winning_move(board, opponent_piece) or len(valid_locations) == 0
+		if depth == 0 or terminal:
+		...
+	\end{lstlisting}
+	
+	Falls ja, gibt die Funktion eine Bewertung zurück. Andernfalls wird der Spielbaum weiter durchlaufen.
+	
+	\paragraph*{Maximierender Spieler (KI):}
+	\\
+	
+	\begin{lstlisting}[style=pythonstyle]
+		if maximizing_player:
+		value = -float('inf')
+		for col in valid_locations:
+		...
+		new_score = alpha_beta(..., False)[1]
+		if new_score > value:
+		value = new_score
+		best_col = col
+		alpha = max(alpha, value)
+		if alpha >= beta:
+		break
+	\end{lstlisting}
+	
+	Hier versucht der Algorithmus, die maximal erreichbare Bewertung zu finden und prüft regelmäßig, ob das aktuelle Ergebnis besser ist als die bisherige beste Option. Wenn \texttt{alpha >= beta}, wird der restliche Baum abgeschnitten (Pruning).
+	
+	\paragraph*{Minimierender Spieler (Gegner):}
+	
+	Analog erfolgt das Vorgehen für den Gegner:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		else:
+		value = float('inf')
+		for col in valid_locations:
+		...
+		new_score = alpha_beta(..., True)[1]
+		if new_score < value:
+		value = new_score
+		best_col = col
+		beta = min(beta, value)
+		if beta <= alpha:
+		break
+	\end{lstlisting}
+	
+	Am Ende wird das Ergebnis in der Transpositionstabelle gespeichert und zurückgegeben:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		transposition_table[key] = result
+		return result
+	\end{lstlisting}
+	
+	\subsection*{Dynamische Suchtiefe}
+	
+	Je nach Spielphase kann es sinnvoll sein, tiefer oder flacher zu suchen. Zu Beginn reicht eine niedrige Tiefe, da viele Züge möglich sind. In späteren Phasen erhöht sich die Tiefe:
+	
+	\begin{lstlisting}[style=pythonstyle]
+		def get_dynamic_depth(board):
+		empty = sum(row.count(0) for row in board)
+		if empty > 30:
+		return 3
+		else:
+		return 4
+	\end{lstlisting}
+	
+	Diese dynamische Anpassung balanciert Spielstärke und Rechenzeit optimal.
+	
+	\subsection*{Fazit}
+	
+	Der eingesetzte Minimax-Algorithmus mit Alpha-Beta-Pruning stellt das strategische Herzstück des 4-Gewinnt-Roboters dar. Durch gezielte Bewertung von Spielpositionen, Berücksichtigung gegnerischer Drohungen und dynamische Tiefenanpassung kann der Roboter selbstständig Züge planen, Gefahren abwehren und letztlich siegreich agieren. Die Verwendung eines Transpositionstables beschleunigt dabei die Entscheidungsfindung, indem bereits analysierte Spielsituationen nicht erneut bewertet werden müssen. Das Ergebnis ist ein hochgradig effektives Entscheidungsverfahren für ein strategisches Spiel wie 4-Gewinnt.
+	
+
+
+	
+
+
