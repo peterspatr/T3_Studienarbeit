@@ -353,7 +353,45 @@ Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Ge
 		while sensor_activated():
 			time.sleep(0.1)
 		print("Move completed. Waiting for next activation...")
-	
-	
 \end{lstlisting}
 
+\tikzstyle{startstop} = [ellipse, draw, fill=gray!10, minimum width=3cm, minimum height=1cm]
+\tikzstyle{io} = [trapezium, trapezium left angle=70, trapezium right angle=110, draw, fill=blue!10, minimum width=3cm, minimum height=1cm]
+\tikzstyle{process} = [rectangle, draw, fill=orange!10, minimum width=3cm, minimum height=1cm]
+\tikzstyle{decision} = [diamond, draw, fill=green!10, aspect=2, minimum width=3cm, minimum height=1cm]
+\tikzstyle{arrow} = [thick,->,>=Stealth]
+
+\begin{figure}[H]
+
+\begin{tikzpicture}[node distance=2cm]
+	\node (start) [startstop] {Start};
+	\node (wait) [process, below of=start] {Warten auf Sensor-Aktivierung};
+	\node (move) [process, below of=wait] {Spielfeld anfahren};
+	\node (scan) [process, below of=move] {Spalten scannen};
+	\node (update) [process, below of=scan] {Board-Update};
+	\node (opponent) [decision, below of=update, yshift=-0.7cm] {Neuer gegnerischer Stein?};
+	\node (calc) [process, below of=opponent, yshift=-0.7cm] {Optimalen Zug berechnen (Alpha-Beta)};
+	\node (motor) [process, below of=calc] {Motorsteuerung: Stein platzieren};
+	\node (win) [decision, below of=motor, yshift=-0.7cm] {Gewonnen?};
+	\node (congrats) [startstop, right of=win, xshift=5cm] {Glückwunsch! Spiel gewonnen};
+	\node (print) [process, below of=win] {Spielfeld ausgeben};
+
+	
+	\draw [arrow] (start) -- (wait);
+	\draw [arrow] (wait) -- (move);
+	\draw [arrow] (move) -- (scan);
+	\draw [arrow] (scan) -- (update);
+	\draw [arrow] (update) -- (opponent);
+	\draw [arrow] (opponent) -- node[right] {Ja/Nein} (calc);
+	\draw [arrow] (calc) -- (motor);
+	\draw [arrow] (motor) -- (win);
+	\draw [arrow] (win) -- node[above] {Ja} (congrats);
+	\draw [arrow] (win) -- node[right] {Nein} (print);
+	\draw [arrow] (congrats) |- (print);
+	\draw [arrow] (print.west) -| ($(wait.west)+(-1.5,0)$) -- (wait.west);
+	
+\end{tikzpicture}
+
+	\caption[Flussdiagramm]{Flussdiagramm der Software}
+\label{fig:Flussdiagramm}
+\end{figure}
