@@ -176,10 +176,15 @@ def alpha_beta(board, depth, alpha, beta, maximizing_player):
     transposition_table[key] = result
     return result
 
+
+
 # --- MAIN PROGRAM ---
 board = [[0 for _ in range(field_width)] for _ in range(field_height)]
 last_board = [row[:] for row in board]
 
+def move_motor_e_to_zero():
+    pass
+	
 while True:
     print("Waiting for sensor at port C...")
     while not sensor_activated():
@@ -294,3 +299,4 @@ while True:
     while sensor_activated():
         time.sleep(0.1)
     print("Move completed. Waiting for next activation...")
+
