@@ -52,9 +52,9 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 		- & wenn ein leerer Platz erkannt wurde, zur nächsten Spalte & W\\
 		\hline
 		- &  & F\\
-		\hline
+		\hline 
 
-	\end{tabular}
+	\end{tabular} 
 	  %\vspace{3mm}
 	\begin{minipage}{0.5\linewidth}
 		\small
@@ -63,6 +63,9 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 	
 \end{table}
 \section{Konzept}
+Nachdem die Anforderungsliste erstellt wurde, folgt im nächsten Schritt die Ausarbeitung eines Konzepts.
+Um die vielen verschiedenen Möglichkeiten übersichtlich und strukturiert darzustellen, wurde hierfür der Ansatz eines  morphologischer Kasten gewählt. Dieser ist in der Tabelle \ref{tab:Morpho} dargestellt.
+Durch diese Herangehensweise können unterschiedliche Kombinationen von Lösungsansätzen untersucht und miteinander verglichen werden. Dadurch kann die beste Lösung für die Realisierung gefunden werden. In der Tabelle \ref{tab:Morpho} ist diese durch eine blaue Linie dargestellt \textcolor{blue}{\rule[0.5ex]{1cm}{3pt}}.
 
 
 	
@@ -84,14 +87,14 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 		row 1/.style={nodes={fill=gray!50}},
 		column 1/.style={nodes={fill=gray!30}}
 		] {
-			& Variante 1 & Variante 2 & Variante 3 \\
+			Merkmale & Variante 1 & Variante 2 & Variante 3 \\
 			Berechnung      & auf dem Computer   & auf dem Controller   &  \\
-			Rückmeldung & Computer & LED-Matrix & Akustisches Signal \\
+			Rückmeldung & Computer & LED-Matrix & akustisches Signal \\
 			Programmiersprache  & MicroPython  & Scratch  & \\
 			Algorithmus& Zufall& Minimax/Alpha-Beta& Vorprogrammierte Züge\\
-			Verbindung zum PC & Bluetooth  & USB Kabel &  \\
+			Verbindung zum PC & Bluetooth  & USB-Kabel &  \\
 			Art der Startbetätigung & vom Computer  & Kraftsensor & Taste am Hub  \\
-			Spielfeld-Erkennung & Farbsensor  & Manuelle Eingabe &  \\
+			Spielfeld-Erkennung & Farbsensor  & manuelle Eingabe &  \\
 			Steinplatzierung & Greifarm & Fallmechanismus/ Rutsche & Förderband \\
 			%Rückmeldung & Computer & LED-Matrix & Akustisches Signal \\
 		};
@@ -107,6 +110,7 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 		\draw[blue, ultra thick]   (m-8-3) -- (m-9-3);
 	\end{tikzpicture}
 \caption[Morphologischer Kasten]{Morphologischer Kasten}
+\label{tab:Morpho}
 \end{table}
 %\section{der Algorithmus}
 %\section*{Struktur und Funktionalität des Python-Codes für ein 4-Gewinnt-Spiel}
