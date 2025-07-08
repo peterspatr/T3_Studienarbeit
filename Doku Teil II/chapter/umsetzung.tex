@@ -1,12 +1,12 @@
-\chapter{Mechanischer Aufbau}
-\label{cha:Mechanischer Aufbau}
+\chapter{ Umsetzung}
+\label{cha:Umsetzung}
 
 %Je nach Art der Arbeit kann diese Kapitelüberschrift auch \glqq Ergebnisse\grqq~lauten, z.~B. bei rein messtechnischen Aufgaben.
 
 %Beschreibung der Umsetzung des zuvor gewählten Vorgehens (theoretische Untersuchung, Erhebungen, Durchführung von Experimenten, Prototypenaufbau, Implementierung eines Prozesses, etc.).
 
 %Verifikation anhand der zuvor erarbeiteten Anforderungen und Validierung in Bezug auf das zuvor gestellte Ziel. Diskussion der Ergebnisse. Spätestens hier auch auf die Zuverlässigkeit der gewonnenen Erkenntnisse eingehen (z.~B. anhand der Genauigkeit von Messergebnissen).
-
+\section{Mechanischer Aufbau}
 Für die Umsetzung des 4-Gewinnt-Roboters wurde eine mechanische Konstruktion gewählt, die es erlaubt, das Spielfeld zu scannen sowie Chips gezielt in eine Spalte einzuwerfen. Der Aufbau umfasst drei Winkelmotoren, einen Farbsensor und einen Drucktaster. Im Folgenden werden die einzelnen Komponenten detailliert beschrieben. Dabei beziehen sich die Ziffern der Aufzählung der einzelnen Sensoren und Aktoren auf die Abbildung 4.1 und Abbildung 4.2.
 
 Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinatensystem, bei dem der Farbsensor durch die Kombination aus horizontaler und vertikaler Bewegung jede Spielfeldposition präzise anfahren kann. Das System erlaubt eine vollautomatische Spielweise.
@@ -25,7 +25,7 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 
 	\item \textbf{Startsignal}\\
 	Um dem Roboter mitzuteilen, dass er den nächsten Zug starten kann wurde ein Kraftsensor angebracht. Dieser befindet sich an der Vorderseite des Roboters. Sobald der Spieler den Sensor leicht berührt, wird ein Signal ausgelöst und der Prozess startet. 
-	\item \textbf{Spielfeldscan – Farbsensor an Kette}\\
+	\item \textbf{Spielfeldscan }\\
 	 Für die Farberkennung des Spielfeldes wurde ein LEGO-Farbsensor verwendet, der über die oben beschriebene Kettenkonstruktion vertikal verfahrbar ist. Die Farbmessung erfolgt jeweils in der Mitte eines Spielfeldes. Der Sensor erkennt RGB-Werte (in diesem Projekt benutzt: Rot, Gelb oder Leer). Der Abstand zwischen Sensor und Spielfeld beträgt etwa 7 mm. Dieser Wert hat sich als optimal für zuverlässige Farbmessung erwiesen.
 \end{enumerate}
 
@@ -96,7 +96,7 @@ Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Ge
 \chapter{Programmlogik}
 
 In diesem Kapitel wird die Softwarestruktur des 4-Gewinnt-Roboters systematisch beschrieben. Da der vollständige Quellcode eine Vielzahl an Funktionen, Hilfsroutinen und technischen Details umfasst, wird in diesem Kapitel aus Gründen der Übersichtlichkeit nicht jede einzelne Codezeile dargestellt und erläutert.
-Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen.
+Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. siehe anhangxxxxxxxxx
 
 Zur besseren Nachvollziehbarkeit der Funktionsweise wird die Darstellung in zwei Teile gegliedert:
 
@@ -137,7 +137,7 @@ Die Bewertungsfunktion basiert auf der Idee, sogenannte „Fenster“ (Ausschnit
 	if window.count(player) == 4:
 	score += 100
 	elif window.count(player) == 3 and window.count(0) == 1:
-	score += 5
+		score += 5
 	elif window.count(player) == 2 and window.count(0) == 2:
 	score += 2
 	if window.count(opp_player) == 3 and window.count(0) == 1:
@@ -474,13 +474,12 @@ Die gesamte Programmstruktur wurde mit dem Ziel entwickelt, unter den beschränk
 
 \chapter{Test und Versuchsauswertung}
 
-Zur Überprüfung der Funktionalität und Spielstärke des entwickelten 4-Gewinnt-Roboters wurde eine umfangreiche Testreihe mit menschlichen Mitspielern durchgeführt. Ziel dieser Versuche war es, das Verhalten des Roboters in realen Spielsituationen zu beobachten, die Zuverlässigkeit der Spielfelderkennung zu evaluieren und die Qualität des Entscheidungsalgorithmus praktisch zu prüfen.
+Zur Überprüfung der Funktionalität und Spielstärke des entwickelten 4-Gewinnt-Roboters wurde eine umfangreiche Testreihe mit menschlichen Mitspielern durchgeführt. Ziel dieser Versuche war es, das Verhalten des Roboters in realen Spielsituationen zu beobachten, die Zuverlässigkeit der Spielfelderkennung zu bewerten und die Qualität des Entscheidungsalgorithmus praktisch zu prüfen.
 
 \section{Versuchsaufbau}
 
-Der Roboter wurde in der finalen Version gegen eine Reihe unterschiedlicher menschlicher Spieler getestet. Die Bedienung erfolgte wie vorgesehen: Nach jedem menschlichen Zug wird der Force Sensor betätigt, woraufhin der Roboter das Spielfeld scannt, den neuen Spielstein erkennt, seinen Zug berechnet und automatisch ausführt.
-
-Es wurden insgesamt \textbf{20 vollständige Partien} gespielt. Die menschlichen Spieler handelten eigenständig ohne technische Vorkenntnisse und spielten mit realem Gewinninteresse – es wurde weder bewusst schlechter noch absichtlich gegen den Roboter gespielt. Alle Partien fanden unter konstanten Lichtverhältnissen und mit identischer physischer Spielfläche statt.
+Der Roboter wurde in der finalen Version gegen vier unterschiedliche Spieler getestet. 
+Es wurden insgesamt 20 vollständige Partien gespielt. Die menschlichen Spieler handelten eigenständig und spielten mit realem Gewinninteresse.
 
 \section{Ergebnisse}
 
