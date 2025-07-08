@@ -65,7 +65,7 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 \section{Konzept}
 Nachdem die Anforderungsliste erstellt wurde, folgt im nächsten Schritt die Ausarbeitung eines Konzepts.
 Um die vielen verschiedenen Möglichkeiten übersichtlich und strukturiert darzustellen, wurde hierfür der Ansatz eines  morphologischer Kasten gewählt. Dieser ist in der Tabelle \ref{tab:Morpho} dargestellt.
-Durch diese Herangehensweise können unterschiedliche Kombinationen von Lösungsansätzen untersucht und miteinander verglichen werden. Dadurch kann die beste Lösung für die Realisierung gefunden werden. In der Tabelle \ref{tab:Morpho} ist diese durch eine blaue Linie dargestellt \textcolor{blue}{\rule[0.5ex]{1cm}{3pt}}.
+Durch diese Herangehensweise können unterschiedliche Kombinationen von Lösungsansätzen untersucht und miteinander verglichen werden. Dadurch kann die beste Lösung für die Realisierung gefunden werden. In der Tabelle \ref{tab:Morpho} ist diese durch eine rote Linie dargestellt \textcolor{red}{\rule[0.5ex]{1cm}{3pt}}.
 
 
 	
@@ -101,17 +101,47 @@ Durch diese Herangehensweise können unterschiedliche Kombinationen von Lösungs
 		
 		% Bunte Linien zwischen Zeilen/Zellen
 		
-		\draw[blue, ultra thick]   (m-2-3) -- (m-3-2);    % Blaue, durchgezogene Linie
-		\draw[blue, ultra thick]   (m-3-2) -- (m-4-2);
-		\draw[blue, ultra thick]   (m-4-2) -- (m-5-3);
-		\draw[blue, ultra thick]   (m-5-3) -- (m-6-2);
-		\draw[blue, ultra thick]   (m-6-2) -- (m-7-3);
-		\draw[blue, ultra thick]   (m-7-3) -- (m-8-3);
-		\draw[blue, ultra thick]   (m-8-3) -- (m-9-3);
+		\draw[red, ultra thick]   (m-2-3) -- (m-3-2);    % Blaue, durchgezogene Linie
+		\draw[red, ultra thick]   (m-3-2) -- (m-4-2);
+		\draw[red, ultra thick]   (m-4-2) -- (m-5-3);
+		\draw[red, ultra thick]   (m-5-3) -- (m-6-2);
+		\draw[red, ultra thick]   (m-6-2) -- (m-7-3);
+		\draw[red, ultra thick]   (m-7-3) -- (m-8-3);
+		\draw[red, ultra thick]   (m-8-3) -- (m-9-3);
 	\end{tikzpicture}
 \caption[Morphologischer Kasten]{Morphologischer Kasten}
 \label{tab:Morpho}
 \end{table}
+
+\section{Zeitplan}
+Im Zeitplan werden die einzeln Arbeitsschritte strukturiert und organisiert grafisch dargestellt. Hierfür wird für jede einzeln Arbeitsaufgaben ein Zeitraum festgelegt. Dadurch kann der Fortschritt
+besser verfolgt werden. Ein Zeitplan ist bei einer Projektarbeit ein unerlässliches Werkzeug, um die Arbeit effzient und zielgerecht durchführen zu können.
+
+
+\begin{table}[h!]
+\begin{ganttchart}[
+	hgrid,
+	vgrid,
+	x unit=0.9cm
+	]{1}{12}
+	\gantttitlelist{"April","Mai","Juni"}{4} \\ % Monatsnamen als Text
+	\gantttitlelist{1,2,3,4,5,6,7,8,9,10,11,12}{1} \\ % Wochennummern
+	\ganttbar[bar/.append style={fill=red}]{Einarbeitung}{1}{2} \\
+	\ganttbar[bar/.append style={fill=red}]{Projektplanung}{2}{2} \\
+	\ganttbar[bar/.append style={fill=red}]{Entwurf entwerfen}{3}{4} \\
+	\ganttbar[bar/.append style={fill=red}]{Material heraussuchen}{4}{4} \\
+	\ganttbar[bar/.append style={fill=red}]{Erster Prototyp}{5}{6} \\
+	\ganttbar[bar/.append style={fill=red}]{Software entwickeln}{6}{8} \\
+	\ganttbar[bar/.append style={fill=red}]{Erste Versuche}{7}{8} \\
+	\ganttbar[bar/.append style={fill=red}]{Optimierungen}{9}{10} \\
+	\ganttbar[bar/.append style={fill=orange}]{ Abschlussturnier}{10}{10} 
+	
+\end{ganttchart}
+
+\caption[Zeitplan]{Zeitplan}
+\label{tab:Zeitplan}
+\end{table}
+
 %\section{der Algorithmus}
 %\section*{Struktur und Funktionalität des Python-Codes für ein 4-Gewinnt-Spiel}
 %
