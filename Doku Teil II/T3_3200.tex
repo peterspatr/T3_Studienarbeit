@@ -14,7 +14,6 @@ cleardoublepage=empty,			% Stil einer leeren eingefügten Seite bei Kapitelwechs
 parskip,							% Absatzabstand bei Absatzwechsel einfügen
 ngerman
 ]{scrbook}			
-\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[ngerman]{babel}
@@ -153,6 +152,8 @@ marginal
 	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
+
+
 % -----------------------------------------------------------------------------------------------------------------
 % Zum Aktualisieren des Abkürzungsverzeichnisses (Nomenklatur) bitte auf der Kommandozeile folgenden Befehl aufrufen :
 % makeindex <Dateiname>.nlo -s nomencl.ist -o <Dateiname>.nls
@@ -197,6 +198,12 @@ marginal
 \usetikzlibrary{positioning}
 \usetikzlibrary{calc}
 \usetikzlibrary{shapes.geometric, arrows.meta}
+\usetikzlibrary{matrix}
+\usepackage[table]{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
 
 \hyphenation{Schrift-ar-ten}
 
@@ -207,6 +214,27 @@ marginal
 %\makeindex						% Indexverzeichnis erstellen
 \makenomenclature				% Abkürzungsverzeichnis erstellen
 \makeglossaries
+
+%Python
+\lstdefinestyle{pythonstyle}{
+	language=Python,
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{gray}\itshape,
+	stringstyle=\color{orange},
+	numbers=left,
+	numberstyle=\tiny,
+	stepnumber=1,
+	numbersep=8pt,
+	frame=single,                 % Einzelrahmen um Codeblöcke
+	rulecolor=\color{black},      % Rahmenfarbe schwarz
+	framerule=0.8pt,              % Rahmendicke
+	breaklines=true,
+	backgroundcolor=\color{white},
+	tabsize=4,
+	showstringspaces=false,
+}
+
 
 % -------------------------------------------------------------------------------------------
 %                     Beginn des Dokumenteninhalts

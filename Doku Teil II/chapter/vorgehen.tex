@@ -2,6 +2,9 @@
 Im folgendem Kapitel wird auf die Planung des Vier-Gewinnt-Roboters eingegangen. Zunächst werden die Anforderungen definiert. Anschließend werden verschiedene Konzepte genauer betrachtet und miteinander verglichen.
 
 \section{Aufgabenpräzisierung}
+Für das Projekt soll mit LEGO Spike Prime ein Roboter entwickelt werden, der Spielzüge im Spiel Vier-Gewinnt vollkommen eigenständig gegen einen menschlichen Gegner oder einen anderen Roboter spielen kann. Der Roboter muss dazu in der Lage sein, die auf dem Spielfeld platzierten gelben und roten Spielsteine zuverlässig zu erkennen und deren Positionen zu erfassen, um das gesamte Spielfeld systematisch auswerten zu können.\newline
+Nach Abschluss des Scanvorgangs berechnet der Roboter mithilfe eines passenden Algorithmus die nächste optimale Position. An der ermittelten Stelle platziert er anschließend eigenständig den nächsten Spielstein. Es ist wichtig, dass der Roboter flexibel ist und sowohl mit gelben als auch mit roten Steinen spielen kann. Außerdem muss es möglich sein, dass der Roboter das Spiel entweder eröffnet oder als zweiter Spieler startet.\newline
+Für jeden Spielzug gilt eine maximale Zeitvorgabe von 90 Sekunden, die nicht überschritten werden darf. Der Roboter zieht sich nach jedem Zug komplett vom Spielfeld zurück und wartet darauf, dass der Gegner seinen Spielzug komplett abgeschlossen hat. Erst danach startet der Roboter erneut mit dem Scannen des Spielfelds und der darauf folgenden Berechnung des nächsten Zuges.
 
 
 \section{Anforderungen an den Roboter}
@@ -11,67 +14,45 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 	\centering
 	\caption{Anforderungstabelle für einen Vier-Gewinnt-Roboter}
 	\label{tab:Anforderungen}
-	\begin{tabular}{|p{1cm}|p{12cm}| p{1cm}|}
+	\begin{tabular}{|p{1cm}|p{11.5cm}| p{1cm}|}
 		\hline
-		\textbf{Nr} & \textbf{Anforderung an das System} & \textbf{F/W} \\
+		\textbf{Nr.} & \textbf{Anforderung an das System} & \textbf{F/W} \\
 		\hline
 		\hline
-		- & Komplettes Spielfeld scannen & F\\
+		-& komplettes Spielfeld scannen & F\\
 		\hline
-		- & Das Ende des Spiels erkennen & F\\
+		- & das Ende des Spiels erkennen & F\\
 		\hline
-		- & Autonom fahren	& F\\
+		- & autonom fahren	& F\\
 		\hline
-		- &  Begrezungen des Spielfeld erkennen& F\\
+		-& Begrenzungen des Spielfelds erkennen & F\\
 		\hline
 		- &Steine selber platzieren & F\\
 		\hline
-		- & Immer nur ein Stein pro Spielzug & F\\
+		- & immer nur ein Stein pro Spielzug & F\\
 		\hline
-		-&  Abwarten bis der Gegner sein Zug beendet hat& F\\
+		-&  Abwarten, bis der Gegner seinen Zug beendet hat & F\\
 		\hline
-	
-		- & Nach jeden Zug rechts vom Spielfeld wegfahren  & F\\
+		- & nach jedem Zug rechts vom Spielfeld wegfahren & F\\
 		\hline
 		- & maximal 90 Sekunden pro Spielzug  & F\\
 		\hline
 		- & optimalen Spielzug berechnen & F\\
 		\hline
-		- & Scannen bis ein neuer gegnerischer Stein erkannt wurde  &W\\
+		- &  es sollte möglich sein sowohl mit Gelb als auch Rot zu spielen  & F\\
 		\hline
-		- & Volle Spalten überspringen & W\\
+		- & sowohl als Erster als auch als Zweiter zu starten & F\\
 		\hline
-		- & Wenn eine leere Zeile erkannt wurde zur nächsten Spalte wechseln & W\\
+		- & während des gegnerischen Spielzugs warten  & F\\
+		\hline
+		- & Scannen, nur bis ein neuer gegnerischer Stein erkannt wurde  &W\\
+		\hline
+		- & volle Spalten überspringen & W\\
+		\hline
+		- & wenn ein leerer Platz erkannt wurde, zur nächsten Spalte & W\\
 		\hline
 		- &  & F\\
 		\hline
-		
-		
-		
-%		Physisches Spiel & Der Roboter muss in der Lage sein, auf einem echten Vier-Gewinnt-Brett Spielsteine zu platzieren. \\
-%		\hline
-%		Mechanik & Einfache, zuverlässige Mechanik zum Greifen, Transportieren und Einwerfen der Spielsteine in die gewünschte Spalte. \\
-%		\hline
-%		Brett-Erkennung & Das aktuelle Spielfeld muss erkannt werden, z.B. mit einer Kamera oder Sensoren, um die Position aller Steine zu erfassen. \\
-%		\hline
-%		Gegnerzug-Erkennung & Der Roboter muss erkennen, in welche Spalte der menschliche Spieler seinen Stein geworfen hat. \\
-%		\hline
-%		Künstliche Intelligenz & Implementierung eines Algorithmus (z.B. Minimax mit Alpha-Beta-Pruning), um den optimalen Zug zu berechnen. \\
-%		\hline
-%		Reaktionszeit & Der Roboter soll innerhalb weniger Sekunden nach dem gegnerischen Zug reagieren können. \\
-%		\hline
-%		Benutzerinteraktion & Möglichkeit, den Schwierigkeitsgrad einzustellen und das Spiel zu starten/abzubrechen. \\
-%		\hline
-%		Sicherheit & Der Roboter darf keine Gefahr für den Benutzer darstellen (z.B. Not-Aus, sichere Mechanik). \\
-%		\hline
-%		Kommunikation & Schnittstellen zur Steuerung und ggf. zur Anzeige von Statusinformationen (Display, LEDs, Sound). \\
-%		\hline
-%		Wartung & Der Roboter soll einfach zu warten und zu reinigen sein. \\
-%		\hline
-%		Mobilität (optional) & Der Roboter kann transportabel oder stationär ausgelegt sein. \\
-%		\hline
-
-% Legende direkt unter der Tabelle
 
 	\end{tabular}
 	  %\vspace{3mm}
@@ -81,7 +62,52 @@ In der Tabelle \ref{tab:Anforderungen} sind die Anforderungen an den Vier-Gewinn
 	\end{minipage}
 	
 \end{table}
+\section{Konzept}
 
+
+	
+\begin{table}[h!]
+	
+	\begin{tikzpicture}
+		% Tabelle als Matrix
+		\matrix (m) [matrix of nodes,
+		nodes in empty cells,
+		nodes={
+			draw,
+			minimum width=4cm,
+			minimum height=1.5cm,
+			text width=3.5cm,
+			align=center,
+			anchor=center
+		},
+		column sep=0.3cm, row sep=0.3cm,
+		row 1/.style={nodes={fill=gray!50}},
+		column 1/.style={nodes={fill=gray!30}}
+		] {
+			& Variante 1 & Variante 2 & Variante 3 \\
+			Berechnung      & auf dem Computer   & auf dem Controller   &  \\
+			Rückmeldung & Computer & LED-Matrix & Akustisches Signal \\
+			Programmiersprache  & MicroPython  & Scratch  & \\
+			Algorithmus& Zufall& Minimax/Alpha-Beta& Vorprogrammierte Züge\\
+			Verbindung zum PC & Bluetooth  & USB Kabel &  \\
+			Art der Startbetätigung & vom Computer  & Kraftsensor & Taste am Hub  \\
+			Spielfeld-Erkennung & Farbsensor  & Manuelle Eingabe &  \\
+			Steinplatzierung & Greifarm & Fallmechanismus/ Rutsche & Förderband \\
+			%Rückmeldung & Computer & LED-Matrix & Akustisches Signal \\
+		};
+		
+		% Bunte Linien zwischen Zeilen/Zellen
+		
+		\draw[blue, ultra thick]   (m-2-3) -- (m-3-2);    % Blaue, durchgezogene Linie
+		\draw[blue, ultra thick]   (m-3-2) -- (m-4-2);
+		\draw[blue, ultra thick]   (m-4-2) -- (m-5-3);
+		\draw[blue, ultra thick]   (m-5-3) -- (m-6-2);
+		\draw[blue, ultra thick]   (m-6-2) -- (m-7-3);
+		\draw[blue, ultra thick]   (m-7-3) -- (m-8-3);
+		\draw[blue, ultra thick]   (m-8-3) -- (m-9-3);
+	\end{tikzpicture}
+\caption[Morphologischer Kasten]{Morphologischer Kasten}
+\end{table}
 %\section{der Algorithmus}
 %\section*{Struktur und Funktionalität des Python-Codes für ein 4-Gewinnt-Spiel}
 %
