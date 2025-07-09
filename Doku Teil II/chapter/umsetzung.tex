@@ -1,6 +1,6 @@
 \chapter{ Umsetzung}
 \label{cha:Umsetzung}
-
+In diesem Kapitel steht die praktische Umsetzung des Roboters im Fokus. Dabei wird auf den Aufbau eingegangen, ebenso wie auf die Funktionsweise der Software. 
 %Je nach Art der Arbeit kann diese Kapitelüberschrift auch \glqq Ergebnisse\grqq~lauten, z.~B. bei rein messtechnischen Aufgaben.
 
 %Beschreibung der Umsetzung des zuvor gewählten Vorgehens (theoretische Untersuchung, Erhebungen, Durchführung von Experimenten, Prototypenaufbau, Implementierung eines Prozesses, etc.).
@@ -11,7 +11,7 @@ Für die Umsetzung des 4-Gewinnt-Roboters wurde eine mechanische Konstruktion ge
 
 Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinatensystem, bei dem der Farbsensor durch die Kombination aus horizontaler und vertikaler Bewegung jede Spielfeldposition präzise anfahren kann. Das System erlaubt eine vollautomatische Spielweise.
 
-\section{Einbindung von Aktorik}
+\subsection{Einbindung von Aktorik}
 \begin{enumerate}
 	\item \textbf{Horizontalantrieb}\\
 	Der horizontale Antrieb des Farbsensors erfolgt über einen Winkelmotor. Dieser ist dafür zuständig, die Spielfeldspalten nacheinander anzufahren. Der Motor ist mit einer Achse verbunden, welche zwei Räder antreiben. Die Bewegung erfolgt in gleichmäßigen Schritten: Eine Drehung um exakt 72 Grad bewegt den Roboter um eine Spalte weiter. Diese Schrittweite wurde so gewählt, dass sie der Breite einer Spalte im Spielfeld entspricht. Dadurch ist eine exakte Positionierung des Sensors über jeder Spalte möglich, ohne dass zusätzliche Sensoren zur Positionsbestimmung notwendig sind. 
@@ -21,7 +21,7 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 	Das Einwerfen des eigenen Spielsteins erfolgt ebenfalls über einen Winkelmotor. An diesem Motor ist eine Stange montiert, die bei einer vollständigen Umdrehung einen Spielchip aus dem Vorratsmagazin (mit der Software Fusion360 konstrukiert und 3D-gedruckt) in die gewünschte Spalte stößt. Nach der Auslösung kann ein neuer Chip in die Abschussposition nachrutschen. In der Software ist eine Wartezeit nach dem Auslösen eingebaut, damit der Chip sicher im Spielfeld ankommt, bevor die nächste Aktion beginnt.
 
 
-\section{Einbindung von Sensorik}
+\subsection{Einbindung von Sensorik}
 
 	\item \textbf{Startsignal}\\
 	Um dem Roboter mitzuteilen, dass er den nächsten Zug starten kann wurde ein Kraftsensor angebracht. Dieser befindet sich an der Vorderseite des Roboters. Sobald der Spieler den Sensor leicht berührt, wird ein Signal ausgelöst und der Prozess startet. 
@@ -49,7 +49,19 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 
 
 \section{Software}
-Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Gewinnt-Roboters umgesetzt ist. Die Software bildet das Kernstück des Roboters und ist entscheidend dafür, dass dieser eigenständig am Spiel teilnehmen kann.
+Das Kapitel Software beschreibt ausführlicher, wie der Vier-Gewinnt-Roboter programmiert wird. Die Software ist das Herzstück des Roboters und spielt eine entscheidende Rolle für seine autonome Teilnahme am Spiel.
+
+\subsection{Ablauf der Software}
+Das in der Abbildung \ref{fig:Flussdiagramm} dargestellte Flussdiagramm zeigt grafisch den groben Ablauf der Software. \newline
+Zu Beginn befindet sich das System im Wartezustand und wartet auf die Betätigung des Touch-/Kraftsensors. Dieser signalisiert den Start eines neuen Spielzugs. Sobald der Sensor aktiviert wurde, fährt der Roboter zur ersten Spalte des Spielfelds.
+Anschließend scannt das System die einzelnen Spalten des Spielfelds ab, um den neuen gegnerischen Stein zu entdecken. Dabei wird das interne Spielfeld aktualisiert, bis ein neuer gegnerischer Stein erkannt wurde oder alle 7 Spalten gescannt wurden.
+
+Im nächsten Schritt prüft die Software das interne Spielfeld und berechnet mithilfe des Alpha-Beta-Algorithmus den optimalen Spielzug.
+Dabei ist es nicht von Bedeutung, ob ein gegnerischer Stein erkannt wurde oder nicht. Da zu Beginn des Spiels noch gar keine Steine im Feld vorhanden sind.
+Der Roboter platziert nach der Berechnung den eigenen Spielstein an der berechneten optimalen Position.
+
+Im Anschluss prüft die Software, ob das Spiel gewonnen wurde. Ist das der Fall, so wird eine Glückwunschmeldung und ein Ton ausgegeben. Falls kein Gewinn vorliegt, wird einfach das aktuelle Spielfeld auf der Konsole in der LEGO Spike App ausgegeben und der Prozess beginnt von vorne in der Warteposition mit dem Warten auf die nächste Sensoraktivierung. 
+
 
 
 
@@ -96,53 +108,54 @@ Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Ge
 \section{Programmlogik}
 
 In diesem Kapitel wird die Softwarestruktur des 4-Gewinnt-Roboters systematisch beschrieben. Da der vollständige Quellcode eine Vielzahl an Funktionen, Hilfsroutinen und technischen Details umfasst, wird in diesem Kapitel aus Gründen der Übersichtlichkeit nicht jede einzelne Codezeile dargestellt und erläutert.
-Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. siehe anhangxxxxxxxxx
+Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. Der vollständige Code kann aus dem Anhang entnommen werden.
 
 Zur besseren Nachvollziehbarkeit der Funktionsweise wird die Darstellung in zwei Teile gegliedert:
 
 \begin{itemize}
-	\item Zunächst wird der \textbf{Algorithmus zur Spielentscheidung} detailliert erläutert. Dabei handelt es sich um den Minimax-Algorithmus mit Alpha-Beta-Pruning. Dieser Abschnitt behandelt ausschließlich die Entscheidungslogik.
+	\item Zunächst wird ausschließlich der \textbf{Algorithmus} zur Spielentscheidung detailliert erläutert. Dabei handelt es sich um den Minimax-Algorithmus mit Alpha-Beta-Pruning.
 	
-	\item Im Anschluss wird das \textbf{Hauptprogramm} vorgestellt, das alle Bestandteile miteinander verknüpft. Es steuert den Ablauf des Spiels von der Spielerkennung über das Spielfeld-Scanning bis zur Ausführung des eigenen Spielzugs. Dabei werden sowohl Sensoren als auch Motoren angesprochen und der Entscheidungsalgorithmus eingebunden.
+	\item Im Anschluss wird das \textbf{Hauptprogramm} vorgestellt, das alle Bestandteile miteinander verknüpft. Es steuert den Ablauf über das Spielfeld-Scanning bis zum Berechnen und Ausführen des eigenen Spielzugs. Dabei werden sowohl Sensoren als auch Motoren angesprochen und der Entscheidungsalgorithmus eingebunden.
 \end{itemize}
 
 Diese Zweiteilung erlaubt es, sowohl die algorithmische Tiefe als auch die technische Umsetzung getrennt zu betrachten und anschließend im Gesamtkontext zu verstehen.
 
-Desweiteren wird im Unterkapitel 5.3 die konkrete Umsetzung der Spielsteuerung und Entscheidungslogik für den 4-Gewinnt-Roboter beschrieben. Der Fokus liegt auf der softwareseitigen Realisierung unter Berücksichtigung der limitierten Hardware-Ressourcen des LEGO Spike Prime Hubs. Es werden hierbei zentrale Entwurfsentscheidungen erläutert.
+Desweiteren wird im Unterkapitel 4.7 die konkrete Umsetzung der Spielsteuerung und Entscheidungslogik für den 4-Gewinnt-Roboter beschrieben. Der Fokus liegt auf der softwareseitigen Realisierung unter Berücksichtigung der limitierten Hardware-Ressourcen des LEGO Spike Prime Hubs. Es werden hierbei zentrale Entwurfsentscheidungen erläutert.
 
 
 \subsection{Algorithmus}
 
-Ein zentraler Bestandteil des 4-Gewinnt-Roboters ist die Entscheidungsfindung durch einen algorithmischen Spielbaum. Dieser wird mit dem bekannten\newline Minimax-Algorithmus unter Verwendung von Alpha-Beta-Pruning realisiert. Ziel ist es, basierend auf dem aktuellen Spielfeldzustand den optimalen Zug für die KI zu berechnen.
+Ein zentraler Bestandteil des 4-Gewinnt-Roboters ist die Entscheidungsfindung durch einen algorithmischen Spielbaum. Dieser wird mit dem bekannten Minimax-Algorithmus unter Verwendung von Alpha-Beta-Pruning realisiert. Ziel ist es, basierend auf dem aktuellen Spielfeldzustand den optimalen Zug für den Roboter zu berechnen.\\
 Der Algorithmus bewertet mögliche Züge bis zu einer bestimmten Tiefe im Spielbaum und trifft Entscheidungen, die langfristig zum Sieg führen können oder gegnerische Gewinnzüge verhindern.
 
-\textbf{Spielfeld und Spielerdefinition}
-Im Vorfeld des Algorithmus ist festgelegt, welches Symbol der Algorithmus (die KI) spielt:
+\textbf{Spielfeld und Spielerdefinition:}\\
+Im Vorfeld des Algorithmus ist festgelegt, welches Symbol der Algorithmus (Roboter) spielt:
 
 \begin{lstlisting}[style=pythonstyle]
 	my_piece = 1  # 1 = YELLOW (AI player), -1 = RED
 	opponent_piece = -my_piece
 \end{lstlisting}
 
-Dabei entspricht 1 dem gelben Spielstein (der KI), -1 dem roten Spielstein (dem Gegner). Diese numerische Darstellung vereinfacht die Bewertung und das Vergleichen der Felder im Spielfeld.
+Dabei entspricht 1 dem gelben Spielstein (Roboter), -1 dem roten Spielstein (Gegner). Diese numerische Darstellung vereinfacht die Bewertung und das Vergleichen der Felder im Spielfeld.
 
-\textbf{Bewertungsfunktion}
+\textbf{Bewertungsfunktion:}\\
 Der Algorithmus benötigt eine Bewertungsfunktion, die die Qualität eines Spielzustands abschätzt. Dies geschieht durch eine Heuristik, die mögliche Gewinnlinien zählt und bewertet.
-Die Bewertungsfunktion basiert auf der Idee, sogenannte „Fenster“ (Ausschnitte aus 4 Feldern) im Spiel zu analysieren und zu beurteilen, wie viele Steine der KI bzw. des Gegners in diesen Fenstern enthalten sind:
+Die Bewertungsfunktion basiert auf der Idee, sogenannte „Fenster“ (Ausschnitte aus 4 Feldern) im Spiel zu analysieren und zu beurteilen, wie viele Steine der Roboter bzw. des Gegners in diesen Fenstern enthalten sind:
 
 \begin{lstlisting}[style=pythonstyle]
 	def evaluate_window(window, player):
-	opp_player = opponent_piece if player == my_piece else my_piece
-	score = 0
-	if window.count(player) == 4:
-	score += 100
-	elif window.count(player) == 3 and window.count(0) == 1:
-		score += 5
-	elif window.count(player) == 2 and window.count(0) == 2:
-	score += 2
-	if window.count(opp_player) == 3 and window.count(0) == 1:
-	score -= 4
-	return score
+			opp_player = opponent_piece 
+		if player == my_piece else 	my_piece
+			score = 0
+		if window.count(player) == 4:
+			score += 100
+		elif window.count(player) == 3 and window.count(0) == 1:
+			score += 5
+		elif window.count(player) == 2 and window.count(0) == 2:
+			score += 2
+		if window.count(opp_player) == 3 and window.count(0)==1:
+			score -= 4
+		return score
 \end{lstlisting}
 
 Diese Funktion bewertet sowohl offensive als auch defensive Situationen. Ein Fenster mit drei eigenen Steinen und einem leeren Feld wird positiv bewertet, ein Fenster mit drei gegnerischen Steinen und einem leeren Feld hingegen negativ, um Bedrohungen abzuwehren.
@@ -151,38 +164,38 @@ Die Hauptfunktion zur Bewertung des gesamten Spielfeldes aggregiert alle horizon
 
 \begin{lstlisting}[style=pythonstyle]
 	def evaluate(board):
-	score = 0
-	center_array = [board[r][field_width//2] for r in range(field_height)]
-	center_count = center_array.count(my_piece)
-	score += center_count * 3
+		score = 0
+		center_array = [board[r][field_width//2]
+		 for r in range(field_height)]
+			center_count = center_array.count(my_piece)
+			score += center_count * 3
 \end{lstlisting}
 
-Zunächst werden die mittleren Spalten stärker gewichtet, da sie strategisch wichtiger sind (siehe Teil 1 xxxxx)
+Zunächst werden die mittleren Spalten stärker gewichtet, da sie strategisch wichtiger sind.
 
 Anschließend werden alle Zeilen, Spalten und Diagonalen analysiert:
 
 \begin{lstlisting}[style=pythonstyle]
 	for r in range(field_height):
-	row_array = [board[r][c] for c in range(field_width)]
+		row_array = [board[r][c] for c in range(field_width)]
 	for c in range(field_width - 3):
-	window = row_array[c:c+4]
-	score += evaluate_window(window, my_piece)
-	score -= evaluate_window(window, opponent_piece)
+		window = row_array[c:c+4]
+		score += evaluate_window(window, my_piece)
+		score -= evaluate_window(window, opponent_piece)
 \end{lstlisting}
 
 Diese Schleifen bilden das heuristische Fundament für die spätere Entscheidungsfindung.
 
-\textbf{Minimax mit Alpha-Beta-Pruning}
-
-Die Hauptentscheidung trifft der Minimax-Algorithmus. Dabei wird rekursiv der Spielbaum aufgebaut, wobei sich der Algorithmus abwechselnd in die Rolle der KI („maximizing player“) und des Gegners („minimizing player“) versetzt. Um die Effizienz zu steigern, wird Alpha-Beta-Pruning genutzt. Dabei werden Äste im Spielbaum verworfen, wenn sie nachweislich zu schlechteren Ergebnissen führen. (siehe Teil 1 xxx)
+\textbf{Minimax mit Alpha-Beta-Pruning:}\\
+Die Hauptentscheidung trifft der Minimax-Algorithmus. Dabei wird rekursiv der Spielbaum aufgebaut, wobei sich der Algorithmus abwechselnd in die Rolle des Roboters („maximizing player“) und des Gegners („minimizing player“) versetzt. Um die Effizienz zu steigern, wird Alpha-Beta-Pruning genutzt. Dabei werden Äste im Spielbaum verworfen, wenn sie nachweislich zu schlechteren Ergebnissen führen.
 
 Der Einstiegspunkt ist:
 
 \begin{lstlisting}[style=pythonstyle]
-	def alpha_beta(board, depth, alpha, beta, maximizing_player):
+	def alpha_beta(board, depth, alpha, beta, maximizing_player)
 \end{lstlisting}
 
-Zuerst wird geprüft, ob der aktuelle Zustand bereits im Transposition Table gespeichert ist – einem Cache zur Vermeidung redundanter Berechnungen:
+Zuerst wird geprüft, ob der aktuelle Zustand bereits im Transposition Tabelle gespeichert ist. Das ist ein Cache zur Vermeidung redundanter Berechnungen:
 
 \begin{lstlisting}[style=pythonstyle]
 	key = (board_hash(board, maximizing_player), depth)
@@ -193,46 +206,45 @@ Zuerst wird geprüft, ob der aktuelle Zustand bereits im Transposition Table ges
 Anschließend erfolgt eine Prüfung: Ist der Zug eine Gewinnsituation, oder wurde die maximale Tiefe erreicht?
 
 \begin{lstlisting}[style=pythonstyle]
-	valid_locations = [col for col in range(field_width) if is_valid_location(board, col)]
-	terminal = winning_move(board, my_piece) or winning_move(board, opponent_piece) or len(valid_locations) == 0
+	valid_locations = [col for col in range(field_width)
+	 if is_valid_location(board, col)]
+		terminal = winning_move(board, my_piece) or winning_move	(board, opponent_piece) or len(valid_locations) == 0
 	if depth == 0 or terminal:
 	...
 \end{lstlisting}
 
 Falls ja, gibt die Funktion eine Bewertung zurück. Andernfalls wird der Spielbaum weiter durchlaufen.
 
-\textbf{Maximierender Spieler (KI)}
+\textbf{Maximierender Spieler (Roboter):}\\
+Hier versucht der Algorithmus, die maximal erreichbare Bewertung zu finden und prüft regelmäßig, ob das aktuelle Ergebnis besser ist als die bisherige beste Option. Wenn \texttt{alpha >= beta}, wird der restliche Baum abgeschnitten (Pruning).
 
 \begin{lstlisting}[style=pythonstyle]
 	if maximizing_player:
-	value = -float('inf')
+		value = -float('inf')
 	for col in valid_locations:
-	...
+		...
 	new_score = alpha_beta(..., False)[1]
 	if new_score > value:
-	value = new_score
-	best_col = col
-	alpha = max(alpha, value)
+		value = new_score
+		best_col = col
+		alpha = max(alpha, value)
 	if alpha >= beta:
 	break
 \end{lstlisting}
 
-Hier versucht der Algorithmus, die maximal erreichbare Bewertung zu finden und prüft regelmäßig, ob das aktuelle Ergebnis besser ist als die bisherige beste Option. Wenn \texttt{alpha >= beta}, wird der restliche Baum abgeschnitten (Pruning).
-
-\textbf{Minimierender Spieler (Gegner)}
-
+\textbf{Minimierender Spieler (Gegner):}\\
 Analog erfolgt das Vorgehen für den Gegner:
 
 \begin{lstlisting}[style=pythonstyle]
 	else:
 	value = float('inf')
 	for col in valid_locations:
-	...
+		...
 	new_score = alpha_beta(..., True)[1]
 	if new_score < value:
-	value = new_score
-	best_col = col
-	beta = min(beta, value)
+		value = new_score
+		best_col = col
+		beta = min(beta, value)
 	if beta <= alpha:
 	break
 \end{lstlisting}
@@ -244,17 +256,16 @@ Am Ende wird das Ergebnis in der Transpositionstabelle gespeichert und zurückge
 	return result
 \end{lstlisting}
 
-\subsection*{Dynamische Suchtiefe}
-
+\textbf{Dynamische Suchtiefe:}\\
 Je nach Spielphase kann es sinnvoll sein, tiefer oder flacher zu suchen. Zu Beginn reicht eine niedrige Tiefe, da viele Züge möglich sind. In späteren Phasen erhöht sich die Tiefe:
 
 \begin{lstlisting}[style=pythonstyle]
 	def get_dynamic_depth(board):
-	empty = sum(row.count(0) for row in board)
-	if empty > 30:
-	return 3
-	else:
-	return 4
+		empty = sum(row.count(0) for row in board)
+		if empty > 30:
+			return 3
+			else:
+			return 4
 \end{lstlisting}
 
 Diese dynamische Anpassung balanciert Spielstärke und Rechenzeit optimal.
@@ -264,18 +275,18 @@ Diese dynamische Anpassung balanciert Spielstärke und Rechenzeit optimal.
 
 \section{Hauptprogramm}
 
-Nachdem der Algorithmus erläutert wurden und in Kapitel xxx die Konstruktion und Ansteuerung des Roboters aufgezeigt wurde, beschreibt dieses Kapitel den Gesamtablauf des Programms. Dabei steht im Fokus, wie die Spielfelderkennung, Algorithmus und Ausführungsschritte zu einem vollständigen Spielzug kombiniert werden.
+Nachdem der Algorithmus erläutert wurde und in Kapitel 4.1 die Konstruktion und Ansteuerung des Roboters aufgezeigt wurde, beschreibt dieses Kapitel den Gesamtablauf des Programms. Dabei steht im Fokus, wie die Spielfelderkennung, Algorithmus und Ausführungsschritte zu einem vollständigen Spielzug kombiniert werden.
 
-\textbf{Initialisierung}:
+\textbf{Initialisierung:}\\
 Zu Beginn wird das Spielfeld als leere Matrix angelegt. Zusätzlich wird eine Kopie gespeichert, um Änderungen im Vergleich zur vorherigen Runde erkennen zu können.
 
 \begin{lstlisting}[style=pythonstyle]
-	board = [[0 for _ in range(field_width)] for _ in range(field_height)]
+	board = [[0 for _ in range(field_width)] 
+	for _ in range(field_height)]
 	last_board = [row[:] for row in board]
 \end{lstlisting}
 
-\textbf{Warten auf Eingabe durch den Spieler}
-
+\textbf{Warten auf Eingabe durch den Spieler:}\\
 Bevor der Roboter mit dem Scannen des Spielfeldes beginnt, wartet er auf eine Aktivierung des Drucksensors am Port C.
 
 \begin{lstlisting}[style=pythonstyle]
@@ -284,17 +295,15 @@ Bevor der Roboter mit dem Scannen des Spielfeldes beginnt, wartet er auf eine Ak
 	time.sleep(0.1)
 \end{lstlisting}
 
-\textbf{Positionierung an der Startspalte}
-
-Der Roboter fährt seine Sensorplattform an die rechte Spielfeldseite (Spalte 6), um von dort den Scan zu beginnen.
+\textbf{Positionierung an der Startspalte:}\\
+Der Roboter fährt an die rechte Spielfeldseite (Spalte 6), um von dort den Scan zu beginnen.
 
 \begin{lstlisting}[style=pythonstyle]
 	motor.run_for_degrees(port.D, 198, 170)
 	time.sleep(1.5)
 \end{lstlisting}
 
-\textbf{Scannen des Spielfelds}
-
+\textbf{Scannen des Spielfelds:}\\
 Von rechts nach links wird jede Spalte analysiert. Dabei wird der Farbsensor in die erste freie Zeile der Spalte bewegt:
 
 \begin{lstlisting}[style=pythonstyle]
@@ -309,17 +318,15 @@ Wird ein neuer gegnerischer Spielstein erkannt, wird seine Position gespeichert 
 \begin{lstlisting}[style=pythonstyle]
 	if (last_board[free_row][matrix_col] == 0 and
 	board[free_row][matrix_col] == opponent_piece):
-	opponent_piece_found = True
-	opponent_col = col
+		opponent_piece_found = True
+		opponent_col = col
 \end{lstlisting}
 
-\textbf{Berechnung des Spielzugs}
-
+\textbf{Berechnung des Spielzugs:}\\
 Die Tiefe der Suche wird dynamisch abhängig vom Spielstand gewählt. Anschließend wird der beste Spielzug mit Minimax und Alpha-Beta-Pruning berechnet:
 
 \begin{lstlisting}[style=pythonstyle]
 	dynamic_depth = get_dynamic_depth(board_numeric)
-	
 	best_col, _ = alpha_beta(
 	board_numeric,
 	depth=dynamic_depth,
@@ -329,8 +336,7 @@ Die Tiefe der Suche wird dynamisch abhängig vom Spielstand gewählt. Anschließ
 	)
 \end{lstlisting}
 
-\textbf{Ausführen des Spielzugs}
-
+\textbf{Ausführen des Spielzugs:}\\
 Zuerst wird die physische Zielspalte berechnet und der Roboter dorthin bewegt:
 
 \begin{lstlisting}[style=pythonstyle]
@@ -356,13 +362,13 @@ Anschließend erfolgt eine Prüfung auf einen möglichen Spielsieg:
 
 \begin{lstlisting}[style=pythonstyle]
 	if winning_move(board, my_piece):
-	print(" Congratulations! The robot has WON the game!")
-	print_board(board)
-	sound.beep(440, 1000000, 100)
-	break
+		print(" Congratulations! The robot has WON the game!")
+		print_board(board)
+		sound.beep(440, 1000000, 100)
+		break
 \end{lstlisting}
 
-\textbf{Zurückfahren in Ausgangsposition}
+\textbf{Zurückfahren in Ausgangsposition:}\\
 
 Unabhängig vom Spielausgang kehrt der Roboter an seine Startposition zurück:
 
@@ -370,8 +376,7 @@ Unabhängig vom Spielausgang kehrt der Roboter an seine Startposition zurück:
 	motor.run_for_degrees(port.D, -199, speed_D)
 \end{lstlisting}
 
-\textbf{Warten auf die nächste Runde}
-
+\textbf{Warten auf die nächste Runde:}\\
 Abschließend wird auf das Loslassen des Drucksensors gewartet, bevor ein neuer Zyklus beginnt:
 
 \begin{lstlisting}[style=pythonstyle]
@@ -387,7 +392,7 @@ Abschließend wird auf das Loslassen des Drucksensors gewartet, bevor ein neuer 
 Die Implementierung des Spielablaufs und der Entscheidungslogik wurde unter besonderer Berücksichtigung der eingeschränkten Ressourcen des LEGO Spike Prime Hub entwickelt. Durch gezielte Reduktion von unnötigen Berechnungen, Verwendung eines Gedächtnisses für das Spielfeld, dynamische Anpassung der Suchtiefe und einfache Ablaufsteuerung konnte ein vollständiger Spielzyklus umgesetzt werden, der sowohl strategisch leistungsfähig als auch technisch robust ist. Im Folgenden werden die zentralen Entwurfsentscheidungen aufgezeigt.
 
 \subsection{Begrenzte Hardware-Ressourcen}
-Der LEGO Spike Hub besitzt mit seinem 100MHz ARM Cortex-M4 Prozessor, 320 KB RAM und 1 MB Flash-Speicher eine stark begrenzte Hardwareausstattung. Diese Ressourcen reichen für einfache Steuerungsaufgaben, setzen aber dem Einsatz komplexer Algorithmen wie Minimax enge Grenzen.
+Der LEGO Spike Hub besitzt mit seinem 100MHz ARM Cortex-M4 Prozessor, 320 KB RAM und 1 MB Flash-Speicher eine stark begrenzte Hardwareausstattung \cite{lego2020techniclargehub}. Diese Ressourcen reichen für einfache Steuerungsaufgaben, setzen aber dem Einsatz komplexer Algorithmen wie Minimax enge Grenzen.
 Diese Rahmenbedingungen erfordern eine möglichst effiziente und ressourcenschonende Programmstruktur. Daher wurde bewusst auf eine komplexe Multithread-Struktur verzichtet und stattdessen ein sequenzieller, wartender Ablauf gewählt.
 
 \subsection{Zeitbasierte Steuerung mit \texttt{time.sleep()}}
@@ -396,11 +401,9 @@ Zur Koordination zwischen Sensorik, Motorik und internen Berechnungen wurde \tex
 
 \begin{itemize}
 	\item \textbf{Sicherstellung der mechanischen Stabilität:} Nach jeder Bewegung oder Farberkennung sorgt eine kurze Pause dafür, dass der Sensor sich mechanisch beruhigen kann und stabile Werte liefert.
-	\item \textbf{Hardware-Synchronisierung:} Viele Vorgänge, wie etwa die Farberkennung oder das vollständige Einwerfen eines Chips, benötigen eine kurze Wartezeit, die hardwareseitig nicht automatisch rückgemeldet wird. Durch gezielte Pausen wird so ein zuverlässiger Ablauf ohne ungewollte Überschneidungen erreicht.
-	\item \textbf{Einfachheit:} In Abwesenheit von Interrupts oder Echtzeitbetriebssystemen auf dem Hub ist \texttt{time.sleep()} eine praktikable Lösung zur Ablaufsteuerung.
+	\item \textbf{Hardware-Synchronisierung:}  Vorgänge, wie etwa das Einwerfen eines Chips, benötigen eine kurze Wartezeit, die hardwareseitig nicht automatisch rückgemeldet wird. Durch gezielte Pausen wird so ein zuverlässiger Ablauf ohne ungewollte Überschneidungen erreicht.
+	\item \textbf{Einfachheit:} In Abwesenheit von Interrupts auf dem Hub ist \texttt{time.sleep()} eine praktikable Lösung zur Ablaufsteuerung.
 \end{itemize}
-
-Diese Zeitsteuerung ist somit keine Notlösung, sondern eine bewusste Wahl für eine robuste und nachvollziehbare Ablaufkontrolle.
 
 \subsection{Spielfeldvergleich zur Erkennung neuer Spielzüge}
 
@@ -410,7 +413,7 @@ Ein wesentlicher Optimierungsschritt liegt in der Verwendung eines ``Gedächtnis
 	if last_board[zeile][spalte] == 0 and board[zeile][spalte] == opponent_piece:
 \end{lstlisting}
 
-Dieser Vergleich erlaubt es, gezielt den neuen Zug des Gegners zu erkennen und den Scanvorgang direkt danach abzubrechen. Dies reduziert die benötigte Zeit pro Runde drastisch – insbesondere im späteren Spielverlauf, wenn viele Felder bereits belegt sind.
+Dieser Vergleich erlaubt es, gezielt den neuen Zug des Gegners zu erkennen und den Scanvorgang direkt danach abzubrechen. Dies reduziert die benötigte Zeit pro Runde drastisch. Insbesondere im späteren Spielverlauf, wenn viele Felder bereits belegt sind.
 
 \subsection{Spaltenweises Scannen statt Vollscan}
 
@@ -418,10 +421,10 @@ Anstatt das gesamte Spielfeld (6 Zeilen × 7 Spalten) vollständig zu scannen, w
 
 \begin{lstlisting}[style=pythonstyle]
 	if opponent_piece_found:
-	break
+		break
 \end{lstlisting}
 
-Diese Strategie basiert auf der Annahme, dass pro Runde exakt ein neuer gegnerischer Stein erscheint – was dem rundenbasierten Spielmodell von 4-Gewinnt entspricht. Dadurch kann der Großteil des Spielfelds übersprungen werden, sobald der neue gegnerische Zug erkannt wurde. Dies reduziert die Anzahl der Motorbewegungen, senkt den Energieverbrauch und steigert die Reaktionsgeschwindigkeit.
+Diese Strategie basiert auf der Annahme, dass pro Runde exakt ein neuer gegnerischer Stein erscheint. Dadurch kann der Großteil des Spielfelds übersprungen werden, sobald der neue gegnerische Zug erkannt wurde. Dies reduziert die Anzahl der Motorbewegungen und gewinnt somit an Zeit.
 
 \subsection{Dynamische Suchtiefe im Algorithmus}
 
@@ -429,11 +432,11 @@ Der Minimax-Algorithmus mit Alpha-Beta-Pruning wird verwendet, um den optimalen 
 
 \begin{lstlisting}[style=pythonstyle]
 	def get_dynamic_depth(board):
-	empty = sum(row.count(0) for row in board)
-	return 3 if empty > 30 else 4
+		empty = sum(row.count(0) for row in board)
+		return 3 if empty > 30 else 4
 \end{lstlisting}
 
-In der Anfangsphase sind noch viele Züge möglich, was den Suchbaum exponentiell wachsen lässt. Eine flachere Suchtiefe (z.~B. 3) ist hier sinnvoll, da es ohnehin viele gleichwertige Optionen gibt. Im Endspiel hingegen sind nur noch wenige Felder frei, wodurch eine tiefere Suche (z.~B. 4 oder mehr) möglich und auch sinnvoll wird. Diese dynamische Anpassung balanciert Rechenzeit und Spielqualität optimal.
+In der Anfangsphase sind noch viele Züge möglich, was den Suchbaum exponentiell wachsen lässt. Eine flachere Suchtiefe (z.~B. 3) ist hier sinnvoll, da es ohnehin viele gleichwertige Optionen gibt. Im Endspiel hingegen sind nur noch wenige Felder frei, wodurch eine tiefere Suche (z.~B. 4) möglich und auch sinnvoll wird. Diese dynamische Anpassung balanciert Rechenzeit und Spielqualität optimal.
 
 \subsection{Speicherung bewerteter Zustände (Transposition Table)}
 
@@ -442,7 +445,7 @@ Zur weiteren Reduktion der Rechenlast wird eine sogenannte Transposition Table e
 \begin{lstlisting}[style=pythonstyle]
 	key = (board_hash(board, maximizing_player), depth)
 	if key in transposition_table:
-	return transposition_table[key]
+		return transposition_table[key]
 \end{lstlisting}
 
 Diese Technik ist besonders im mittleren Spielverlauf effektiv, da viele unterschiedliche Zugfolgen zu identischen Spielzuständen führen können.
@@ -486,8 +489,8 @@ Zwei Partien wurden verloren, weil der Algorithmus eine mehrstufige Kombination 
 
 \begin{lstlisting}[style=pythonstyle]
 	def get_dynamic_depth(board):
-	empty = sum(row.count(0) for row in board)
-	return 3 if empty > 30 else 4
+		empty = sum(row.count(0) for row in board)
+		return 3 if empty > 30 else 4
 \end{lstlisting}
 
 In frühen Spielphasen prüft der Algorithmus nur drei Züge voraus, um Rechenzeit zu sparen. Dadurch übersieht er unter Umständen mehrphasige Angriffsstrategien vom Gegner. Ein Spieler nutzte diese Gelegenheit und platzierte seine Spielsteine so, dass der Roboter einen drohenden Vierer erst bemerkte, als keine Abwehr mehr möglich war.

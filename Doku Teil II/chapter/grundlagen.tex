@@ -29,7 +29,10 @@ Dadurch eignet sich MicroPython besonders gut für die Programmierung des LEGO S
 
 
 
-\section{LEGO Spike Hub:}
+\section{LEGO Spike Komponenten:}
+In diesem Kapitel werden die zentralen LEGO Spike-Komponenten beschrieben, die beim Bau des Roboters verwendet wurden. 
+
+\subsection{Hub}
 Der LEGO Spike Hub ist das Herzstück des LEGO Spike Prime Sets. Er dient als programmierbare Steuereinheit mit sechs LPF2 input/output ports, an die alle LEGO-Sensoren und -Motoren angeschlossen werden können. Im Inneren arbeitet ein eigener Prozessor (100 MHz ARM Cortex-M4), unterstützt von 320 KB RAM und 1 MB Flash-Speicher. Die Programmierung des LEGO Spike Hubs erfolgt in der Sprache MicroPython. LEGO stellt dafür eine eigene Entwicklungsumgebung (IDE) bereit, mit dieser der Hub einfach programmiert werden kann. Hierfür kann der Hub über USB oder via Bluetooth mit dem Computer verbunden werden. Die Steuereinheit wird über einen  wiederaufladbarer Lithium-Ionen-Akku mit Strom und Spannung versorgt \autocite{lego2020techniclargehub}.
 
 Weitere technische Merkmale des LEGO Spike Hubs sind:
@@ -48,8 +51,6 @@ Weitere technische Merkmale des LEGO Spike Hubs sind:
 	\caption[LEGO Spike Hub Quelle:\autocite{legoeducation2020spikesensors}]{LEGO Spike Hub}
 	\label{fig:hub}
 \end{figure}
-
-\section{Sensorik}
 
 \subsection{LEGO Spike Kraft- oder Touchsensor}
 Dieser Sensor erkennt, ob er gedrückt wurde, und misst dabei gleichzeitig die auf ihn ausgeübte Kraft. Mit einer Abtastrate von 100 Hz erfasst er Kräfte im Bereich von 2,5 bis 10 Newton und arbeitet dabei mit einer Genauigkeit von $\pm 0,65$ Newton. Der gemessene Wert wird als Prozentwert ausgegeben, wobei 100\% einem Tastendruck von 10 Newton entsprechen. Typischerweise wird der Sensor zum Erkennen von Hindernissen oder als Start- bzw. Stopptaste eines Roboters eingesetzt. Der Kraft- oder Tuchsensor wird direkt am LEGO Spike Hub angeschlossen \autocite{legoeducation2020spikesensors}.
@@ -75,7 +76,6 @@ Zur Reflexionsmessung sendet der Sensor weißes Licht auf eine Oberfläche und m
 	\label{fig:farbsensor}
 \end{figure}
 
-\section{Aktorik} %Ändern
 \subsection{LEGO Spike Winkelmotor}
 Der LEGO Spike Winkelmotor nicht nur ein einfacher Elektromotor, aufgrund eines integrierten Drehsensors kann er nicht nur die Drehrichtung, sondern auch die relative und absolute Position (in Grad) sowie die Drehgeschwindigkeit erfassen. Eine vollständige Umdrehung wird dabei in 360 einzelne Zählimpulse unterteilt, wobei die Genauigkeit des Motors bei $\pm3$ Grad liegt. Muss der Motor ein Drehmoment von mehr als 5 Ncm aufbringen, blockiert er. Mit einer Abtastrate von 100 Hz erfasst der Motor die Position sowohl beim automatischen als auch im manuellen Betrieb. Der LEGO Spike Winkelmotor eignet sich somit nicht nur für Bewegungsaufgaben, sondern auch zur Positionsbestimmung \autocite{legoeducation2020spikesensors}.
 
