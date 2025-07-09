@@ -1,11 +1,7 @@
 \chapter{ Umsetzung}
 \label{cha:Umsetzung}
+In diesem Kapitel steht die praktische Umsetzung des Roboters im Fokus. Dabei wird auf den Aufbau eingegangen, ebenso wie auf die Funktionsweise der Software. 
 
-%Je nach Art der Arbeit kann diese Kapitelüberschrift auch \glqq Ergebnisse\grqq~lauten, z.~B. bei rein messtechnischen Aufgaben.
-
-%Beschreibung der Umsetzung des zuvor gewählten Vorgehens (theoretische Untersuchung, Erhebungen, Durchführung von Experimenten, Prototypenaufbau, Implementierung eines Prozesses, etc.).
-
-%Verifikation anhand der zuvor erarbeiteten Anforderungen und Validierung in Bezug auf das zuvor gestellte Ziel. Diskussion der Ergebnisse. Spätestens hier auch auf die Zuverlässigkeit der gewonnenen Erkenntnisse eingehen (z.~B. anhand der Genauigkeit von Messergebnissen).
 \section{Mechanischer Aufbau}
 Für die Umsetzung des 4-Gewinnt-Roboters wurde eine mechanische Konstruktion gewählt, die es erlaubt, das Spielfeld zu scannen sowie Chips gezielt in eine Spalte einzuwerfen. Der Aufbau umfasst drei Winkelmotoren, einen Farbsensor und einen Drucktaster. Im Folgenden werden die einzelnen Komponenten detailliert beschrieben. Dabei beziehen sich die Ziffern der Aufzählung der einzelnen Sensoren und Aktoren auf die Abbildung 4.1 und Abbildung 4.2.
 
@@ -121,7 +117,7 @@ Diese Zweiteilung erlaubt es, sowohl die algorithmische Tiefe als auch die techn
 Desweiteren wird im Unterkapitel 5.3 die konkrete Umsetzung der Spielsteuerung und Entscheidungslogik für den 4-Gewinnt-Roboter beschrieben. Der Fokus liegt auf der softwareseitigen Realisierung unter Berücksichtigung der limitierten Hardware-Ressourcen des LEGO Spike Prime Hubs. Es werden hierbei zentrale Entwurfsentscheidungen erläutert.
 
 
-\section{Algorithmus}
+\subsection{Algorithmus}
 
 Ein zentraler Bestandteil des 4-Gewinnt-Roboters ist die Entscheidungsfindung durch einen algorithmischen Spielbaum. Dieser wird mit dem bekannten\newline Minimax-Algorithmus unter Verwendung von Alpha-Beta-Pruning realisiert. Ziel ist es, basierend auf dem aktuellen Spielfeldzustand den optimalen Zug für die KI zu berechnen.
 Der Algorithmus bewertet mögliche Züge bis zu einer bestimmten Tiefe im Spielbaum und trifft Entscheidungen, die langfristig zum Sieg führen können oder gegnerische Gewinnzüge verhindern.
