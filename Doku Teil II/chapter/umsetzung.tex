@@ -1,7 +1,11 @@
 \chapter{ Umsetzung}
 \label{cha:Umsetzung}
-In diesem Kapitel steht die praktische Umsetzung des Roboters im Fokus. Dabei wird auf den Aufbau eingegangen, ebenso wie auf die Funktionsweise der Software. 
 
+%Je nach Art der Arbeit kann diese Kapitelüberschrift auch \glqq Ergebnisse\grqq~lauten, z.~B. bei rein messtechnischen Aufgaben.
+
+%Beschreibung der Umsetzung des zuvor gewählten Vorgehens (theoretische Untersuchung, Erhebungen, Durchführung von Experimenten, Prototypenaufbau, Implementierung eines Prozesses, etc.).
+
+%Verifikation anhand der zuvor erarbeiteten Anforderungen und Validierung in Bezug auf das zuvor gestellte Ziel. Diskussion der Ergebnisse. Spätestens hier auch auf die Zuverlässigkeit der gewonnenen Erkenntnisse eingehen (z.~B. anhand der Genauigkeit von Messergebnissen).
 \section{Mechanischer Aufbau}
 Für die Umsetzung des 4-Gewinnt-Roboters wurde eine mechanische Konstruktion gewählt, die es erlaubt, das Spielfeld zu scannen sowie Chips gezielt in eine Spalte einzuwerfen. Der Aufbau umfasst drei Winkelmotoren, einen Farbsensor und einen Drucktaster. Im Folgenden werden die einzelnen Komponenten detailliert beschrieben. Dabei beziehen sich die Ziffern der Aufzählung der einzelnen Sensoren und Aktoren auf die Abbildung 4.1 und Abbildung 4.2.
 
@@ -45,18 +49,8 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 
 
 \section{Software}
-Das Kapitel Software beschreibt ausführlicher, wie der Vier-Gewinnt-Roboter programmiert wird. Die Software ist das Herzstück des Roboters und spielt eine entscheidende Rolle für seine autonome Teilnahme am Spiel.
+Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Gewinnt-Roboters umgesetzt ist. Die Software bildet das Kernstück des Roboters und ist entscheidend dafür, dass dieser eigenständig am Spiel teilnehmen kann.
 
-\subsection{Ablauf der Software}
-Das in der Abbildung \ref{fig:Flussdiagramm} dargestellte Flussdiagramm zeigt grafisch den groben Ablauf der Software. \newline
-Zu Beginn befindet sich das System im Wartezustand und wartet auf die Betätigung des Touch-/Kraftsensors. Dieser signalisiert den Start eines neuen Spielzugs. Sobald der Sensor aktiviert wurde, fährt der Roboter zur ersten Spalte des Spielfelds.
-Anschließend scannt das System die einzelnen Spalten des Spielfelds ab, um den neuen gegnerischen Stein zu entdecken. Dabei wird das interne Spielfeld aktualisiert, bis ein neuer gegnerischer Stein erkannt wurde oder alle 7 Spalten gescannt wurden.
-
-Im nächsten Schritt prüft die Software das interne Spielfeld und berechnet mithilfe des Alpha-Beta-Algorithmus den optimalen Spielzug.
-Dabei ist es nicht von Bedeutung, ob ein gegnerischer Stein erkannt wurde oder nicht. Da zu Beginn des Spiels noch gar keine Steine im Feld vorhanden sind.
-Der Roboter platziert nach der Berechnung den eigenen Spielstein an der berechneten optimalen Position.
-
-Im Anschluss prüft die Software, ob das Spiel gewonnen wurde. Ist das der Fall, so wird eine Glückwunschmeldung und ein Ton ausgegeben. Falls kein Gewinn vorliegt, wird einfach das aktuelle Spielfeld auf der Konsole in der LEGO Spike App ausgegeben und der Prozess beginnt von vorne in der Warteposition mit dem Warten auf die nächste Sensoraktivierung. 
 
 
 \tikzstyle{startstop} = [ellipse, draw, fill=gray!10, minimum width=3cm, minimum height=1cm]
@@ -72,7 +66,7 @@ Im Anschluss prüft die Software, ob das Spiel gewonnen wurde. Ist das der Fall,
 	\node (wait) [process, below of=start] {Warten auf Sensor-Aktivierung};
 	\node (move) [process, below of=wait] {Spielfeld anfahren};
 	\node (scan) [process, below of=move] {Spalten scannen};
-	\node (update) [process, below of=scan] {Spielfeld-Update};
+	\node (update) [process, below of=scan] {Board-Update};
 	\node (opponent) [decision, below of=update, yshift=-0.7cm] {Neuer gegnerischer Stein?};
 	\node (calc) [process, below of=opponent, yshift=-0.7cm] {Optimalen Zug berechnen (Alpha-Beta)};
 	\node (motor) [process, below of=calc] {Motorsteuerung: Stein platzieren};
@@ -99,10 +93,10 @@ Im Anschluss prüft die Software, ob das Spiel gewonnen wurde. Ist das der Fall,
 	\caption[Flussdiagramm]{Flussdiagramm der Software}
 \label{fig:Flussdiagramm}
 \end{figure}
-\chapter{Programmlogik}
+\section{Programmlogik}
 
 In diesem Kapitel wird die Softwarestruktur des 4-Gewinnt-Roboters systematisch beschrieben. Da der vollständige Quellcode eine Vielzahl an Funktionen, Hilfsroutinen und technischen Details umfasst, wird in diesem Kapitel aus Gründen der Übersichtlichkeit nicht jede einzelne Codezeile dargestellt und erläutert.
-Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. siehe anhang 
+Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. siehe anhangxxxxxxxxx
 
 Zur besseren Nachvollziehbarkeit der Funktionsweise wird die Darstellung in zwei Teile gegliedert:
 
@@ -250,7 +244,7 @@ Am Ende wird das Ergebnis in der Transpositionstabelle gespeichert und zurückge
 	return result
 \end{lstlisting}
 
-\subsection{Dynamische Suchtiefe}
+\subsection*{Dynamische Suchtiefe}
 
 Je nach Spielphase kann es sinnvoll sein, tiefer oder flacher zu suchen. Zu Beginn reicht eine niedrige Tiefe, da viele Züge möglich sind. In späteren Phasen erhöht sich die Tiefe:
 
@@ -265,12 +259,10 @@ Je nach Spielphase kann es sinnvoll sein, tiefer oder flacher zu suchen. Zu Begi
 
 Diese dynamische Anpassung balanciert Spielstärke und Rechenzeit optimal.
 
-\textbf{Fazit}
-
-Der eingesetzte Minimax-Algorithmus mit Alpha-Beta-Pruning stellt das strategische Herzstück des 4-Gewinnt-Roboters dar. Durch gezielte Bewertung von Spielpositionen, Berücksichtigung gegnerischer Drohungen und dynamische Tiefenanpassung kann der Roboter selbstständig Züge planen, Gefahren abwehren und letztlich siegreich agieren. Die Verwendung eines Transpositionstables beschleunigt dabei die Entscheidungsfindung, indem bereits analysierte Spielsituationen nicht erneut bewertet werden müssen. Das Ergebnis ist ein hochgradig effektives Entscheidungsverfahren für ein strategisches Spiel wie 4-Gewinnt.
+%Der eingesetzte Minimax-Algorithmus mit Alpha-Beta-Pruning stellt das strategische Herzstück des 4-Gewinnt-Roboters dar. Durch gezielte Bewertung von Spielpositionen, Berücksichtigung gegnerischer Drohungen und dynamische Tiefenanpassung kann der Roboter selbstständig Züge planen, Gefahren abwehren und letztlich siegreich agieren. Die Verwendung eines Transpositionstables beschleunigt dabei die Entscheidungsfindung, indem bereits analysierte Spielsituationen nicht erneut bewertet werden müssen. Das Ergebnis ist ein hochgradig effektives Entscheidungsverfahren für ein strategisches Spiel wie 4-Gewinnt.
 
 
-\section{Ablaufsteuerung des Hauptprogramms}
+\section{Hauptprogramm}
 
 Nachdem der Algorithmus erläutert wurden und in Kapitel xxx die Konstruktion und Ansteuerung des Roboters aufgezeigt wurde, beschreibt dieses Kapitel den Gesamtablauf des Programms. Dabei steht im Fokus, wie die Spielfelderkennung, Algorithmus und Ausführungsschritte zu einem vollständigen Spielzug kombiniert werden.
 
@@ -387,13 +379,12 @@ Abschließend wird auf das Loslassen des Drucksensors gewartet, bevor ein neuer 
 	time.sleep(0.1)
 \end{lstlisting}
 
-\textbf{Fazit}
 
-Die Ablaufsteuerung des Hauptprogramms ist zyklisch aufgebaut und gewährleistet einen strukturierten Spielverlauf: Der Roboter wartet auf das Startsignal, scannt das Spielfeld, berechnet den optimalen Spielzug und führt diesen präzise aus. Die Kombination aus Sensorik, Algorithmik und Motorsteuerung wird dabei durch eine klare Programmstruktur miteinander verbunden. Diese Trennung der Verantwortlichkeiten sorgt für Übersichtlichkeit, Erweiterbarkeit und Fehlerrobustheit.
+%Die Ablaufsteuerung des Hauptprogramms ist zyklisch aufgebaut und gewährleistet einen strukturierten Spielverlauf: Der Roboter wartet auf das Startsignal, scannt das Spielfeld, berechnet den optimalen Spielzug und führt diesen präzise aus. Die Kombination aus Sensorik, Algorithmik und Motorsteuerung wird dabei durch eine klare Programmstruktur miteinander verbunden. Diese Trennung der Verantwortlichkeiten sorgt für Übersichtlichkeit, Erweiterbarkeit und Fehlerrobustheit.
 
 \section{Ressourcenschonende Implementierung der Spielsteuerung und Entscheidungslogik}
 
-Die Implementierung des Spielablaufs und der Entscheidungslogik wurde unter besonderer Berücksichtigung der eingeschränkten Ressourcen des LEGO Spike Prime Hub entwickelt. Im Folgenden werden die zentralen Entwurfsentscheidungen und deren technische wie funktionale Hintergründe erläutert.
+Die Implementierung des Spielablaufs und der Entscheidungslogik wurde unter besonderer Berücksichtigung der eingeschränkten Ressourcen des LEGO Spike Prime Hub entwickelt. Durch gezielte Reduktion von unnötigen Berechnungen, Verwendung eines Gedächtnisses für das Spielfeld, dynamische Anpassung der Suchtiefe und einfache Ablaufsteuerung konnte ein vollständiger Spielzyklus umgesetzt werden, der sowohl strategisch leistungsfähig als auch technisch robust ist. Im Folgenden werden die zentralen Entwurfsentscheidungen aufgezeigt.
 
 \subsection{Begrenzte Hardware-Ressourcen}
 Der LEGO Spike Hub besitzt mit seinem 100MHz ARM Cortex-M4 Prozessor, 320 KB RAM und 1 MB Flash-Speicher eine stark begrenzte Hardwareausstattung. Diese Ressourcen reichen für einfache Steuerungsaufgaben, setzen aber dem Einsatz komplexer Algorithmen wie Minimax enge Grenzen.
@@ -460,34 +451,14 @@ Diese Technik ist besonders im mittleren Spielverlauf effektiv, da viele untersc
 
 Das Spielfeld wird intern als Liste von Ganzzahlen (\texttt{-1}, \texttt{0}, \texttt{1}) dargestellt. Diese Codierung ist speicherarm, ermöglicht arithmetische Operationen (z.~B. Summieren zur Bewertung) und reduziert die Komplexität beim Kopieren und Vergleichen des Boards.
 
-\subsection{Einfacher Kontrollfluss durch linearen Aufbau}
-
-Die gesamte Spiellogik ist in einem klar linearen Ablauf organisiert:
-
-\begin{enumerate}
-	\item Warten auf Nutzereingabe
-	\item Scannen des Spielfelds
-	\item Berechnen des Zugs
-	\item Ausführen des Zugs
-	\item Rücksetzen des Zustands
-\end{enumerate}
-
-Auf Schleifen, Nebenläufigkeit oder Events wurde bewusst verzichtet, um einen stabilen, deterministischen Ablauf sicherzustellen. Dies erhöht die Zuverlässigkeit und erleichtert Debugging und Weiterentwicklung.
-
-\subsection*{Fazit}
-
-Die gesamte Programmstruktur wurde mit dem Ziel entwickelt, unter den beschränkten Ressourcen des LEGO Spike Hub ein reaktionsschnelles, stabiles und intelligentes Verhalten zu erreichen. Durch gezielte Reduktion von unnötigen Berechnungen, Verwendung eines Gedächtnisses für das Spielfeld, dynamische Anpassung der Suchtiefe und einfache Ablaufsteuerung konnte ein vollständiger Spielzyklus umgesetzt werden, der sowohl strategisch leistungsfähig als auch technisch robust ist.
-
-\chapter{Test und Versuchsauswertung}
+\section{Test und Versuchsauswertung}
 
 Zur Überprüfung der Funktionalität und Spielstärke des entwickelten 4-Gewinnt-Roboters wurde eine umfangreiche Testreihe mit menschlichen Mitspielern durchgeführt. Ziel dieser Versuche war es, das Verhalten des Roboters in realen Spielsituationen zu beobachten, die Zuverlässigkeit der Spielfelderkennung zu bewerten und die Qualität des Entscheidungsalgorithmus praktisch zu prüfen.
 
-\section{Versuchsaufbau}
+\subsection{Durchführung und Ergebnisse der Testreihe}
 
 Der Roboter wurde in der finalen Version gegen vier unterschiedliche Spieler getestet. 
 Es wurden insgesamt 20 vollständige Partien gespielt. Die menschlichen Spieler handelten eigenständig und spielten mit realem Gewinninteresse.
-
-\section{Ergebnisse}
 
 Die Resultate der Testreihe lauten wie folgt:
 
@@ -497,19 +468,19 @@ Die Resultate der Testreihe lauten wie folgt:
 	\item \textbf{2 Niederlagen gegen menschliche Spieler}
 \end{itemize}
 
-Damit konnte der Roboter in \textbf{70\,\% der Partien gewinnen} und blieb in \textbf{90\,\% der Fälle ungeschlagen}.
+Damit konnte der Roboter in 70\% der Partien gewinnen und blieb in 90\% der Fälle ungeschlagen.
 
-\section{Analyse der Unentschieden und Niederlagen}
+\subsection{Analyse der Unentschieden und Niederlagen}
 
-Insgesamt sechs Partien wurden nicht gewonnen. Diese lassen sich in vier Unentschieden und zwei tatsächliche Niederlagen unterteilen. Beide Fälle sind technisch nachvollziehbar und lassen sich mit den Eigenschaften des Algorithmus sowie den physikalischen Begrenzungen des Systems erklären.
+Insgesamt sechs Partien wurden nicht gewonnen. Diese lassen sich in vier Unentschieden und zwei Niederlagen unterteilen. Beide Fälle sind technisch nachvollziehbar und lassen sich mit den Eigenschaften des Algorithmus sowie den physikalischen Begrenzungen des Systems erklären.
 
-\subsection*{a) Unentschieden durch Blockaden im Endspiel}
+\subsubsection{Unentschieden durch Blockaden im Endspiel}
 
-In vier Partien kam es zu einem klassischen Patt: Beide Spieler hatten keine Möglichkeit mehr, vier Spielsteine in einer Linie zu platzieren, und das Spielfeld war vollständig gefüllt. Die Ursache liegt nicht in einem Fehler, sondern im Aufbau der Spielstrategie: Der Roboter blockierte konsequent potenzielle Gewinnchancen des Gegners, ohne jedoch selbst ausreichend Raum für eine erfolgreiche Linie zu schaffen.
+In vier Partien endete das Spiel unentschieden: Beide Spieler konnten keine vier Spielsteine mehr in eine Reihe bringen, das Spielfeld war komplett gefüllt. Die Ursache lag dabei nicht in einem technischen Fehler, sondern im Spielverhalten des Roboters. Er verhinderte konsequent alle potenziellen Gewinnchancen des Gegners, agierte aber gleichzeitig zu passiv, um selbst eine entscheidende Reihe aufzubauen.
 
-In diesen Fällen war der Algorithmus zu defensiv eingestellt – er verhinderte zwar Niederlagen, konnte aber keinen aktiven Gewinn erzwingen. Besonders im Mittelspiel wurde mehrfach eine gleichwertige Position bevorzugt, anstatt ein langfristiges Angriffsszenario aufzubauen.
+Der Algorithmus spielte in diesen Situationen eher defensiv und wählte im Mittelspiel häufig sichere, ausgeglichene Positionen, anstatt gezielt einen eigenen Angriff vorzubereiten. Dadurch entstand ein blockiertes Spiel, in dem letztlich keiner der beiden Spieler gewinnen konnte.
 
-\subsection*{b) Niederlagen durch fehlende Mehrzugerkennung}
+\subsubsection{Niederlagen durch fehlende Mehrzugerkennung}
 
 Zwei Partien wurden verloren, weil der Algorithmus eine mehrstufige Kombination des Gegners nicht rechtzeitig erkannte. Ursache ist die eingeschränkte Suchtiefe zu Beginn des Spiels:
 
@@ -519,36 +490,7 @@ Zwei Partien wurden verloren, weil der Algorithmus eine mehrstufige Kombination 
 	return 3 if empty > 30 else 4
 \end{lstlisting}
 
-In frühen Spielphasen prüft der Algorithmus nur drei Züge voraus, um Rechenzeit zu sparen. Dadurch übersieht er unter Umständen komplexe, mehrphasige Angriffsstrategien. Ein Spieler nutzte diese Schwäche und platzierte seine Spielsteine so, dass der Roboter einen drohenden Vierer erst bemerkte, als keine Abwehr mehr möglich war.
-
-\subsection*{c) Priorisierung durch heuristische Bewertung}
-
-Ein weiteres Risiko liegt in der Bewertungsfunktion selbst. Diese bevorzugt zentral platzierte Spielsteine, da sie statistisch an mehr Gewinnkombinationen beteiligt sind:
-
-\begin{lstlisting}[style=pythonstyle]
-	center_array = [board[r][field_width // 2] for r in range(field_height)]
-	score += center_array.count(my_piece) * 3
-\end{lstlisting}
-
-In einer verlorenen Partie führte dies dazu, dass ein gefährlicher Spielstein am Spielfeldrand ignoriert wurde, weil der Algorithmus die Zentrumsposition irrtümlich höher bewertete. Der Gegner nutzte dies zur schnellen Gewinnkombination.
-
-\section{Versuchserklärung}
-
-Die dokumentierten Unentschieden und Niederlagen zeigen, dass der Algorithmus unter realistischen Bedingungen leistungsfähig, aber nicht perfekt ist. Die Ursachen lassen sich wie folgt zusammenfassen:
-
-\begin{itemize}
-	\item \textbf{Eingeschränkte Suchtiefe} in der Eröffnungsphase verhindert die frühzeitige Erkennung komplexer Drohungen.
-	\item \textbf{Statische Heuristik} bevorzugt zentrale Positionen, was in bestimmten Spielsituationen kontraproduktiv ist.
-	\item \textbf{Defensives Spielverhalten} kann zu Blockadeverläufen führen, in denen kein Spieler mehr gewinnen kann.
-\end{itemize}
-
-Trotz dieser Schwächen blieb der Roboter in 90\,\% der Spiele unbesiegt. Die hohe Stabilität, Konsistenz im Spielverlauf und korrekt ausgeführten Spielzüge belegen die Zuverlässigkeit des Systems.
-
-\section{Zusammenfassung}
-
-Die durchgeführten Tests bestätigen die Funktionalität und Robustheit des 4-Gewinnt-Roboters. Mit 14 Siegen, 4 Unentschieden und lediglich 2 Niederlagen zeigt sich der Algorithmus in der Lage, gegen menschliche Gegner effektiv und erfolgreich zu spielen. Die wenigen Schwächen konnten identifiziert und auf algorithmische und strukturelle Ursachen zurückgeführt werden. In zukünftigen Weiterentwicklungen könnten diese durch tiefere Suchen, adaptive Bewertungsfunktionen oder Bedrohungsanalysen verbessert werden.
-
-Insgesamt belegt die Testreihe, dass das Gesamtsystem aus Spielfelderkennung, Entscheidungslogik und Ansteuerung sowohl technisch zuverlässig als auch spielerisch überzeugend funktioniert.
+In frühen Spielphasen prüft der Algorithmus nur drei Züge voraus, um Rechenzeit zu sparen. Dadurch übersieht er unter Umständen mehrphasige Angriffsstrategien vom Gegner. Ein Spieler nutzte diese Gelegenheit und platzierte seine Spielsteine so, dass der Roboter einen drohenden Vierer erst bemerkte, als keine Abwehr mehr möglich war.
 
 
 %Der LEGO Spike Hub besitzt mit seinem 100MHz ARM Cortex-M4 Prozessor, 320 KB RAM und 1 MB Flash-Speicher eine stark begrenzte Hardwareausstattung. Diese Ressourcen reichen für einfache Steuerungsaufgaben, setzen aber dem Einsatz komplexer Algorithmen wie Minimax enge Grenzen.

@@ -1,6 +1,17 @@
 \chapter{Zusammenfassung}
 \label{cha:zusammenfassung}
 
+Im Rahmen dieser Arbeit wurde ein autonmer 4-Gewinnt-Roboter entwickelt, der in der Lage ist, selbstständig gegen menschliche Spieler anzutreten. Ziel war es, ein System zu entwerfen, das sowohl spieltheoretisch fundierte Entscheidungen trifft als auch physisch in der Lage ist, Spielzüge eigenständig umzusetzen.
+
+Als Grundlage diente die in einem ersten Schritt entwickelte Spieltheorie, auf der ein Minimax-Algorithmus mit Alpha-Beta-Pruning aufgebaut wurde. Dieser bewertet mögliche Züge im Voraus und trifft Entscheidungen, die langfristig zum Sieg führen oder gegnerische Gewinnchancen verhindern. Der Algorithmus wurde so angepasst, dass er auf die begrenzten Ressourcen des LEGO Spike Prime Hubs abgestimmt ist. Dazu zählt unter anderem eine dynamische Anpassung der Rechentiefe abhängig vom Spielverlauf, um eine stabile und reaktionsschnelle Umsetzung zu ermöglichen.
+
+Ergänzt wurde der Algorithmus durch eine passende mechanische Konstruktion. Der Roboter kann mithilfe eines Farbsensors das Spielfeld erkennen, neue gegnerische Spielsteine lokalisieren und über Motoren präzise den eigenen Spielstein platzieren. Ein Kraftsensor dient als einfacher, intuitiver Startmechanismus für den nächsten Spielzug.
+
+In einem abschließenden Test wurde das System in 20 Partien gegen verschiedene menschliche Spieler geprüft. Dabei konnte der Roboter 14 Spiele gewinnen, 4-mal ein Unentschieden erzielen und wurde nur 2-mal geschlagen. Diese Ergebnisse zeigen, dass das System weitgehend erfolgreich funktioniert und auch in realen Spielsituationen zuverlässig arbeitet. Die Niederlagen waren dabei vor allem auf die bewusst begrenzte Rechentiefe im frühen Spielverlauf zurückzuführen.
+
+Besonders positiv ist hervorzuheben, dass der entwickelte Roboter auch gegen andere studentische Projekte antreten konnte und dabei ebenfalls als Sieger hervorging. Das zeigt, dass sowohl die theoretische als auch die technische Umsetzung konkurrenzfähig und durchdacht war.
+
+Insgesamt lässt sich festhalten, dass das gesteckte Ziel erreicht wurde. Der Roboter verbindet erfolgreich die theoretischen Grundlagen mit praktischer Anwendung. Als Ausblick bieten sich weiterführende Ansätze wie eine noch tiefere Spielfeldauswertung, verbesserte Heuristiken oder auch ein lernfähiger Algorithmus an, um die Spielstärke künftig weiter zu erhöhen.
 %Auf zwei bis drei Seiten soll auf folgende Punkte eingegangen werden:
 
 %\begin{itemize}
