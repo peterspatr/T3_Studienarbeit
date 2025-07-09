@@ -49,8 +49,18 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 
 
 \section{Software}
-Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Gewinnt-Roboters umgesetzt ist. Die Software bildet das Kernstück des Roboters und ist entscheidend dafür, dass dieser eigenständig am Spiel teilnehmen kann.
+Das Kapitel Software beschreibt ausführlicher, wie der Vier-Gewinnt-Roboter programmiert wird. Die Software ist das Herzstück des Roboters und spielt eine entscheidende Rolle für seine autonome Teilnahme am Spiel.
 
+\subsection{Ablauf der Software}
+Das in der Abbildung \ref{fig:Flussdiagramm} dargestellte Flussdiagramm zeigt grafisch den groben Ablauf der Software. \newline
+Zu Beginn befindet sich das System im Wartezustand und wartet auf die Betätigung des Touch-/Kraftsensors. Dieser signalisiert den Start eines neuen Spielzugs. Sobald der Sensor aktiviert wurde, fährt der Roboter zur ersten Spalte des Spielfelds.
+Anschließend scannt das System die einzelnen Spalten des Spielfelds ab, um den neuen gegnerischen Stein zu entdecken. Dabei wird das interne Spielfeld aktualisiert, bis ein neuer gegnerischer Stein erkannt wurde oder alle 7 Spalten gescannt wurden.
+
+Im nächsten Schritt prüft die Software das interne Spielfeld und berechnet mithilfe des Alpha-Beta-Algorithmus den optimalen Spielzug.
+Dabei ist es nicht von Bedeutung, ob ein gegnerischer Stein erkannt wurde oder nicht. Da zu Beginn des Spiels noch gar keine Steine im Feld vorhanden sind.
+Der Roboter platziert nach der Berechnung den eigenen Spielstein an der berechneten optimalen Position.
+
+Im Anschluss prüft die Software, ob das Spiel gewonnen wurde. Ist das der Fall, so wird eine Glückwunschmeldung und ein Ton ausgegeben. Falls kein Gewinn vorliegt, wird einfach das aktuelle Spielfeld auf der Konsole in der LEGO Spike App ausgegeben und der Prozess beginnt von vorne in der Warteposition mit dem Warten auf die nächste Sensoraktivierung. 
 
 
 \tikzstyle{startstop} = [ellipse, draw, fill=gray!10, minimum width=3cm, minimum height=1cm]
@@ -66,7 +76,7 @@ Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Ge
 	\node (wait) [process, below of=start] {Warten auf Sensor-Aktivierung};
 	\node (move) [process, below of=wait] {Spielfeld anfahren};
 	\node (scan) [process, below of=move] {Spalten scannen};
-	\node (update) [process, below of=scan] {Board-Update};
+	\node (update) [process, below of=scan] {Spielfeld-Update};
 	\node (opponent) [decision, below of=update, yshift=-0.7cm] {Neuer gegnerischer Stein?};
 	\node (calc) [process, below of=opponent, yshift=-0.7cm] {Optimalen Zug berechnen (Alpha-Beta)};
 	\node (motor) [process, below of=calc] {Motorsteuerung: Stein platzieren};
@@ -96,7 +106,7 @@ Im Kapitel Software wird genauer beschrieben, wie die Programmierung des Vier-Ge
 \chapter{Programmlogik}
 
 In diesem Kapitel wird die Softwarestruktur des 4-Gewinnt-Roboters systematisch beschrieben. Da der vollständige Quellcode eine Vielzahl an Funktionen, Hilfsroutinen und technischen Details umfasst, wird in diesem Kapitel aus Gründen der Übersichtlichkeit nicht jede einzelne Codezeile dargestellt und erläutert.
-Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. siehe anhangxxxxxxxxx
+Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. siehe anhang 
 
 Zur besseren Nachvollziehbarkeit der Funktionsweise wird die Darstellung in zwei Teile gegliedert:
 
