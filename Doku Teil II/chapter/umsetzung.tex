@@ -7,7 +7,7 @@ In diesem Kapitel steht die praktische Umsetzung des Roboters im Fokus. Dabei wi
 
 %Verifikation anhand der zuvor erarbeiteten Anforderungen und Validierung in Bezug auf das zuvor gestellte Ziel. Diskussion der Ergebnisse. Spätestens hier auch auf die Zuverlässigkeit der gewonnenen Erkenntnisse eingehen (z.~B. anhand der Genauigkeit von Messergebnissen).
 \section{Mechanischer Aufbau}
-Für die Umsetzung des 4-Gewinnt-Roboters wurde eine mechanische Konstruktion gewählt, die es erlaubt, das Spielfeld zu scannen sowie Chips gezielt in eine Spalte einzuwerfen. Der Aufbau umfasst drei Winkelmotoren, einen Farbsensor und einen Drucktaster. Im Folgenden werden die einzelnen Komponenten detailliert beschrieben. Dabei beziehen sich die Ziffern der Aufzählung der einzelnen Sensoren und Aktoren auf die Abbildung 4.1 und Abbildung 4.2.
+Für die Umsetzung des 4-Gewinnt-Roboters wurde eine mechanische Konstruktion gewählt, die es erlaubt, das Spielfeld zu scannen sowie Chips gezielt in eine Spalte einzuwerfen. Der Aufbau umfasst drei Winkelmotoren, einen Farbsensor und einen Drucktaster. Im Folgenden werden die einzelnen Komponenten detailliert beschrieben. Dabei beziehen sich die Ziffern der Aufzählung der einzelnen Sensoren und Aktoren auf die Abbildung \ref{fig:seitenansicht-links} und Abbildung \ref{fig:seitenansicht-rechts}.
 
 Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinatensystem, bei dem der Farbsensor durch die Kombination aus horizontaler und vertikaler Bewegung jede Spielfeldposition präzise anfahren kann. Das System erlaubt eine vollautomatische Spielweise.
 
@@ -29,22 +29,27 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 	 Für die Farberkennung des Spielfeldes wurde ein LEGO-Farbsensor verwendet, der über die oben beschriebene Kettenkonstruktion vertikal verfahrbar ist. Die Farbmessung erfolgt jeweils in der Mitte eines Spielfeldes. Der Sensor erkennt RGB-Werte (in diesem Projekt benutzt: Rot, Gelb oder Leer). Der Abstand zwischen Sensor und Spielfeld beträgt etwa 7 mm. Dieser Wert hat sich als optimal für zuverlässige Farbmessung erwiesen.
 \end{enumerate}
 
-
 \begin{figure}[H]
 	\centering
-	\begin{minipage}[b]{0.48\linewidth}
+	\begin{minipage}[b]{0.39\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/188CF006-D571-4F2D-9337-8C4BDD7DAAEF_1_105_c}
 		\caption{Seitenansicht links}
 		\label{fig:seitenansicht-links}
 	\end{minipage}
 	\hfill
-	\begin{minipage}[b]{0.48\linewidth}
+	\begin{minipage}[b]{0.39\linewidth}
 		\centering
 		\includegraphics[width=\linewidth]{images/DAE26A50-277E-4C6B-96A3-F2DE2CC9C004_1_105_c}
 		\caption{Seitenansicht rechts}
 		\label{fig:seitenansicht-rechts}
 	\end{minipage}
+	\fbox{%
+	\begin{minipage}{0.5\linewidth}
+		\small
+		\textbf{Legende:}\\ \textbf{1} = Motor für horizontale Bewegung, \\ \textbf{2} = Motor für vertikale Bewegung, \\ \textbf{3} = Motor für Steineinwurf,\\ \textbf{4} = Kraft-/Touchsensor
+		\textbf{5} = Farbsensor,
+	\end{minipage}}%
 \end{figure}
 
 
@@ -140,7 +145,7 @@ Dabei entspricht 1 dem gelben Spielstein (Roboter), -1 dem roten Spielstein (Geg
 
 \textbf{Bewertungsfunktion:}\\
 Der Algorithmus benötigt eine Bewertungsfunktion, die die Qualität eines Spielzustands abschätzt. Dies geschieht durch eine Heuristik, die mögliche Gewinnlinien zählt und bewertet.
-Die Bewertungsfunktion basiert auf der Idee, sogenannte „Fenster“ (Ausschnitte aus 4 Feldern) im Spiel zu analysieren und zu beurteilen, wie viele Steine der Roboter bzw. des Gegners in diesen Fenstern enthalten sind:
+Die Bewertungsfunktion basiert auf der Idee, sogenannte „Fenster“ (Ausschnitte aus 4 Feldern) im Spiel zu analysieren und zu beurteilen, wie viele Steine der Roboter bzw. des Gegners in diesen Fenstern enthalten sind: \newpage
 
 \begin{lstlisting}[style=pythonstyle]
 	def evaluate_window(window, player):
@@ -296,7 +301,7 @@ Bevor der Roboter mit dem Scannen des Spielfeldes beginnt, wartet er auf eine Ak
 \end{lstlisting}
 
 \textbf{Positionierung an der Startspalte:}\\
-Der Roboter fährt an die rechte Spielfeldseite (Spalte 6), um von dort den Scan zu beginnen.
+Der Roboter fährt an die rechte Spielfeldseite (Spalte 0), um von dort den Scan zu beginnen.
 
 \begin{lstlisting}[style=pythonstyle]
 	motor.run_for_degrees(port.D, 198, 170)
@@ -472,6 +477,7 @@ Die Resultate der Testreihe lauten wie folgt:
 \end{itemize}
 
 Damit konnte der Roboter in 70\% der Partien gewinnen und blieb in 90\% der Fälle ungeschlagen.
+\newpage
 
 \subsection{Analyse der Unentschieden und Niederlagen}
 
@@ -486,7 +492,6 @@ Der Algorithmus spielte in diesen Situationen eher defensiv und wählte im Mitte
 \subsubsection{Niederlagen durch fehlende Mehrzugerkennung}
 
 Zwei Partien wurden verloren, weil der Algorithmus eine mehrstufige Kombination des Gegners nicht rechtzeitig erkannte. Ursache ist die eingeschränkte Suchtiefe zu Beginn des Spiels:
-
 \begin{lstlisting}[style=pythonstyle]
 	def get_dynamic_depth(board):
 		empty = sum(row.count(0) for row in board)
