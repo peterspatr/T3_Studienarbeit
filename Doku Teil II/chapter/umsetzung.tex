@@ -1,6 +1,6 @@
 \chapter{ Umsetzung}
 \label{cha:Umsetzung}
-In diesem Kapitel steht die praktische Umsetzung des Roboters im Fokus. Dabei wird auf den Aufbau eingegangen, ebenso wie auf die Funktionsweise der Software. 
+IIn diesem Kapitel wird die praktische Realisierung des 4-Gewinnt-Roboters erläutert. Im Mittelpunkt stehen der mechanische Aufbau, die Programmierung des Algorithmus und das Zusammenspiel von Sensorik, Aktorik und der Software.
 %Je nach Art der Arbeit kann diese Kapitelüberschrift auch \glqq Ergebnisse\grqq~lauten, z.~B. bei rein messtechnischen Aufgaben.
 
 %Beschreibung der Umsetzung des zuvor gewählten Vorgehens (theoretische Untersuchung, Erhebungen, Durchführung von Experimenten, Prototypenaufbau, Implementierung eines Prozesses, etc.).
@@ -9,16 +9,16 @@ In diesem Kapitel steht die praktische Umsetzung des Roboters im Fokus. Dabei wi
 \section{Mechanischer Aufbau}
 Für die Umsetzung des 4-Gewinnt-Roboters wurde eine mechanische Konstruktion gewählt, die es erlaubt, das Spielfeld zu scannen sowie Chips gezielt in eine Spalte einzuwerfen. Der Aufbau umfasst drei Winkelmotoren, einen Farbsensor und einen Drucktaster. Im Folgenden werden die einzelnen Komponenten detailliert beschrieben. Dabei beziehen sich die Ziffern der Aufzählung der einzelnen Sensoren und Aktoren auf die Abbildung \ref{fig:seitenansicht-links} und Abbildung \ref{fig:seitenansicht-rechts}.
 
-Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinatensystem, bei dem der Farbsensor durch die Kombination aus horizontaler und vertikaler Bewegung jede Spielfeldposition präzise anfahren kann. Das System erlaubt eine vollautomatische Spielweise.
+Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinatensystem, bei dem der Farbsensor durch die Kombination aus horizontaler und vertikaler Bewegung jede Spielfeldposition präzise anfahren kann. Das System erlaubt somit eine vollautomatische Spielweise.
 
 \subsection{Einbindung von Aktorik}
 \begin{enumerate}
 	\item \textbf{Horizontalantrieb}\\
-	Der horizontale Antrieb des Farbsensors erfolgt über einen Winkelmotor. Dieser ist dafür zuständig, die Spielfeldspalten nacheinander anzufahren. Der Motor ist mit einer Achse verbunden, welche zwei Räder antreiben. Die Bewegung erfolgt in gleichmäßigen Schritten: Eine Drehung um exakt 72 Grad bewegt den Roboter um eine Spalte weiter. Diese Schrittweite wurde so gewählt, dass sie der Breite einer Spalte im Spielfeld entspricht. Dadurch ist eine exakte Positionierung des Sensors über jeder Spalte möglich, ohne dass zusätzliche Sensoren zur Positionsbestimmung notwendig sind. 
+	Der horizontale Antrieb des Farbsensors erfolgt über einen Winkelmotor. Dieser ist dafür zuständig, die Spielfeldspalten nacheinander anzufahren. Der Motor ist mit einer Achse verbunden, welche zwei Räder antreiben. Die Bewegung erfolgt in gleichmäßigen Schritten: Eine Drehung um exakt 73 Grad bewegt den Roboter um eine Spalte weiter. Diese Schrittweite wurde so gewählt, dass sie der Breite einer Spalte im Spielfeld entspricht. Dadurch ist eine exakte Positionierung des Sensors über jeder Spalte möglich, ohne dass zusätzliche Sensoren zur Positionsbestimmung notwendig sind. 
 	\item \textbf{Vertikalantrieb}\\
-	 Um das Spielfeld auch in vertikaler Richtung abfahren zu können, ist der Farbsensor an einer Kette montiert. Diese Kette wird durch einen Winkelmotor angetrieben. Der Sensor ist an einem mittleren Segment der Kette befestigt und fährt beim Drehen der Kette entsprechend auf und ab. Ein Schritt des Motors um 95 Grad bewegt den Sensor um genau eine Spielfeldhöhe weiter. Auf diese Weise können sämtliche sechs Reihen der aktuellen Spalte nacheinander abgescannt werden. Die Rückwärtsbewegung der Kette erlaubt es, den Sensor wieder nach unten zu fahren.
+	 Um das Spielfeld auch in vertikaler Richtung abfahren zu können, ist der Farbsensor an einer Kette montiert. Diese Kette wird durch einen Winkelmotor angetrieben. Der Sensor ist an einem mittleren Segment der Kette befestigt und fährt beim Drehen der Kette entsprechend auf und ab. Ein Schritt des Motors um 97 Grad bewegt den Sensor um genau eine Spielfeldhöhe weiter. Auf diese Weise können sämtliche sechs Reihen der aktuellen Spalte nacheinander abgescannt werden. Die Rückwärtsbewegung der Kette erlaubt es, den Sensor wieder nach unten zu fahren.
 	\item \textbf{Chipauswerfer}\\
-	Das Einwerfen des eigenen Spielsteins erfolgt ebenfalls über einen Winkelmotor. An diesem Motor ist eine Stange montiert, die bei einer vollständigen Umdrehung einen Spielchip aus dem Vorratsmagazin (mit der Software Fusion360 konstrukiert und 3D-gedruckt) in die gewünschte Spalte stößt. Nach der Auslösung kann ein neuer Chip in die Abschussposition nachrutschen. In der Software ist eine Wartezeit nach dem Auslösen eingebaut, damit der Chip sicher im Spielfeld ankommt, bevor die nächste Aktion beginnt.
+	Das Einwerfen des eigenen Spielsteins erfolgt ebenfalls über einen Winkelmotor. An diesem Motor ist eine Stange montiert, die bei einer vollständigen Umdrehung einen Spielchip aus dem Vorratsmagazin (mit der Software Fusion360 konstrukiert und 3D-gedruckt) in die gewünschte Spalte stößt. Nach der Auslösung kann ein neuer Chip in die Abschussposition nachrutschen. In der Software ist eine Wartezeit nach dem Auslösen eingebaut, damit der Chip sicher im Spielfeld ankommt, bevor die nächste Aktion beginnt. Die Rutsche wurde mithilfe von Lego-Bauteile zusammengebaut. Durch die nicht optimale Oberfläche, kam es bei den Spielabläufen teilweise zu Problemen, da die Spielchips durch ihre Form sich verhakten.
 
 
 \subsection{Einbindung von Sensorik}
@@ -28,6 +28,13 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 	\item \textbf{Spielfeldscan }\\
 	 Für die Farberkennung des Spielfeldes wurde ein LEGO-Farbsensor verwendet, der über die oben beschriebene Kettenkonstruktion vertikal verfahrbar ist. Die Farbmessung erfolgt jeweils in der Mitte eines Spielfeldes. Der Sensor erkennt RGB-Werte (in diesem Projekt benutzt: Rot, Gelb oder Leer). Der Abstand zwischen Sensor und Spielfeld beträgt etwa 7 mm. Dieser Wert hat sich als optimal für zuverlässige Farbmessung erwiesen.
 \end{enumerate}
+
+\subsection{Gesamtaufbau}
+Der Roboter wurde hauptsächlich mit LEGO Spike Prime Bausteinen aufgebaut. Das modulare System bot eine gute Grundlage, um Motoren, Sensoren und bewegliche Teile einfach zu integrieren. Ergänzend dazu wurden einige Bauteile, wie das Chipmagazin und zwei seitliche Führungsschienen, mithilfe eines 3D-Druckers gefertigt.
+
+Die Schienen sorgen dafür, dass der Roboter beim Bewegen entlang des Spielfelds immer den gleichen Abstand zum Spielbrett einhält. Das ist wichtig, damit der Farbsensor exakt messen kann und der Chip präzise platziert wird.
+
+Beim Aufbau wurde außerdem darauf geachtet, dass der Schwerpunkt möglichst tief liegt. So bleibt der Roboter während der Fahrt stabil und schwankt nicht.
 
 \begin{figure}[H]
 	\centering
@@ -47,22 +54,39 @@ Die mechanische Konstruktion basiert auf die Idee einem kartesischen Koordinaten
 	\fbox{%
 	\begin{minipage}{0.5\linewidth}
 		\small
-		\textbf{Legende:}\\ \textbf{1} = Motor für horizontale Bewegung, \\ \textbf{2} = Motor für vertikale Bewegung, \\ \textbf{3} = Motor für Steineinwurf,\\ \textbf{4} = Kraft-/Touchsensor
+		\textbf{Legende:}\\ \textbf{1} = Motor für horizontale Bewegung, \\ \textbf{2} = Motor für vertikale Bewegung, \\ \textbf{3} = Motor für Steineinwurf,\\ \textbf{4} = Kraft-/Touchsensor\\
 		\textbf{5} = Farbsensor,
 	\end{minipage}}%
 \end{figure}
 
 
 \section{Software}
-Das Kapitel Software beschreibt ausführlicher, wie der Vier-Gewinnt-Roboter programmiert wird. Die Software ist das Herzstück des Roboters und spielt eine entscheidende Rolle für seine autonome Teilnahme am Spiel.
+In diesem Kapitel wird die Softwarestruktur des 4-Gewinnt-Roboters systematisch beschrieben. 
+Am Anfang wird der generelle Ablauf der Software mithilfe eines Flussdiagramm beschriben. Anschließend die Programmlogik im allgmeinen.
+Da der vollständige Quellcode eine Vielzahl an Funktionen, Hilfsroutinen und technischen Details umfasst, wird in diesem Kapitel aus Gründen der Übersichtlichkeit nicht jede einzelne Codezeile dargestellt und erläutert.
+Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. Der vollständige Code kann aus dem Anhang entnommen werden.
+
+Zur besseren Nachvollziehbarkeit der Funktionsweise wird die Darstellung in zwei Teile gegliedert:
+
+\begin{itemize}
+	\item Zunächst wird ausschließlich der \textbf{Algorithmus} zur Spielentscheidung detailliert erläutert. Dabei handelt es sich um den Minimax-Algorithmus mit Alpha-Beta-Pruning.
+	
+	\item Im Anschluss wird das \textbf{Hauptprogramm} vorgestellt, das alle Bestandteile miteinander verknüpft. Es steuert den Ablauf über das Spielfeld-Scanning bis zum Berechnen und Ausführen des eigenen Spielzugs. Dabei werden sowohl Sensoren als auch Motoren angesprochen und der Entscheidungsalgorithmus eingebunden.
+\end{itemize}
+
+Diese Zweiteilung erlaubt es, sowohl die algorithmische Tiefe als auch die technische Umsetzung getrennt zu betrachten und anschließend im Gesamtkontext zu verstehen.
+
+Desweiteren wird im Unterkapitel 4.5 die konkrete Umsetzung der Spielsteuerung und Entscheidungslogik für den 4-Gewinnt-Roboter beschrieben. Der Fokus liegt auf der softwareseitigen Realisierung unter Berücksichtigung der limitierten Hardware-Ressourcen des LEGO Spike Prime Hubs. Es werden hierbei zentrale Entwurfsentscheidungen erläutert.
+
+%Das Spielverhalten als auch die Zuverlässigkeit des Systems wurden mit mehreren Duchläufen beobachtet und ausgewertet.
 
 \subsection{Ablauf der Software}
 Das in der Abbildung \ref{fig:Flussdiagramm} dargestellte Flussdiagramm zeigt grafisch den groben Ablauf der Software. \newline
 Zu Beginn befindet sich das System im Wartezustand und wartet auf die Betätigung des Touch-/Kraftsensors. Dieser signalisiert den Start eines neuen Spielzugs. Sobald der Sensor aktiviert wurde, fährt der Roboter zur ersten Spalte des Spielfelds.
-Anschließend scannt das System die einzelnen Spalten des Spielfelds ab, um den neuen gegnerischen Stein zu entdecken. Dabei wird das interne Spielfeld aktualisiert, bis ein neuer gegnerischer Stein erkannt wurde oder alle 7 Spalten gescannt wurden.
+Anschließend scannt das System die einzelnen Spalten des Spielfelds ab, um den neuen gegnerischen Stein zu entdecken. Dabei wird das interne Spielfeld aktualisiert, bis ein neuer gegnerischer Stein erkannt oder alle 7 Spalten gescannt wurden.
 
 Im nächsten Schritt prüft die Software das interne Spielfeld und berechnet mithilfe des Alpha-Beta-Algorithmus den optimalen Spielzug.
-Dabei ist es nicht von Bedeutung, ob ein gegnerischer Stein erkannt wurde oder nicht. Da zu Beginn des Spiels noch gar keine Steine im Feld vorhanden sind.
+Dabei ist es nicht von Bedeutung, ob ein gegnerischer Stein erkannt wurde oder nicht, da zu Beginn des Spiels noch gar keine Steine im Feld vorhanden sind.
 Der Roboter platziert nach der Berechnung den eigenen Spielstein an der berechneten optimalen Position.
 
 Im Anschluss prüft die Software, ob das Spiel gewonnen wurde. Ist das der Fall, so wird eine Glückwunschmeldung und ein Ton ausgegeben. Falls kein Gewinn vorliegt, wird einfach das aktuelle Spielfeld auf der Konsole in der LEGO Spike App ausgegeben und der Prozess beginnt von vorne in der Warteposition mit dem Warten auf die nächste Sensoraktivierung. 
@@ -110,23 +134,6 @@ Im Anschluss prüft die Software, ob das Spiel gewonnen wurde. Ist das der Fall,
 	\caption[Flussdiagramm]{Flussdiagramm der Software}
 \label{fig:Flussdiagramm}
 \end{figure}
-\section{Programmlogik}
-
-In diesem Kapitel wird die Softwarestruktur des 4-Gewinnt-Roboters systematisch beschrieben. Da der vollständige Quellcode eine Vielzahl an Funktionen, Hilfsroutinen und technischen Details umfasst, wird in diesem Kapitel aus Gründen der Übersichtlichkeit nicht jede einzelne Codezeile dargestellt und erläutert.
-Stattdessen liegt der Fokus auf den wesentlichen Programmabschnitten, die das Spielverhalten maßgeblich bestimmen. Der vollständige Code kann aus dem Anhang entnommen werden.
-
-Zur besseren Nachvollziehbarkeit der Funktionsweise wird die Darstellung in zwei Teile gegliedert:
-
-\begin{itemize}
-	\item Zunächst wird ausschließlich der \textbf{Algorithmus} zur Spielentscheidung detailliert erläutert. Dabei handelt es sich um den Minimax-Algorithmus mit Alpha-Beta-Pruning.
-	
-	\item Im Anschluss wird das \textbf{Hauptprogramm} vorgestellt, das alle Bestandteile miteinander verknüpft. Es steuert den Ablauf über das Spielfeld-Scanning bis zum Berechnen und Ausführen des eigenen Spielzugs. Dabei werden sowohl Sensoren als auch Motoren angesprochen und der Entscheidungsalgorithmus eingebunden.
-\end{itemize}
-
-Diese Zweiteilung erlaubt es, sowohl die algorithmische Tiefe als auch die technische Umsetzung getrennt zu betrachten und anschließend im Gesamtkontext zu verstehen.
-
-Desweiteren wird im Unterkapitel 4.7 die konkrete Umsetzung der Spielsteuerung und Entscheidungslogik für den 4-Gewinnt-Roboter beschrieben. Der Fokus liegt auf der softwareseitigen Realisierung unter Berücksichtigung der limitierten Hardware-Ressourcen des LEGO Spike Prime Hubs. Es werden hierbei zentrale Entwurfsentscheidungen erläutert.
-
 
 \subsection{Algorithmus}
 
@@ -278,7 +285,7 @@ Diese dynamische Anpassung balanciert Spielstärke und Rechenzeit optimal.
 %Der eingesetzte Minimax-Algorithmus mit Alpha-Beta-Pruning stellt das strategische Herzstück des 4-Gewinnt-Roboters dar. Durch gezielte Bewertung von Spielpositionen, Berücksichtigung gegnerischer Drohungen und dynamische Tiefenanpassung kann der Roboter selbstständig Züge planen, Gefahren abwehren und letztlich siegreich agieren. Die Verwendung eines Transpositionstables beschleunigt dabei die Entscheidungsfindung, indem bereits analysierte Spielsituationen nicht erneut bewertet werden müssen. Das Ergebnis ist ein hochgradig effektives Entscheidungsverfahren für ein strategisches Spiel wie 4-Gewinnt.
 
 
-\section{Hauptprogramm}
+\subsection{Hauptprogramm}
 
 Nachdem der Algorithmus erläutert wurde und in Kapitel 4.1 die Konstruktion und Ansteuerung des Roboters aufgezeigt wurde, beschreibt dieses Kapitel den Gesamtablauf des Programms. Dabei steht im Fokus, wie die Spielfelderkennung, Algorithmus und Ausführungsschritte zu einem vollständigen Spielzug kombiniert werden.
 
@@ -392,15 +399,15 @@ Abschließend wird auf das Loslassen des Drucksensors gewartet, bevor ein neuer 
 
 %Die Ablaufsteuerung des Hauptprogramms ist zyklisch aufgebaut und gewährleistet einen strukturierten Spielverlauf: Der Roboter wartet auf das Startsignal, scannt das Spielfeld, berechnet den optimalen Spielzug und führt diesen präzise aus. Die Kombination aus Sensorik, Algorithmik und Motorsteuerung wird dabei durch eine klare Programmstruktur miteinander verbunden. Diese Trennung der Verantwortlichkeiten sorgt für Übersichtlichkeit, Erweiterbarkeit und Fehlerrobustheit.
 
-\section{Ressourcenschonende Implementierung der Spielsteuerung und Entscheidungslogik}
+\subsection{Ressourcenschonende Implementierung der Spielsteuerung und Entscheidungslogik}
 
 Die Implementierung des Spielablaufs und der Entscheidungslogik wurde unter besonderer Berücksichtigung der eingeschränkten Ressourcen des LEGO Spike Prime Hub entwickelt. Durch gezielte Reduktion von unnötigen Berechnungen, Verwendung eines Gedächtnisses für das Spielfeld, dynamische Anpassung der Suchtiefe und einfache Ablaufsteuerung konnte ein vollständiger Spielzyklus umgesetzt werden, der sowohl strategisch leistungsfähig als auch technisch robust ist. Im Folgenden werden die zentralen Entwurfsentscheidungen aufgezeigt.
 
-\subsection{Begrenzte Hardware-Ressourcen}
+\textbf{Begrenzte Hardware-Ressourcen:}\\
 Der LEGO Spike Hub besitzt mit seinem 100MHz ARM Cortex-M4 Prozessor, 320 KB RAM und 1 MB Flash-Speicher eine stark begrenzte Hardwareausstattung \cite{lego2020techniclargehub}. Diese Ressourcen reichen für einfache Steuerungsaufgaben, setzen aber dem Einsatz komplexer Algorithmen wie Minimax enge Grenzen.
 Diese Rahmenbedingungen erfordern eine möglichst effiziente und ressourcenschonende Programmstruktur. Daher wurde bewusst auf eine komplexe Multithread-Struktur verzichtet und stattdessen ein sequenzieller, wartender Ablauf gewählt.
 
-\subsection{Zeitbasierte Steuerung mit \texttt{time.sleep()}}
+\subsubsection*{Zeitbasierte Steuerung mit \texttt{time.sleep()}}
 
 Zur Koordination zwischen Sensorik, Motorik und internen Berechnungen wurde \texttt{time.sleep()} gezielt eingesetzt. Es erfüllt mehrere Aufgaben:
 
@@ -410,7 +417,7 @@ Zur Koordination zwischen Sensorik, Motorik und internen Berechnungen wurde \tex
 	\item \textbf{Einfachheit:} In Abwesenheit von Interrupts auf dem Hub ist \texttt{time.sleep()} eine praktikable Lösung zur Ablaufsteuerung.
 \end{itemize}
 
-\subsection{Spielfeldvergleich zur Erkennung neuer Spielzüge}
+\subsubsection{Spielfeldvergleich zur Erkennung neuer Spielzüge}
 
 Ein wesentlicher Optimierungsschritt liegt in der Verwendung eines ``Gedächtnisses'' über das vorherige Spielfeld. Zu Beginn jeder Spielrunde wird die aktuelle Matrix \texttt{board} mit dem gespeicherten Zustand \texttt{last\_board} verglichen. Ziel ist es, festzustellen, wo genau ein neuer gegnerischer Spielstein hinzugekommen ist, ohne jedes einzelne Feld vollständig neu scannen zu müssen:
 
@@ -420,7 +427,7 @@ Ein wesentlicher Optimierungsschritt liegt in der Verwendung eines ``Gedächtnis
 
 Dieser Vergleich erlaubt es, gezielt den neuen Zug des Gegners zu erkennen und den Scanvorgang direkt danach abzubrechen. Dies reduziert die benötigte Zeit pro Runde drastisch. Insbesondere im späteren Spielverlauf, wenn viele Felder bereits belegt sind.
 
-\subsection{Spaltenweises Scannen statt Vollscan}
+\subsubsection{Spaltenweises Scannen statt Vollscan}
 
 Anstatt das gesamte Spielfeld (6 Zeilen × 7 Spalten) vollständig zu scannen, wird nur von rechts nach links spaltenweise geprüft. Sobald ein neuer Spielstein entdeckt wurde, wird der Scan abgebrochen:
 
@@ -431,7 +438,7 @@ Anstatt das gesamte Spielfeld (6 Zeilen × 7 Spalten) vollständig zu scannen, w
 
 Diese Strategie basiert auf der Annahme, dass pro Runde exakt ein neuer gegnerischer Stein erscheint. Dadurch kann der Großteil des Spielfelds übersprungen werden, sobald der neue gegnerische Zug erkannt wurde. Dies reduziert die Anzahl der Motorbewegungen und gewinnt somit an Zeit.
 
-\subsection{Dynamische Suchtiefe im Algorithmus}
+\subsubsection{Dynamische Suchtiefe im Algorithmus}
 
 Der Minimax-Algorithmus mit Alpha-Beta-Pruning wird verwendet, um den optimalen eigenen Spielzug zu berechnen. Um die Rechenlast dabei zu steuern, wird die maximale Suchtiefe dynamisch an die Spielsituation angepasst:
 
@@ -443,7 +450,7 @@ Der Minimax-Algorithmus mit Alpha-Beta-Pruning wird verwendet, um den optimalen 
 
 In der Anfangsphase sind noch viele Züge möglich, was den Suchbaum exponentiell wachsen lässt. Eine flachere Suchtiefe (z.~B. 3) ist hier sinnvoll, da es ohnehin viele gleichwertige Optionen gibt. Im Endspiel hingegen sind nur noch wenige Felder frei, wodurch eine tiefere Suche (z.~B. 4) möglich und auch sinnvoll wird. Diese dynamische Anpassung balanciert Rechenzeit und Spielqualität optimal.
 
-\subsection{Speicherung bewerteter Zustände (Transposition Table)}
+\subsubsection{Speicherung bewerteter Zustände (Transposition Table)}
 
 Zur weiteren Reduktion der Rechenlast wird eine sogenannte Transposition Table eingesetzt. Diese speichert bereits bewertete Spielzustände in einer Hash-Tabelle, sodass doppelt auftretende Konstellationen nicht erneut berechnet werden müssen:
 
@@ -455,7 +462,7 @@ Zur weiteren Reduktion der Rechenlast wird eine sogenannte Transposition Table e
 
 Diese Technik ist besonders im mittleren Spielverlauf effektiv, da viele unterschiedliche Zugfolgen zu identischen Spielzuständen führen können.
 
-\subsection{Minimale Boarddarstellung mit Ganzzahlen}
+\subsubsection{Minimale Boarddarstellung mit Ganzzahlen}
 
 Das Spielfeld wird intern als Liste von Ganzzahlen (\texttt{-1}, \texttt{0}, \texttt{1}) dargestellt. Diese Codierung ist speicherarm, ermöglicht arithmetische Operationen (z.~B. Summieren zur Bewertung) und reduziert die Komplexität beim Kopieren und Vergleichen des Boards.
 
@@ -471,25 +478,25 @@ Es wurden insgesamt 20 vollständige Partien gespielt. Die menschlichen Spieler 
 Die Resultate der Testreihe lauten wie folgt:
 
 \begin{itemize}
-	\item \textbf{14 Siege des Roboters}
+	\item \textbf{14 Siege}
 	\item \textbf{4 Unentschieden}
-	\item \textbf{2 Niederlagen gegen menschliche Spieler}
+	\item \textbf{2 Niederlagen}
 \end{itemize}
 
-Damit konnte der Roboter in 70\% der Partien gewinnen und blieb in 90\% der Fälle ungeschlagen.
+Damit konnte der Roboter in 70\% der Partien gewinnen und blieb in 90\% der Fälle ungeschlagen. Je nach Spielfeldauslastung braucht der Roboter für einen Spielzug zwischen 20 - 45 Sekunden. Der maximale längste Zug, vom Drücken des Startknopfs bis zum Fahren in die Endposition, liegt somit bei der Hälfte der vorgegebenen Zeit von 90 Sekunden.
 \newpage
 
 \subsection{Analyse der Unentschieden und Niederlagen}
 
 Insgesamt sechs Partien wurden nicht gewonnen. Diese lassen sich in vier Unentschieden und zwei Niederlagen unterteilen. Beide Fälle sind technisch nachvollziehbar und lassen sich mit den Eigenschaften des Algorithmus sowie den physikalischen Begrenzungen des Systems erklären.
 
-\subsubsection{Unentschieden durch Blockaden im Endspiel}
+\subsubsection*{Unentschieden durch Blockaden im Endspiel}
 
 In vier Partien endete das Spiel unentschieden: Beide Spieler konnten keine vier Spielsteine mehr in eine Reihe bringen, das Spielfeld war komplett gefüllt. Die Ursache lag dabei nicht in einem technischen Fehler, sondern im Spielverhalten des Roboters. Er verhinderte konsequent alle potenziellen Gewinnchancen des Gegners, agierte aber gleichzeitig zu passiv, um selbst eine entscheidende Reihe aufzubauen.
 
 Der Algorithmus spielte in diesen Situationen eher defensiv und wählte im Mittelspiel häufig sichere, ausgeglichene Positionen, anstatt gezielt einen eigenen Angriff vorzubereiten. Dadurch entstand ein blockiertes Spiel, in dem letztlich keiner der beiden Spieler gewinnen konnte.
 
-\subsubsection{Niederlagen durch fehlende Mehrzugerkennung}
+\subsubsection*{Niederlagen durch fehlende Mehrzugerkennung}
 
 Zwei Partien wurden verloren, weil der Algorithmus eine mehrstufige Kombination des Gegners nicht rechtzeitig erkannte. Ursache ist die eingeschränkte Suchtiefe zu Beginn des Spiels:
 \begin{lstlisting}[style=pythonstyle]
